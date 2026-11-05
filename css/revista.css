@@ -1,0 +1,377 @@
+/* ============================================
+   LECTOR DE REVISTA - volteo de páginas
+   Usa junto con page-flip (js/vendor)
+   ============================================ */
+
+/* ---------- Layout del lector ---------- */
+.lector {
+  min-height: calc(100vh - var(--nav-height));
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(0, 229, 255, 0.06), transparent),
+    radial-gradient(ellipse 90% 70% at 50% 110%, rgba(124, 58, 237, 0.08), transparent),
+    linear-gradient(180deg, #0b101c 0%, #070b14 100%);
+}
+
+.lector-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: min(1100px, 94%);
+  margin: 0 auto;
+  padding: 1.1rem 0 0.4rem;
+}
+
+.lector-volver {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.lector-volver:hover {
+  color: var(--accent);
+}
+
+.lector-titulo {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  text-align: center;
+}
+
+.lector-contador {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+}
+
+/* ---------- Zona del libro ---------- */
+.zona-revista {
+  flex: 1;
+  min-height: 440px;
+  width: min(1100px, 94%);
+  margin: 0 auto;
+  padding: 1.25rem 0 2.5rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.revista {
+  /* PageFlip gestiona tamaño/transform; aquí solo evitamos estilos heredados */
+  margin: 0 auto;
+  filter: drop-shadow(0 24px 50px rgba(0, 0, 0, 0.55));
+}
+
+/* ---------- Flechas laterales ---------- */
+.lector-flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(19, 26, 42, 0.9);
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+
+.lector-flecha:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-50%) scale(1.06);
+}
+
+.lector-flecha:disabled {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.lector-flecha.prev { left: -8px; }
+.lector-flecha.next { right: -8px; }
+
+/* ---------- Páginas ---------- */
+.pagina {
+  background: linear-gradient(160deg, #141c2e 0%, #101728 55%, #0e1526 100%);
+  color: var(--text);
+  padding: clamp(1.4rem, 3.5vw, 2.4rem);
+  padding-bottom: 2.4rem;
+  overflow: hidden;
+  position: relative;
+  font-size: clamp(0.86rem, 1.1vw, 0.98rem);
+  line-height: 1.65;
+}
+
+.pagina h1,
+.pagina h2,
+.pagina h3 {
+  color: var(--text);
+}
+
+.pagina h2 {
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+}
+
+.pagina h3 {
+  font-size: clamp(0.98rem, 1.6vw, 1.1rem);
+  margin: 1.1rem 0 0.45rem;
+}
+
+.pagina p {
+  margin: 0 0 0.85rem;
+  color: var(--text);
+}
+
+.pagina ul,
+.pagina ol {
+  margin: 0 0 1rem 1.15rem;
+}
+
+.pagina li {
+  margin-bottom: 0.4rem;
+}
+
+.pagina strong {
+  color: #fff;
+}
+
+.pagina em {
+  color: var(--muted);
+}
+
+.pagina .etiqueta {
+  margin-bottom: 0.85rem;
+}
+
+.pagina .destacado {
+  background: rgba(0, 229, 255, 0.06);
+  border-left: 3px solid var(--accent);
+  padding: 0.8rem 1rem;
+  border-radius: 0 10px 10px 0;
+  margin: 1.1rem 0;
+  color: var(--muted);
+  font-size: 0.92em;
+}
+
+.pagina img {
+  border-radius: 10px;
+  margin: 0.75rem 0;
+}
+
+/* Numeración automática (inyectada por lectura.js) */
+.pagina-num {
+  position: absolute;
+  bottom: 0.7rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+/* ---------- Portada ---------- */
+.portada-revista,
+.contra-revista {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.portada-revista {
+  background: linear-gradient(150deg, var(--c1, #0ea5e9) 0%, var(--c2, #6366f1) 100%);
+  color: #f4faff;
+}
+
+.portada-revista::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 60% at 85% 10%, rgba(255, 255, 255, 0.22), transparent 55%),
+    linear-gradient(180deg, transparent 55%, rgba(4, 8, 18, 0.45));
+  pointer-events: none;
+}
+
+.portada-revista > * {
+  position: relative;
+}
+
+.portada-sello {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  background: rgba(4, 8, 18, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  margin-bottom: 1.4rem;
+  width: fit-content;
+}
+
+.portada-revista h1 {
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #fff;
+  margin: 0 0 1rem;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.25);
+}
+
+.portada-autor {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 0 0.3rem !important;
+}
+
+.portada-fecha {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.06em;
+}
+
+.portada-hint {
+  position: absolute;
+  bottom: 1.4rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  animation: hint-pulso 1.8s ease-in-out infinite;
+}
+
+@keyframes hint-pulso {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+/* ---------- Contraportada ---------- */
+.contra-revista {
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 0%, rgba(0, 229, 255, 0.1), transparent),
+    linear-gradient(160deg, #101728, #0b1120);
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.contra-revista .logo-mark {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: #06101a;
+  margin: 0 auto;
+}
+
+.contra-revista h2 {
+  color: var(--text);
+  margin: 0.5rem 0 0.25rem;
+}
+
+.contra-revista p {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.contra-revista .btn {
+  margin-top: 0.75rem;
+}
+
+/* ---------- Fallback sin librería ---------- */
+.revista-estatica .revista {
+  filter: none;
+  display: grid;
+  gap: 1.25rem;
+  width: min(640px, 100%);
+}
+
+.revista-estatica .pagina {
+  min-height: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: visible;
+}
+
+.revista-estatica .lector-flecha {
+  display: none;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .lector-flecha.prev { left: -4px; }
+  .lector-flecha.next { right: -4px; }
+}
+
+@media (max-width: 640px) {
+  .lector-titulo { display: none; }
+
+  .lector-barra { padding-top: 0.9rem; }
+
+  .zona-revista {
+    min-height: 380px;
+    padding: 1rem 0 4.25rem;
+  }
+
+  .lector-flecha {
+    top: auto;
+    bottom: 0;
+    transform: none;
+    width: 44px;
+    height: 44px;
+  }
+
+  .lector-flecha:hover:not(:disabled) {
+    transform: scale(1.06);
+  }
+
+  .lector-flecha.prev { left: calc(50% - 56px); }
+  .lector-flecha.next { right: calc(50% - 56px); }
+
+  .pagina {
+    font-size: 0.88rem;
+  }
+}

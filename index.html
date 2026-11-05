@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Revista digital de artículos sobre Inteligencia Artificial">
+  <title>Revista IA — Revista Digital de Inteligencia Artificial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar">
+    <div class="contenedor">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">IA</span>
+        Revista<span>IA</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="index.html#articulos">Artículos</a></li>
+          <li><a href="index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== CONTENIDO ===== -->
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="contenedor">
+        <span class="etiqueta">Revista digital · Edición 2026</span>
+        <h1>Explorando el mundo de la <span class="destacado">Inteligencia Artificial</span></h1>
+        <p>Artículos escritos por estudiantes: desde los fundamentos de la IA hasta las redes neuronales, la ética y las aplicaciones que están cambiando el mundo.</p>
+        <div class="hero-acciones">
+          <a href="#articulos" class="btn btn-primary">Explorar artículos</a>
+          <a href="#nosotros" class="btn btn-ghost">Sobre el equipo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARTÍCULOS -->
+    <section class="seccion" id="articulos">
+      <div class="contenedor">
+        <div class="seccion-cabecera">
+          <div>
+            <h2>Últimos artículos</h2>
+            <p>Cada integrante de equipo desarrolla un artículo de la revista.</p>
+          </div>
+        </div>
+
+        <div class="grid-articulos">
+          <a class="tarjeta" href="articulos/articulo-1.html">
+            <div class="tarjeta-portada portada-1">AI</div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="categoria">Fundamentos</span>
+                <span>01 · 2026</span>
+              </div>
+              <h3>¿Qué es la Inteligencia Artificial?</h3>
+              <p>Una introducción a los conceptos básicos, la historia y los tipos de IA que nos rodean hoy.</p>
+              <span class="leer">Leer artículo</span>
+            </div>
+          </a>
+
+          <a class="tarjeta" href="articulos/articulo-2.html">
+            <div class="tarjeta-portada portada-2">ML</div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="categoria">Machine Learning</span>
+                <span>02 · 2026</span>
+              </div>
+              <h3>Aprendizaje automático explicado sencillo</h3>
+              <p>Cómo las máquinas aprenden de los datos: supervisado, no supervisado y por refuerzo.</p>
+              <span class="leer">Leer artículo</span>
+            </div>
+          </a>
+
+          <a class="tarjeta" href="articulos/articulo-3.html">
+            <div class="tarjeta-portada portada-3">NN</div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="categoria">Deep Learning</span>
+                <span>03 · 2026</span>
+              </div>
+              <h3>Redes neuronales: el cerebro artificial</h3>
+              <p>Capas, neuronas y propagación: anatomía de las redes que impulsan la IA moderna.</p>
+              <span class="leer">Leer artículo</span>
+            </div>
+          </a>
+
+          <a class="tarjeta" href="articulos/articulo-4.html">
+            <div class="tarjeta-portada portada-4">LLM</div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="categoria">Lenguaje</span>
+                <span>04 · 2026</span>
+              </div>
+              <h3>Modelos de lenguaje y ChatGPT</h3>
+              <p>Detrás de los chatbots: transformers, tokens y cómo generan texto humano.</p>
+              <span class="leer">Leer artículo</span>
+            </div>
+          </a>
+
+          <a class="tarjeta" href="articulos/articulo-5.html">
+            <div class="tarjeta-portada portada-5">IA+</div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="categoria">Ética</span>
+                <span>05 · 2026</span>
+              </div>
+              <h3>Ética y futuro de la IA</h3>
+              <p>Sesgos, privacidad y el debate sobre un futuro con máquinas cada vez más inteligentes.</p>
+              <span class="leer">Leer artículo</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOSOTROS -->
+    <section class="seccion" id="nosotros">
+      <div class="contenedor">
+        <div class="nosotros">
+          <div>
+            <h2>Sobre esta revista</h2>
+            <p>Proyecto grupal donde cada integrante investiga y escribe un artículo sobre un tema de Inteligencia Artificial. La base del sitio (diseño, navegación y estructura) es común; cada artículo conserva sus propios estilos en su propia página.</p>
+          </div>
+          <ul class="nosotros-lista">
+            <li>5 artículos con temas independientes</li>
+            <li>Cada autor diseña su propia página de artículo</li>
+            <li>HTML, CSS y JavaScript puros</li>
+            <li>Desplegado en GitHub Pages</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="logo">
+            <span class="logo-mark">IA</span>
+            Revista<span>IA</span>
+          </a>
+          <p style="margin-top: 0.75rem;">Revista digital con artículos escritos por estudiantes sobre temas de Inteligencia Artificial.</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="index.html#articulos">Artículos</a></li>
+          <li><a href="index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="anio"></span> Revista IA — Trabajo grupal</span>
+        <span>Hecho con HTML, CSS y JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

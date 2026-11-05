@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Artículo sobre redes neuronales - Revista IA">
+  <title>Redes neuronales: el cerebro artificial — Revista IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/revista.css">
+
+  <!-- Estilos exclusivos del Artículo 3 -->
+  <style>
+    body.art-3 { --accent: #34d399; }
+
+    .art-3 .red-diagrama {
+      background: rgba(52, 211, 153, 0.05);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      border-radius: 12px;
+      padding: 1.1rem 0.75rem;
+      margin: 0.75rem 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .art-3 .capa { display: flex; flex-direction: column; gap: 0.6rem; }
+    .art-3 .neurona {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(52, 211, 153, 0.15);
+      border: 2px solid #34d399;
+      box-shadow: 0 0 10px rgba(52, 211, 153, 0.35);
+    }
+    .art-3 .capa-label {
+      text-align: center; font-size: 0.62rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.4rem;
+    }
+    .art-3 .conexiones {
+      flex: 1; height: 86px; min-width: 40px;
+      background:
+        linear-gradient(24deg, transparent 49.5%, rgba(52,211,153,0.3) 49.5%, rgba(52,211,153,0.3) 50.5%, transparent 50.5%),
+        linear-gradient(-24deg, transparent 49.5%, rgba(52,211,153,0.3) 49.5%, rgba(52,211,153,0.3) 50.5%, transparent 50.5%);
+      background-size: 18px 18px;
+    }
+  </style>
+</head>
+<body class="art-3">
+
+  <header class="navbar">
+    <div class="contenedor">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">IA</span>
+        Revista<span>IA</span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lector">
+    <div class="lector-barra">
+      <a class="lector-volver" href="../index.html#articulos">← Volver</a>
+      <span class="lector-titulo">Redes neuronales: el cerebro artificial</span>
+      <span class="lector-contador" id="contador">Portada</span>
+    </div>
+
+    <div class="zona-revista">
+      <button class="lector-flecha prev" aria-label="Página anterior">‹</button>
+
+      <div id="revista" class="revista">
+
+        <!-- PORTADA -->
+        <div class="pagina portada-revista" data-density="hard" style="--c1:#06b6d4; --c2:#10b981;">
+          <span class="portada-sello">Revista IA · Deep Learning</span>
+          <h1>Redes neuronales: el cerebro artificial</h1>
+          <p class="portada-autor">Por: Autor 3</p>
+          <span class="portada-fecha">Enero 2026</span>
+          <span class="portada-hint">La revista se abrirá…</span>
+        </div>
+
+        <!-- PÁGINA 1 -->
+        <div class="pagina">
+          <span class="etiqueta">Introducción</span>
+          <h2>Inspiradas en nosotros</h2>
+          <p>Las <strong>redes neuronales artificiales</strong> están inspiradas en el cerebro humano: millones de unidades simples (neuronas) conectadas entre sí que, juntas, resuelven problemas extremadamente complejos como reconocer caras o traducir idiomas.</p>
+          <div class="destacado">
+            No simulan un cerebro biológico: toman su <em>idea</em> —muchas unidades simples conectadas— y la traducen a matemáticas.
+          </div>
+          <p>En las próximas páginas veremos cómo se organizan, por qué se llaman "profundas" y dónde las usamos cada día.</p>
+        </div>
+
+        <!-- PÁGINA 2 -->
+        <div class="pagina">
+          <h2>¿Cómo está organizada?</h2>
+          <div class="red-diagrama" aria-hidden="true">
+            <div>
+              <div class="capa">
+                <div class="neurona"></div>
+                <div class="neurona"></div>
+                <div class="neurona"></div>
+              </div>
+              <div class="capa-label">Entrada</div>
+            </div>
+            <div class="conexiones"></div>
+            <div>
+              <div class="capa">
+                <div class="neurona"></div>
+                <div class="neurona"></div>
+                <div class="neurona"></div>
+                <div class="neurona"></div>
+              </div>
+              <div class="capa-label">Oculta</div>
+            </div>
+            <div class="conexiones"></div>
+            <div>
+              <div class="capa">
+                <div class="neurona"></div>
+                <div class="neurona"></div>
+              </div>
+              <div class="capa-label">Salida</div>
+            </div>
+          </div>
+          <ul>
+            <li><strong>Entrada:</strong> recibe los datos (píxeles, palabras…).</li>
+            <li><strong>Oculta:</strong> extrae patrones cada vez más abstractos.</li>
+            <li><strong>Salida:</strong> entrega la respuesta, p. ej. "gato" con 97% de confianza.</li>
+          </ul>
+        </div>
+
+        <!-- PÁGINA 3 -->
+        <div class="pagina">
+          <div class="destacado">
+            Cada conexión tiene un <em>peso</em>. Durante el entrenamiento, esos pesos se ajustan mediante <strong>retropropagación</strong> para reducir el error. Aprendizaje = ajustar pesos.
+          </div>
+          <h2>¿Por qué "profundo"?</h2>
+          <p>Deep Learning ("aprendizaje profundo") usa redes con muchas capas ocultas. A más capas, mayor capacidad de abstracción: desde bordes → formas → objetos completos.</p>
+          <p>Esto fue posible gracias a dos factores: grandes volúmenes de datos y potencia de cálculo de las GPUs.</p>
+        </div>
+
+        <!-- PÁGINA 4 -->
+        <div class="pagina">
+          <h2>Aplicaciones cotidianas</h2>
+          <p>Traducción automática, asistentes de voz, coches autónomos, detección de tumores en radiografías, generación de imágenes y texto… todo esto se apoya en redes neuronales profundas.</p>
+          <h2>Conclusión</h2>
+          <p>Las redes neuronales son la base técnica de la IA actual. Entender su estructura —entradas, capas ocultas, salidas y pesos— nos ayuda a comprender qué hay detrás de las herramientas que usamos cada día.</p>
+          <div class="destacado">
+            Siguiente parada en la revista: los modelos de lenguaje (LLM), la tecnología detrás de los chatbots.
+          </div>
+        </div>
+
+        <!-- CONTRAPORTADA -->
+        <div class="pagina contra-revista" data-density="hard">
+          <div class="logo-mark">IA</div>
+          <h2>Fin del artículo</h2>
+          <p>Gracias por leer la Revista IA</p>
+          <a href="../index.html#articulos" class="btn btn-ghost">← Volver a la revista</a>
+        </div>
+
+      </div>
+
+      <button class="lector-flecha next" aria-label="Página siguiente">›</button>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div>
+          <a href="../index.html" class="logo">
+            <span class="logo-mark">IA</span>
+            Revista<span>IA</span>
+          </a>
+          <p style="margin-top: 0.75rem;">Revista digital con artículos escritos por estudiantes sobre temas de Inteligencia Artificial.</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="anio"></span> Revista IA — Trabajo grupal</span>
+        <span>Hecho con HTML, CSS y JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/vendor/page-flip.browser.min.js"></script>
+  <script src="../js/lectura.js"></script>
+</body>
+</html>

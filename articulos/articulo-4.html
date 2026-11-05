@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Artículo sobre modelos de lenguaje y ChatGPT - Revista IA">
+  <title>Modelos de lenguaje y ChatGPT — Revista IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/revista.css">
+
+  <!-- Estilos exclusivos del Artículo 4 -->
+  <style>
+    body.art-4 { --accent: #fb923c; }
+
+    .art-4 .chat {
+      background: rgba(251, 146, 60, 0.05);
+      border: 1px solid rgba(251, 146, 60, 0.3);
+      border-radius: 12px;
+      padding: 0.9rem;
+      margin: 0.75rem 0 1rem;
+      display: grid;
+      gap: 0.6rem;
+    }
+    .art-4 .chat-barra {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding-bottom: 0.55rem; border-bottom: 1px solid rgba(251, 146, 60, 0.25);
+      font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .art-4 .chat-barra::before {
+      content: ""; width: 8px; height: 8px; border-radius: 50%;
+      background: #fb923c; box-shadow: 0 0 8px rgba(251, 146, 60, 0.6);
+    }
+    .art-4 .mensaje {
+      max-width: 88%; padding: 0.55rem 0.8rem; border-radius: 10px;
+      font-size: 0.82em; line-height: 1.5;
+    }
+    .art-4 .usuario {
+      background: #1d2839; color: var(--text); justify-self: end;
+      border-bottom-right-radius: 4px;
+    }
+    .art-4 .bot {
+      background: rgba(251, 146, 60, 0.12);
+      border: 1px solid rgba(251, 146, 60, 0.35);
+      color: var(--text); justify-self: start;
+      border-bottom-left-radius: 4px;
+    }
+  </style>
+</head>
+<body class="art-4">
+
+  <header class="navbar">
+    <div class="contenedor">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">IA</span>
+        Revista<span>IA</span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lector">
+    <div class="lector-barra">
+      <a class="lector-volver" href="../index.html#articulos">← Volver</a>
+      <span class="lector-titulo">Modelos de lenguaje y ChatGPT</span>
+      <span class="lector-contador" id="contador">Portada</span>
+    </div>
+
+    <div class="zona-revista">
+      <button class="lector-flecha prev" aria-label="Página anterior">‹</button>
+
+      <div id="revista" class="revista">
+
+        <!-- PORTADA -->
+        <div class="pagina portada-revista" data-density="hard" style="--c1:#f59e0b; --c2:#ef4444;">
+          <span class="portada-sello">Revista IA · Lenguaje</span>
+          <h1>Modelos de lenguaje y ChatGPT</h1>
+          <p class="portada-autor">Por: Autor 4</p>
+          <span class="portada-fecha">Enero 2026</span>
+          <span class="portada-hint">La revista se abrirá…</span>
+        </div>
+
+        <!-- PÁGINA 1 -->
+        <div class="pagina">
+          <span class="etiqueta">Introducción</span>
+          <h2>¿Qué hay detrás de un chatbot?</h2>
+          <p>Los <strong>modelos de lenguaje grande</strong> (<em>LLM</em>) son la tecnología detrás de ChatGPT y asistentes similares. Parece magia, pero su funcionamiento se resume en una idea: <strong>predecir la siguiente palabra</strong>.</p>
+          <div class="destacado">
+            No "entienden" como nosotros: generan texto estadísticamente coherente a partir de patrones aprendidos.
+          </div>
+        </div>
+
+        <!-- PÁGINA 2 -->
+        <div class="pagina">
+          <div class="chat" aria-hidden="true">
+            <div class="chat-barra">Conversación de ejemplo</div>
+            <div class="mensaje usuario">¿Cómo funcionan los LLM?</div>
+            <div class="mensaje bot">Prediciendo la palabra más probable en cada paso, aprendiendo patrones de billones de textos.</div>
+            <div class="mensaje usuario">¿Es eso pensamiento?</div>
+            <div class="mensaje bot">No: calculan, con precisión asombrosa, qué palabra viene después.</div>
+          </div>
+          <h2>Del texto a números</h2>
+          <p>Los modelos no leen palabras, leen <strong>tokens</strong>: fragmentos convertidos en números. "inteligencia" podría dividirse en "intel" + "igencia". Cada token se representa como un vector que codifica su uso en el lenguaje.</p>
+        </div>
+
+        <!-- PÁGINA 3 -->
+        <div class="pagina">
+          <h2>La arquitectura Transformer</h2>
+          <p>Lanzada en 2017 con el artículo <em>"Attention Is All You Need"</em>, introdujo el mecanismo de <strong>atención</strong>: el modelo pondera qué partes del contexto son relevantes para cada palabra. Gracias a ello, mantiene coherencia en textos largos.</p>
+          <ul>
+            <li><strong>Preentrenamiento:</strong> aprende patrones leyendo enormes cantidades de texto.</li>
+            <li><strong>Ajuste fino:</strong> se afina con ejemplos de conversaciones de calidad.</li>
+            <li><strong>RLHF:</strong> humanos califican respuestas para alinear el modelo con lo que el usuario necesita.</li>
+          </ul>
+          <div class="destacado">
+            Limitación importante: un LLM puede <em>alucinar</em>, generando información falsa con total confianza. Verifica siempre sus respuestas.
+          </div>
+        </div>
+
+        <!-- PÁGINA 4 -->
+        <div class="pagina">
+          <h2>Conclusión</h2>
+          <p>ChatGPT no piensa ni comprende: calcula, con una precisión asombrosa, qué palabra viene después.</p>
+          <p>Esa aparente simpleza, escalada a cientos de miles de millones de parámetros, es lo que produjo la revolución conversacional de la IA.</p>
+          <div class="destacado">
+            Dato curioso: cada respuesta se genera <strong>token a token</strong>, de izquierda a derecha, una y otra vez.
+          </div>
+        </div>
+
+        <!-- CONTRAPORTADA -->
+        <div class="pagina contra-revista" data-density="hard">
+          <div class="logo-mark">IA</div>
+          <h2>Fin del artículo</h2>
+          <p>Gracias por leer la Revista IA</p>
+          <a href="../index.html#articulos" class="btn btn-ghost">← Volver a la revista</a>
+        </div>
+
+      </div>
+
+      <button class="lector-flecha next" aria-label="Página siguiente">›</button>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div>
+          <a href="../index.html" class="logo">
+            <span class="logo-mark">IA</span>
+            Revista<span>IA</span>
+          </a>
+          <p style="margin-top: 0.75rem;">Revista digital con artículos escritos por estudiantes sobre temas de Inteligencia Artificial.</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="anio"></span> Revista IA — Trabajo grupal</span>
+        <span>Hecho con HTML, CSS y JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/vendor/page-flip.browser.min.js"></script>
+  <script src="../js/lectura.js"></script>
+</body>
+</html>

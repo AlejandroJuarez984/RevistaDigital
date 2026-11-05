@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Plantilla de artículo - Revista IA">
+  <title>Título del artículo — Revista IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <!-- Estilos BASE de la revista (navbar, footer, tipografías) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <!-- Estilos del LECTOR de revista (páginas, portada, controles) -->
+  <link rel="stylesheet" href="../css/revista.css">
+
+  <!-- ============================================
+       ESTILOS EXCLUSIVOS DE ESTE ARTÍCULO
+       Copia este bloque y edítalo a tu gusto.
+       Usa el prefijo .art- para no chocar con nada.
+       ============================================ -->
+  <style>
+    /* Ejemplo: acento personalizado para este artículo */
+    .art-x { --accent: #00e5ff; }
+
+    .art-x .tabla-datos {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1rem;
+      font-size: 0.9em;
+    }
+    .art-x .tabla-datos th,
+    .art-x .tabla-datos td {
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.6rem;
+      text-align: left;
+    }
+    .art-x .tabla-datos th {
+      background: rgba(0, 229, 255, 0.1);
+      color: var(--accent);
+      font-family: var(--font-heading);
+    }
+  </style>
+</head>
+<body class="art-x">
+
+  <!-- ===== NAVBAR (igual en todas las páginas) ===== -->
+  <header class="navbar">
+    <div class="contenedor">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">IA</span>
+        Revista<span>IA</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== LECTOR DE REVISTA ===== -->
+  <main class="lector">
+    <div class="lector-barra">
+      <a class="lector-volver" href="../index.html#articulos">← Volver</a>
+      <span class="lector-titulo">Título del artículo</span>
+      <span class="lector-contador" id="contador">Portada</span>
+    </div>
+
+    <div class="zona-revista">
+      <button class="lector-flecha prev" aria-label="Página anterior">‹</button>
+
+      <!--
+        ============ CÓMO FUNCIONA ============
+        Cada <div class="pagina"> es UNA página de la revista.
+        - Portada y contraportada llevan data-density="hard" (rígidas).
+        - Las páginas de contenido se llenan normal.
+        - Recomendado: máximo ~120 palabras por página.
+        - Las páginas de contenido se numeran solas.
+      -->
+      <div id="revista" class="revista">
+
+        <!-- PORTADA (no editar data-density) -->
+        <div class="pagina portada-revista" data-density="hard" style="--c1:#0ea5e9; --c2:#6366f1;">
+          <span class="portada-sello">Revista IA · Artículo</span>
+          <h1>Título de tu artículo aquí</h1>
+          <p class="portada-autor">Por: Nombre del autor</p>
+          <span class="portada-fecha">Enero 2026 · Categoría</span>
+          <span class="portada-hint">La revista se abrirá…</span>
+        </div>
+
+        <!-- PÁGINA 1 -->
+        <div class="pagina">
+          <span class="etiqueta">Introducción</span>
+          <h2>Comienza tu artículo</h2>
+          <p>Párrafo de introducción: presenta el tema y qué encontrará el lector. Escribe con claridad y divide el contenido entre varias páginas.</p>
+          <div class="destacado">
+            Un dato o cita destacada funciona muy bien para romper la monotonía del texto.
+          </div>
+          <p>Puedes continuar con más párrafos en esta misma página o pasar a la siguiente.</p>
+        </div>
+
+        <!-- PÁGINA 2 -->
+        <div class="pagina">
+          <h2>Primera sección</h2>
+          <p>Desarrolla el contenido aquí. Puedes usar párrafos, listas e imágenes:</p>
+          <ul>
+            <li>Punto uno</li>
+            <li>Punto dos</li>
+            <li>Punto tres</li>
+          </ul>
+          <h2>Segunda sección</h2>
+          <p>Si el contenido crece demasiado, mueve el exceso a una página nueva. Es mejor página corta que página desbordada.</p>
+        </div>
+
+        <!-- PÁGINA 3 -->
+        <div class="pagina">
+          <h2>Conclusión</h2>
+          <p>Cierra el artículo con tus conclusiones y agradecimientos.</p>
+          <div class="destacado">
+            Consejo: puedes añadir las páginas que necesites copiando un bloque &lt;div class="pagina"&gt;…&lt;/div&gt;.
+          </div>
+        </div>
+
+        <!-- CONTRAPORTADA (no editar data-density) -->
+        <div class="pagina contra-revista" data-density="hard">
+          <div class="logo-mark">IA</div>
+          <h2>Fin del artículo</h2>
+          <p>Gracias por leer la Revista IA</p>
+          <a href="../index.html#articulos" class="btn btn-ghost">← Volver a la revista</a>
+        </div>
+
+      </div>
+
+      <button class="lector-flecha next" aria-label="Página siguiente">›</button>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER (igual en todas las páginas) ===== -->
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div>
+          <a href="../index.html" class="logo">
+            <span class="logo-mark">IA</span>
+            Revista<span>IA</span>
+          </a>
+          <p style="margin-top: 0.75rem;">Revista digital con artículos escritos por estudiantes sobre temas de Inteligencia Artificial.</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="anio"></span> Revista IA — Trabajo grupal</span>
+        <span>Hecho con HTML, CSS y JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/vendor/page-flip.browser.min.js"></script>
+  <script src="../js/lectura.js"></script>
+</body>
+</html>
