@@ -88,9 +88,41 @@ Las tarjetas de la portada se generan solas desde `js/articulos.js`. **No edites
    ```
 
 3. Si quieres un color de portada nuevo, agrega una clase `.portada-N` en `css/styles.css` (o reutiliza `portada-1` … `portada-7`).
-4. Guarda, haz push y listo: la card aparece automáticamente.
+4. Guarda y listo: la card aparece automáticamente.
 
-> El orden del array es el orden en que se muestran las tarjetas.
+> **Orden:** no importa dónde coloques tu entrada. Las tarjetas se ordenan solas por el número del archivo (`articulo-5` aparece antes que `articulo-10`).
+
+## Cómo enviar tu artículo (Pull Request)
+
+Sigue este flujo para que tu cambio llegue al sitio oficial:
+
+1. **Fork** del repositorio en GitHub (botón *Fork* arriba a la derecha).
+2. Clona **tu fork** en local:
+   ```bash
+   git clone https://github.com/TU-USUARIO/RevistaDigital.git
+   cd RevistaDigital
+   ```
+3. Crea una rama con tu nombre o tema:
+   ```bash
+   git checkout -b articulo-mi-tema
+   ```
+4. Haz tus cambios:
+   - Sube tu HTML a `articulos/`
+   - Agrega tu entrada en `js/articulos.js`
+   - **No toques** `index.html`, archivos de otros ni el lector
+5. Commitea y sube a **tu fork**:
+   ```bash
+   git add articulos/articulo-N.html js/articulos.js
+   git commit -m "Articulo: titulo del tema"
+   git push origin articulo-mi-tema
+   ```
+6. En GitHub, en **tu fork** aparece el aviso *Compare & pull request* → revísalo → base: `main` → **Create pull request**.
+7. Espera a que el dueño del repo lo revise y haga **merge**.
+
+Reglas del equipo:
+- **Nunca** subas directo a `main`; siempre por PR.
+- Un PR = un artículo: solo tus archivos (`articulo-N.html` + tu entrada en `js/articulos.js`).
+- Si tu rama quedó vieja, actualízala antes del PR: `git pull origin main` en tu rama.
 
 ## Cómo agregar una infografía
 

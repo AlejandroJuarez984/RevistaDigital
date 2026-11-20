@@ -9,11 +9,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Pinta las tarjetas de artículos desde js/articulos.js
+// Orden: numérico por archivo (articulo-5 antes que articulo-10)
 function pintarArticulos() {
   const grid = document.getElementById("grid-articulos");
   if (!grid || typeof ARTICULOS === "undefined") return;
 
-  grid.innerHTML = ARTICULOS.map(
+  const ordenados = [...ARTICULOS].sort(
+    (a, b) => extraerNumero(a.href) - extraerNumero(b.href)
+  );
+
+  grid.innerHTML = ordenados.map(
     (a) => `
     <a class="tarjeta" href="${a.href}">
       <div class="tarjeta-portada ${a.clasePortada}">${a.portada}</div>
@@ -28,6 +33,12 @@ function pintarArticulos() {
       </div>
     </a>`
   ).join("");
+}
+
+// Extrae el número de "articulo-N.html" → N (si no hay, queda al final)
+function extraerNumero(href) {
+  const m = String(href).match(/articulo-(\d+)/i);
+  return m ? Number(m[1]) : Number.MAX_SAFE_INTEGER;
 }
 
 // Menú hamburguesa móvil
