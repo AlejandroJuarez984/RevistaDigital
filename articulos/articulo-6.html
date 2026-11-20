@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Algoritmos genéticos y redes neuronales: definición, origen, componentes, funcionamiento y ejemplos en Python - Revista IA">
+  <title>Algoritmos genéticos y redes neuronales — Revista IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <!-- Estilos BASE de la revista (navbar, footer, tipografías) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <!-- Estilos del LECTOR de revista (páginas, portada, controles) -->
+  <link rel="stylesheet" href="../css/revista.css">
+
+  <!-- ============================================
+       ESTILOS EXCLUSIVOS DE ESTE ARTÍCULO
+       Copia este bloque y edítalo a tu gusto.
+       Usa el prefijo .art- para no chocar con nada.
+       ============================================ -->
+  <style>
+    body.art-6 { --accent: #a3e635; }
+
+    .art-6 .formula {
+      background: rgba(163, 230, 53, 0.07);
+      border: 1px solid rgba(163, 230, 53, 0.3);
+      border-radius: 10px;
+      padding: 0.5rem 0.75rem;
+      margin: 0.6rem 0;
+      text-align: center;
+      font-style: italic;
+    }
+    .art-6 pre {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem 0.65rem;
+      margin: 0.5rem 0 0.7rem;
+      font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+      font-size: 0.7em;
+      line-height: 1.4;
+      white-space: pre-wrap;
+      color: var(--text);
+    }
+    .art-6 pre.codigo { font-size: 0.62em; line-height: 1.35; }
+    .art-6 code { font-family: "SFMono-Regular", Menlo, Consolas, monospace; color: var(--accent); font-size: 0.92em; }
+    .art-6 .refs { font-size: 0.74em; line-height: 1.45; }
+    .art-6 .refs p { margin-bottom: 0.45rem; }
+    .art-6 figure { margin: 0.6rem 0; }
+    .art-6 figure img { max-height: 380px; object-fit: contain; width: 100%; background: #fff; margin: 0; }
+    .art-6 figcaption { font-size: 0.8em; color: var(--muted); text-align: center; margin-top: 0.35rem; }
+    .art-6 .portada-imgs { display: flex; align-items: center; gap: 0.75rem; margin: 0 0 1rem; }
+    .art-6 .portada-imgs img { height: clamp(70px, 12vw, 100px); width: auto; margin: 0; border-radius: 12px; border: 2px solid rgba(255, 255, 255, 0.55); background: #fff; object-fit: cover; }
+    .art-6 .equipo { list-style: none; margin: 0.5rem 0 0 0; padding: 0; }
+    .art-6 .equipo li { margin-bottom: 0.2rem; }
+  </style>
+</head>
+<body class="art-6">
+
+  <!-- ===== NAVBAR (igual en todas las páginas) ===== -->
+  <header class="navbar">
+    <div class="contenedor">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">IA</span>
+        Revista<span>IA</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== LECTOR DE REVISTA ===== -->
+  <main class="lector">
+    <div class="lector-barra">
+      <a class="lector-volver" href="../index.html#articulos">← Volver</a>
+      <span class="lector-titulo">Algoritmos genéticos y redes neuronales</span>
+      <span class="lector-contador" id="contador">Portada</span>
+    </div>
+
+    <div class="zona-revista">
+      <button class="lector-flecha prev" aria-label="Página anterior">‹</button>
+
+      <!--
+        ============ CÓMO FUNCIONA ============
+        Cada <div class="pagina"> es UNA página de la revista.
+        - Portada y contraportada llevan data-density="hard" (rígidas).
+        - Las páginas de contenido se llenan normal.
+        - Recomendado: máximo ~120 palabras por página.
+        - Las páginas de contenido se numeran solas.
+      -->
+      <div id="revista" class="revista">
+
+        <!-- PORTADA (no editar data-density) -->
+        <div class="pagina portada-revista" data-density="hard" style="--c1:#65a30d; --c2:#0d9488;">
+          <span class="portada-sello">Revista IA · Artículo</span>
+          <h1>Algoritmos genéticos y redes neuronales</h1>
+          <div class="portada-imgs">
+            <img src="../assets/img/darwin.jpeg" alt="Charles Darwin y pinzones de las Galápagos">
+            <img src="../assets/img/portada.png" alt="Cerebro con red de nodos conectados">
+          </div>
+          <p class="portada-autor">Por: Barron Reyes Edrei Jezreel<br>Cruz Abrego Misael Iván<br>Fajardo Herrera Victor Manuel<br>Solís Vázquez Carlos Emiliano</p>
+          <span class="portada-fecha">Noviembre 2026 · Sistemas Inteligentes · FES Acatlán, UNAM</span>
+          <span class="portada-hint">La revista se abrirá…</span>
+        </div>
+
+        <!-- PÁGINA DE EQUIPO -->
+        <div class="pagina">
+          <span class="etiqueta">Sistemas Inteligentes</span>
+          <h2>Equipo</h2>
+          <p>Universidad Nacional Autónoma de México<br>Facultad de Estudios Superiores Acatlán<br>Programa de Matemáticas Aplicadas y Computación</p>
+          <h3>Autores</h3>
+          <ul class="equipo">
+            <li>Barron Reyes Edrei Jezreel</li>
+            <li>Cruz Abrego Misael Iván</li>
+            <li>Fajardo Herrera Victor Manuel</li>
+            <li>Solís Vázquez Carlos Emiliano</li>
+          </ul>
+          <div class="destacado">Contenido: Parte I, algoritmos genéticos. Parte II, redes neuronales. Cada parte incluye definición, origen, fundamento biológico, componentes, funcionamiento, pseudocódigo, tipos y un ejemplo en Python.</div>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Parte I · Algoritmos genéticos</span>
+<h2>Definición</h2>
+<p>Un algoritmo genético (AG) es un método de búsqueda y optimización que resuelve problemas imitando el principio de selección natural propuesto por Darwin (Romero, 2019; Melián et al., 2009). En lugar de partir de una solución y mejorarla paso a paso, trabaja con un conjunto de soluciones candidatas llamado <strong>población</strong>, que se hace evolucionar durante varias generaciones.</p>
+<p>La idea: se parte de una población inicial, se eligen los más aptos, se combinan y mutan para producir descendientes, y estos, en promedio mejor adaptados, forman la siguiente generación.</p>
+        </div>
+
+        <div class="pagina">
+<h2>Definición (cont.)</h2>
+<p>La repetición de este ciclo provoca que la calidad de las soluciones mejore progresivamente. Por eso se dice que los AG son métodos de optimización basados en una simulación <em>parcial</em> de la evolución natural.</p>
+<div class="destacado">Es parcial porque solo retoma los mecanismos esenciales (selección, reproducción y mutación); basta conservar la lógica de la adaptación para obtener un procedimiento computacional eficaz (Romero, 2019).</div>
+<h2>Origen</h2>
+<p>Los AG nacen de los trabajos de John Holland, quien en 1962 sentó sus bases. Su propósito inicial no era resolver problemas de ingeniería, sino estudiar la adaptación natural (Gestal et al., 2010).</p>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Figuras</span>
+<h2>Esquema de un algoritmo genético</h2>
+<figure><img src="../assets/img/algoritmos-geneticos.jpeg" alt="Ciclo del algoritmo genético: mezcla inicial, selección, cruce, mutación y repetición"><figcaption>Figura 1. Ciclo general: selección de los mejores, cruce, mutación y repetición.</figcaption></figure>
+        </div>
+
+        <div class="pagina">
+<h2>Origen (cont.)</h2>
+<p>El algoritmo nació como un modelo para comprender la adaptación y solo después se convirtió en una herramienta de optimización.</p>
+<p>La técnica alcanzó gran popularidad con el libro de Goldberg en 1989, que estableció bases firmes para su aplicación práctica. Desde entonces, los AG son parte importante de la <strong>Computación Evolutiva</strong>, un área de la IA que agrupa técnicas inspiradas en la evolución biológica.</p>
+<p>Hoy son innumerables sus aplicaciones en áreas industriales, comerciales y de ingeniería.</p>
+        </div>
+
+        <div class="pagina">
+<h2>Fundamento biológico</h2>
+<p>Los AG se fundamentan en la teoría de la evolución de Charles Darwin (Melián et al., 2009): los individuos mejor adaptados tienen mayor probabilidad de sobrevivir y reproducirse, y sus rasgos se transmiten con más frecuencia.</p>
+<p>A esto se suma la genética: cada célula posee cromosomas, cadenas de ADN formadas por genes, y cada gen codifica un rasgo, como el color de los ojos. Al reproducirse, los cromosomas se recombinan (<strong>cruce</strong>) y ocasionalmente un gen cambia al azar (<strong>mutación</strong>), lo que introduce variedad.</p>
+        </div>
+
+        <div class="pagina">
+<h2>La analogía computacional</h2>
+<ul>
+  <li>Una <strong>solución</strong> del problema equivale a un <strong>cromosoma</strong>.</li>
+  <li>Un conjunto de soluciones equivale a una <strong>población</strong>.</li>
+  <li>La calidad de una solución equivale a la <strong>aptitud</strong> del individuo.</li>
+</ul>
+<div class="destacado">En consecuencia, «sobrevivir» significa, para una solución, ser una buena solución del problema.</div>
+<h2>Características</h2>
+<p>Los AG resuelven problemas de optimización y búsqueda, sobre todo cuando el espacio de soluciones es tan grande que es imposible revisar todas las opciones: ubicar <em>n</em> reinas sin que se ataquen, planear rutas, asignar horarios o diseñar piezas.</p>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Figuras</span>
+<h2>Naturaleza y algoritmo</h2>
+<figure><img src="../assets/img/algoritmogeneticoenquesebasan.png" alt="Correspondencia entre la naturaleza y el algoritmo genético"><figcaption>Figura 2. Analogía entre la evolución natural y el algoritmo genético.</figcaption></figure>
+        </div>
+
+        <div class="pagina">
+<h2>Características (cont.)</h2>
+<p>Su principal ventaja es que no requieren conocer la estructura matemática del problema (derivadas, continuidad o convexidad); solo necesitan evaluar qué tan buena es una solución (Valencia, 1997).</p>
+<p>Son útiles en problemas complejos, con muchas restricciones o varios óptimos locales, donde los métodos clásicos suelen quedar atrapados.</p>
+<div class="destacado">A cambio, no garantizan el óptimo global: ofrecen soluciones de alta calidad en un tiempo razonable (Lucia, 2023).</div>
+        </div>
+
+        <div class="pagina">
+<h2>Componentes</h2>
+<p>Un AG se construye con cinco componentes que trabajan en cadena:</p>
+<ol>
+  <li><strong>Población inicial:</strong> cromosomas generados al azar y en cantidad suficiente para garantizar diversidad.</li>
+  <li><strong>Función de aptitud (<em>fitness</em>):</strong> mide qué tan buena es cada solución.</li>
+  <li><strong>Selección:</strong> elige padres; los más aptos tienen mayor probabilidad.</li>
+  <li><strong>Operadores genéticos:</strong> cruce (combina padres) y mutación (modifica hijos).</li>
+  <li><strong>Criterio de parada:</strong> número máximo de generaciones o convergencia, siendo esta la más habitual (Romero, 2019).</li>
+</ol>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Figuras</span>
+<h2>Componentes del AG</h2>
+<figure><img src="../assets/img/componentes-algoritmogentico.png" alt="Cinco componentes del algoritmo genético en cadena"><figcaption>Figura 3. Los cinco componentes del algoritmo genético.</figcaption></figure>
+        </div>
+
+        <div class="pagina">
+<h2>Elementos de un AG</h2>
+<p>La terminología proviene de la biología. El <strong>cromosoma</strong> es la cadena que representa una solución completa; cada elemento es un <strong>gen</strong>, que ocupa una posición llamada <strong>locus</strong>, y los valores posibles de un gen son los <strong>alelos</strong> (Melián et al., 2009). Por ejemplo:</p>
+<pre>cromosoma: 8 5 2 6 9 3</pre>
+<p>posee seis genes, y el gen de la primera posición vale 8.</p>
+<p>El <strong>genoma</strong> es el material genético completo; el <strong>genotipo</strong>, el conjunto de genes de un individuo; y el <strong>fenotipo</strong>, su expresión en un ambiente. En un AG, el genotipo es el cromosoma codificado y el fenotipo, la solución que resulta de decodificarlo.</p>
+        </div>
+
+        <div class="pagina">
+<h2>Representación</h2>
+<p>La primera decisión es la <strong>representación</strong>: cómo codificar un estado del problema como cromosoma (Piñero et al., 2003).</p>
+<ol>
+  <li><strong>Permutación</strong>, cuando importa el orden: en personas sentadas a una mesa, <code>1 2 3 4 5 6</code> indica el orden.</li>
+  <li><strong>Asignación de tipos</strong>, cuando cada posición toma una categoría: <code>1 1 1 2 2 3</code> indica el tipo de cada caja.</li>
+  <li><strong>Cadena binaria</strong>, cuando cada gen indica presencia o ausencia: en el problema de las reinas, un <code>1</code> es reina en esa casilla y un <code>0</code> que no la hay.</li>
+</ol>
+        </div>
+
+        <div class="pagina">
+<h2>Funcionamiento</h2>
+<p>Un AG se basa en un ciclo que se repite generación tras generación, en cuatro pasos:</p>
+<ol>
+  <li>Evaluar la aptitud de cada cromosoma.</li>
+  <li>Permitir la reproducción de los más aptos.</li>
+  <li>Mutar con cierta probabilidad a los nuevos individuos.</li>
+  <li>Organizar la nueva población.</li>
+</ol>
+<p>Se repite hasta que se cumple una condición de terminación.</p>
+<h3>1. Evaluación: la función de aptitud</h3>
+<p>En el problema de las <em>N</em> reinas no todos los cromosomas cumplen las restricciones, así que hay que evaluarlos. La aptitud asigna a cada uno una estimación numérica de qué tan «bueno» o «malo» es.</p>
+        </div>
+
+        <div class="pagina">
+<h3>Función de aptitud</h3>
+<p>Una forma típica es premiar lo bueno y penalizar lo malo:</p>
+<div class="formula">f(x) = bueno(x) − k · malo(x)</div>
+<p>donde <em>k</em> es una constante de penalización con <em>k</em> ≥ 10 · |población total|, de modo que una solución con defectos nunca supere a una válida.</p>
+<p>Por defecto, la aptitud <strong>maximiza</strong>. Si el problema es de minimización, se antepone un signo negativo:</p>
+<div class="formula">f(x) = −bueno(x) + k · malo(x)</div>
+        </div>
+
+        <div class="pagina">
+<h3>2. Reproducción: selección</h3>
+<p>Los individuos más aptos tienen mayor probabilidad de ser padres. Una manera habitual es la selección proporcional o de <strong>ruleta</strong>, donde la probabilidad de elegir al individuo <em>i</em> es su aptitud relativa:</p>
+<div class="formula">P(i) = f(x<sub>i</sub>) / Σ<sub>j=1..N</sub> f(x<sub>j</sub>)</div>
+<p>con <em>N</em> el tamaño de la población.</p>
+<h3>Cruce (<em>crossover</em>)</h3>
+<p>Genera un nuevo cromosoma a partir de dos o más anteriores. Los operadores más característicos son el cruce en un punto, en <em>n</em> puntos, cíclico, ordenado y uniforme.</p>
+        </div>
+
+        <div class="pagina">
+<h3>Cruce en un punto</h3>
+<p>Se selecciona una posición en ambos cromosomas y se intercambian las partes:</p>
+<pre>Padre 1: 0 0 1 0 1 0 1 0
+Padre 2: 1 0 0 0 1 1 0 1
+Hijo 1:  0 0 1 0 0 1 1 0
+Hijo 2:  1 0 0 0 1 0 1 1</pre>
+<h3>Cruce en <em>n</em> puntos</h3>
+<p>Igual, pero con uno o varios puntos de corte:</p>
+<pre>Padre 1: 0 0 1 0 1 0 1 0
+Padre 2: 1 0 0 0 1 1 0 1
+Hijo 1:  0 1 1 0 1 1 1 0
+Hijo 2:  1 0 0 0 0 0 0 1</pre>
+        </div>
+
+        <div class="pagina">
+<h3>Cruce uniforme</h3>
+<p>Genera dos descendientes decidiendo, gen por gen, si se toma del primer o del segundo padre:</p>
+<pre>Padre 1: 0 0 0 1 0 0 0 1
+Padre 2: 0 0 1 0 1 1 1 1
+Hijo 1:  0 1 0 0 1 1 1 1
+Hijo 2:  0 0 1 1 0 0 0 1</pre>
+<h3>Cruce cíclico</h3>
+<p>Para permutaciones (sin genes repetidos). Se halla el ciclo continuo entre ambos padres, se construye el hijo con esos genes y se rellena con los faltantes del segundo:</p>
+<pre>Padre 1: 1 2 3 4 5 6 7
+Padre 2: 5 4 6 7 2 3 1
+Hijo:    1 2 6 4 5 3 7</pre>
+        </div>
+
+        <div class="pagina">
+<h3>Cruce ordenado</h3>
+<p>Similar al cruce en <em>n</em> puntos, divide el cromosoma en tres trozos. Los genes del segundo trozo del primer cromosoma se marcan y se tachan del segundo; colocado el trozo central, los genes faltantes ocupan las demás posiciones:</p>
+<pre>Padre 1: 1 4 7 2 5 8 3 6 9 0
+Padre 2: 4 8 2 6 5 9 3 7 1 0
+Hijo:    0 4 6 2 5 8 3 9 7 1</pre>
+<h3>3. Mutación</h3>
+<p>Es la modificación de un cromosoma, obtenido por cruce, mediante un operador de mutación. Su función es mantener la diversidad para que la población no se estanque.</p>
+        </div>
+
+        <div class="pagina">
+<h3>Operadores de mutación</h3>
+<p><strong>Flip bit:</strong> cambia el valor de un gen al azar.</p>
+<pre>Antes:   0 1 0 1 0 1 1 0
+Despues: 0 1 1 1 1 0 1 0</pre>
+<p><strong>Intercambio:</strong> intercambia dos genes elegidos al azar.</p>
+<pre>Antes:   1 2 1 4 3 6 8 5
+Despues: 1 6 1 4 3 2 8 5</pre>
+        </div>
+
+        <div class="pagina">
+<p><strong>Scramble:</strong> mezcla un grupo de genes consecutivos.</p>
+<pre>Antes:   1 2 1 4 3 6 8 5
+Despues: 1 2 3 6 4 1 8 5</pre>
+<p><strong>Inversión:</strong> similar a la anterior, invierte el orden de un grupo de genes consecutivos.</p>
+<pre>Antes:   1 2 1 4 3 6 8 5
+Despues: 1 2 6 3 4 1 8 5</pre>
+        </div>
+
+        <div class="pagina">
+<h3>4. Parámetros que controlan el ciclo</h3>
+<p>La <strong>probabilidad de mutación</strong> indica con qué frecuencia mutan los genes. Si no hay mutación, los descendientes quedan idénticos a lo obtenido tras la reproducción. Con una probabilidad del 100 % se cambiaría todo el cromosoma, lo que equivale a una inversión y no a una mutación, y la población degenera muy rápido.</p>
+<p>Por ello se emplean valores pequeños: la mutación aporta variedad sin destruir lo ya aprendido.</p>
+        </div>
+
+        <div class="pagina">
+<p>El <strong>tamaño de la población</strong> suele ser de varios cientos o miles de individuos; se elige por experiencia, equilibrando el esfuerzo de cómputo y la capacidad de explorar el espacio de búsqueda. El total de individuos evaluados es el tamaño de la población por el número de generaciones (Lucia, 2023).</p>
+<p>Un riesgo importante es la <strong>convergencia prematura</strong>: la población se estanca antes de alcanzar soluciones de alta calidad. Para evitarla se controla la diversidad, medida con el valor promedio o el mejor valor de la función objetivo.</p>
+<div class="destacado">El estancamiento también es un criterio de parada razonable: indica que más esfuerzo no producirá mejoras apreciables.</div>
+        </div>
+
+        <div class="pagina">
+<h2>Algoritmo en pseudocódigo</h2>
+<p>El ciclo se resume así (Gutiérrez et al., 2020):</p>
+<pre>Entrada: N, p_c, p_m, G_max
+P ← generar N cromosomas aleatorios
+evaluar f(x) de cada x ∈ P
+mientras no se cumpla la parada:
+  P' ← ∅
+  mientras |P'| &lt; N:
+    padre1 ← Seleccionar(P)
+    padre2 ← Seleccionar(P)
+    si Aleatorio() &lt; p_c:
+      (h1, h2) ← Cruzar(padre1, padre2)
+    si no: (h1, h2) ← (padre1, padre2)
+    h1 ← Mutar(h1, p_m); h2 ← Mutar(h2, p_m)
+    agregar h1, h2 a P'
+  P ← P'
+  evaluar la aptitud de cada x ∈ P
+devolver el mejor cromosoma de P</pre>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Figuras</span>
+<h2>Ciclo evolutivo</h2>
+<figure><img src="../assets/img/ciclo-evolutivo.png" alt="Diagrama del ciclo evolutivo"><figcaption>Figura 4. Cada vuelta del ciclo produce una generación nueva.</figcaption></figure>
+        </div>
+
+        <div class="pagina">
+<h2>Tipos de AG</h2>
+<p>Las versiones surgen al especificar distinto sus componentes: la representación, los operadores y el reemplazo de la población (Melián et al., 2009).</p>
+<p><strong>Modelo generacional:</strong> en cada iteración se genera una población completa de nuevos individuos que reemplaza a la anterior.</p>
+<p><strong>Modelo estacionario:</strong> en cada iteración se seleccionan dos padres y se obtienen dos hijos (posiblemente mutados) que reemplazan a sus padres; la población cambia de forma gradual.</p>
+        </div>
+
+        <div class="pagina">
+<h3>Según la codificación</h3>
+<p>Se distinguen los AG <strong>binarios</strong> (ceros y unos), los de <strong>permutaciones</strong> (problemas de orden, como rutas) y los de <strong>asignación de categorías</strong>.</p>
+<ul>
+  <li>Binarios: <em>flip bit</em> y cruce en un punto, uniforme o en <em>n</em> puntos.</li>
+  <li>Permutaciones: intercambio, <em>scramble</em> o inversión, con cruce cíclico u ordenado (sin repetir genes) (Gutiérrez et al., 2020).</li>
+</ul>
+<h3>Según el criterio de parada</h3>
+<p>Por esfuerzo de cómputo (tiempo de CPU, número de cruzamientos), lo más corriente es limitar las generaciones; o por estancamiento, cuando la mejor solución o la evaluación media no mejora (Lucia, 2023).</p>
+        </div>
+
+        <div class="pagina">
+<h2>Aplicación: un ejemplo sencillo</h2>
+<p>Encontrar el entero <em>x</em>, con 0 ≤ <em>x</em> ≤ 31, que maximice</p>
+<div class="formula">f(x) = x²</div>
+<p>La respuesta es evidente (<em>x</em> = 31, <em>f</em>(<em>x</em>) = 961), y por eso sirve para comprobar que el algoritmo funciona.</p>
+<p><strong>Representación:</strong> cromosoma binario de cinco genes; <code>1 0 1 1 0</code> es <em>x</em> = 22, con aptitud 484. <strong>Población:</strong> seis cromosomas al azar. <strong>Selección:</strong> ruleta.</p>
+        </div>
+
+        <div class="pagina">
+<p><strong>Cruce:</strong> en un punto, con probabilidad 0.9. <strong>Mutación:</strong> <em>flip bit</em>, con probabilidad 0.05 por gen. <strong>Parada:</strong> veinte generaciones. Se conserva siempre al mejor individuo (<strong>elitismo</strong>) para no perderlo por azar (Gutiérrez et al., 2020).</p>
+<p><strong>Herramientas.</strong> Se resuelve en Python usando solo el módulo <code>random</code>. Para problemas reales conviene usar bibliotecas: <strong>DEAP</strong>, marco flexible de computación evolutiva; <strong>PyGAD</strong>, con AG listos para usar y que también entrena redes neuronales; o, en MATLAB, la función <code>ga</code> del <em>Global Optimization Toolbox</em>.</p>
+        </div>
+
+        <div class="pagina">
+<h3>Código 1 · AG para f(x)=x² (1/3)</h3>
+<pre class="codigo">import random
+
+N_BITS = 5          # longitud del cromosoma
+TAM_POB = 6         # tamaño de la población
+P_CRUCE = 0.9       # probabilidad de cruce
+P_MUT = 0.05        # probabilidad de mutación
+GENERACIONES = 20
+
+def decodificar(cromosoma):
+    return int("".join(map(str, cromosoma)), 2)
+
+def fitness(cromosoma):
+    x = decodificar(cromosoma)
+    return x ** 2
+
+def poblacion_inicial():
+    return [[random.randint(0, 1) for _ in range(N_BITS)]
+            for _ in range(TAM_POB)]</pre>
+        </div>
+
+        <div class="pagina">
+<h3>Código 1 (2/3)</h3>
+<pre class="codigo">def seleccion_ruleta(poblacion):
+    aptitudes = [fitness(c) for c in poblacion]
+    total = sum(aptitudes)
+    if total == 0:
+        return random.choice(poblacion)
+    punto = random.uniform(0, total)
+    acumulado = 0
+    for cromosoma, apt in zip(poblacion, aptitudes):
+        acumulado += apt
+        if acumulado &gt;= punto:
+            return cromosoma
+    return poblacion[-1]
+
+def cruce_un_punto(p1, p2):
+    if random.random() &lt; P_CRUCE:
+        punto = random.randint(1, N_BITS - 1)
+        return p1[:punto]+p2[punto:], p2[:punto]+p1[punto:]
+    return p1[:], p2[:]
+
+def mutacion_flip_bit(cromosoma):
+    return [1 - g if random.random() &lt; P_MUT else g
+            for g in cromosoma]</pre>
+        </div>
+
+        <div class="pagina">
+<h3>Código 1 (3/3)</h3>
+<pre class="codigo">def algoritmo_genetico():
+    poblacion = poblacion_inicial()
+    for gen in range(GENERACIONES):
+        mejor = max(poblacion, key=fitness)
+        print(f"Gen {gen:2d} | mejor: {mejor} -&gt; "
+              f"x = {decodificar(mejor):2d}, "
+              f"f(x) = {fitness(mejor)}")
+        nueva = [mejor[:]]      # elitismo
+        while len(nueva) &lt; TAM_POB:
+            p1 = seleccion_ruleta(poblacion)
+            p2 = seleccion_ruleta(poblacion)
+            h1, h2 = cruce_un_punto(p1, p2)
+            nueva += [mutacion_flip_bit(h1),
+                      mutacion_flip_bit(h2)]
+        poblacion = nueva[:TAM_POB]
+    return max(poblacion, key=fitness)
+
+if __name__ == "__main__":
+    random.seed(42)
+    mejor = algoritmo_genetico()
+    print("Mejor solución:", mejor,
+          "-&gt; x =", decodificar(mejor),
+          ", f(x) =", fitness(mejor))</pre>
+<p>Con la semilla 42 la población converge a <code>1 1 1 1 1</code>: <em>x</em> = 31 y <em>f</em>(<em>x</em>) = 961, el óptimo.</p>
+        </div>
+
+        <div class="pagina">
+<h3>Resultado</h3>
+<p>Dado que el algoritmo es aleatorio, otra semilla puede requerir más o menos generaciones, pero el comportamiento es el mismo: la aptitud del mejor individuo aumenta y luego se estabiliza.</p>
+<figure><img src="../assets/img/figura1.png" alt="Gráfica de la mejor aptitud por generación, que llega a 961 en la generación 7"><figcaption>Figura 5. Evolución de la aptitud del mejor individuo a lo largo de las generaciones.</figcaption></figure>
+          <div class="destacado">El AG no «sabe» que la respuesta es 31; solo evalúa, selecciona, cruza y muta, y la población converge al óptimo.</div>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Parte II · Redes neuronales</span>
+<h2>Definición</h2>
+<p>Una red neuronal artificial (RNA) es un modelo computacional formado por numerosas unidades simples, las <strong>neuronas</strong>, conectadas entre sí y organizadas en capas (Díez et al., 2001). Cada neurona recibe números, los combina y entrega un resultado a las siguientes; la capacidad de la red surge de cómo están conectadas.</p>
+<p>Lo que las distingue es que <strong>aprenden a partir de ejemplos</strong>: en lugar de programar reglas, se le dan datos con sus respuestas correctas y la red ajusta sus pesos hasta que sus respuestas se asemejan a las esperadas (Lüthy, 2022).</p>
+        </div>
+
+        <div class="pagina">
+<h2>Definición (cont.)</h2>
+<p>Una vez entrenada, responde ante datos que nunca ha visto: propiedad llamada <strong>generalización</strong> (Rodríguez-Sánchez, 2024).</p>
+<div class="destacado">En términos matemáticos, una red neuronal es una función con muchos parámetros ajustables que transforma una entrada <b>x</b> en una salida <b>y</b>. Entrenarla es encontrar los valores que hacen que la función se aproxime a la relación real entre entradas y salidas (Díez et al., 2001).</div>
+        </div>
+
+        <div class="pagina">
+<h2>Origen</h2>
+<ul>
+  <li><strong>1943:</strong> McCulloch y Pitts proponen el primer modelo matemático de una neurona, con valores binarios y un umbral.</li>
+  <li><strong>1949:</strong> Hebb plantea que las conexiones entre neuronas se refuerzan al activarse juntas.</li>
+  <li><strong>1958:</strong> Rosenblatt presenta el perceptrón, la primera red capaz de aprender sus pesos de ejemplos.</li>
+  <li><strong>1969:</strong> Minsky y Papert demuestran que un perceptrón de una capa no resuelve problemas no linealmente separables, como XOR; el interés decae durante años.</li>
+</ul>
+        </div>
+
+        <div class="pagina">
+<h2>Origen (cont.)</h2>
+<ul>
+  <li><strong>1986:</strong> Rumelhart, Hinton y Williams popularizan la retropropagación (<em>backpropagation</em>), que permite entrenar redes con varias capas.</li>
+  <li><strong>2012 en adelante:</strong> los grandes volúmenes de datos y las GPU dan origen al aprendizaje profundo (<em>deep learning</em>), base de la IA actual (Abeliuk y Gutiérrez, 2021).</li>
+</ul>
+<h2>Fundamento biológico</h2>
+<p>Las RNA se inspiran en el cerebro, con unos 86 mil millones de neuronas. Una neurona tiene <strong>dendritas</strong> (reciben señales), <strong>soma</strong> (las integra) y <strong>axón</strong> (envía la señal por las sinapsis).</p>
+        </div>
+
+        <div class="pagina">
+<h2>Fundamento biológico (cont.)</h2>
+<p>La neurona dispara solo si la suma de lo que recibe supera cierto umbral, y no todas las sinapsis tienen igual intensidad: unas excitan y otras inhiben. El aprendizaje ocurre cuando estas intensidades cambian con la experiencia (idea de Hebb).</p>
+<p>El modelo artificial lo simplifica: dendritas = entradas; intensidad sináptica = peso; soma = suma ponderada; umbral = función de activación; axón = salida.</p>
+<div class="destacado">Es una inspiración y no una copia: una neurona real es mucho más compleja que una artificial (Lüthy, 2022).</div>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Figuras</span>
+<h2>De la neurona biológica a la artificial</h2>
+<figure><img src="../assets/img/redes_neuronalesbio.png" alt="Neurona biológica con dendritas y axón" style="max-height:230px;object-fit:contain"><figcaption>Figura 6. Neurona biológica.</figcaption></figure>
+<figure><img src="../assets/img/redneuronalenquesebasan.png" alt="Correspondencia entre neurona biológica y artificial" style="max-height:230px;object-fit:contain"><figcaption>Figura 7. Correspondencia entre la neurona biológica y la artificial.</figcaption></figure>
+        </div>
+
+        <div class="pagina">
+<h2>Características</h2>
+<p>Las RNA aprenden patrones en los datos, sobre todo cuando es muy difícil escribir reglas explícitas. Sus usos se agrupan en:</p>
+<ul>
+  <li><strong>Clasificación:</strong> a qué categoría pertenece una entrada (¿spam?, ¿hay un gato?).</li>
+  <li><strong>Regresión:</strong> predecir un valor numérico, como el precio de una vivienda.</li>
+  <li><strong>Generación:</strong> producir texto, imágenes o audio nuevos.</li>
+</ul>
+<p>Se aplican en reconocimiento de imágenes y voz, traducción automática, diagnóstico médico asistido, vehículos autónomos, detección de fraudes y asistentes conversacionales.</p>
+        </div>
+
+        <div class="pagina">
+<h2>Características (cont.)</h2>
+<p><strong>Fortaleza:</strong> aproximan funciones muy complejas y no lineales a partir de datos.</p>
+<p><strong>Debilidad:</strong> requieren grandes cantidades de datos y de poder de cómputo, y sus decisiones son difíciles de explicar (Rodríguez-Sánchez, 2024).</p>
+<h2>Componentes</h2>
+<p>Una RNA se organiza en tres tipos de capas. La <strong>capa de entrada</strong> recibe las variables originales, con una neurona por variable. Las <strong>capas ocultas</strong> (una o muchas) transforman progresivamente los datos con combinaciones lineales y funciones no lineales, y dan a la red la capacidad de aprender relaciones complejas.</p>
+        </div>
+
+        <div class="pagina">
+<h2>Componentes (cont.)</h2>
+<p>La <strong>capa de salida</strong> entrega el resultado, con una neurona por cada valor a predecir: una clase, una probabilidad o una magnitud continua.</p>
+<p>Entre capas hay conexiones dirigidas, cada una con un <strong>peso</strong> que determina la influencia de una neurona sobre otra. Además:</p>
+<ul>
+  <li><strong>Función de activación:</strong> introduce no linealidad.</li>
+  <li><strong>Función de pérdida:</strong> cuantifica cuánto se equivoca la red.</li>
+  <li><strong>Algoritmo de optimización:</strong> ajusta los pesos para reducir el error.</li>
+</ul>
+        </div>
+
+        <div class="pagina">
+<h2>Componentes (cont.)</h2>
+<p>La red es una cadena de capas por las que la información fluye de izquierda a derecha (<em>forward pass</em> o propagación hacia adelante), junto con un mecanismo que ajusta los pesos de derecha a izquierda según el error (<em>backpropagation</em> o retropropagación).</p>
+<div class="destacado">Así la red actualiza sus parámetros y mejora su desempeño de manera gradual (Borja et al., 2022).</div>
+<h2>Elementos de una neurona</h2>
+<p>Cada neurona hace dos operaciones: una suma ponderada de sus entradas más un sesgo, y luego una función de activación:</p>
+<div class="formula">z = Σ w<sub>i</sub>x<sub>i</sub> + b = <b>w</b>·<b>x</b> + b &nbsp;&nbsp; a = φ(z)</div>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Figuras</span>
+<h2>Estructura de una red</h2>
+<figure><img src="../assets/img/redesneuronales.jpg" alt="Red neuronal con capa de entrada, oculta y de salida"><figcaption>Figura 8. Red neuronal con capa de entrada, capa oculta y capa de salida.</figcaption></figure>
+        </div>
+
+        <div class="pagina">
+<h3>Elementos de una neurona (cont.)</h3>
+<ul>
+  <li><strong>Entradas</strong> x₁…xₙ: datos del exterior o de la capa anterior.</li>
+  <li><strong>Pesos</strong> w₁…wₙ: importancia de cada entrada; un peso grande amplifica y uno negativo inhibe.</li>
+  <li><strong>Sesgo</strong> b: desplaza el umbral de activación.</li>
+  <li><strong>Suma ponderada</strong> z: combina todo en un número.</li>
+  <li><strong>Activación</strong> φ: transforma z en la <strong>salida</strong> a, que va a la capa siguiente.</li>
+</ul>
+<p>Sin activación, apilar capas equivaldría a una sola operación lineal y la red no aprendería nada complejo.</p>
+        </div>
+
+        <div class="pagina">
+<h3>Funciones de activación</h3>
+<div class="formula">σ(z) = 1 / (1 + e<sup>−z</sup>) &nbsp;·&nbsp; tanh(z) &nbsp;·&nbsp; ReLU(z) = max(0, z)</div>
+<ul>
+  <li><strong>Sigmoide:</strong> comprime la salida a (0, 1) y se interpreta como probabilidad.</li>
+  <li><strong>Tangente hiperbólica:</strong> la lleva a (−1, 1).</li>
+  <li><strong>ReLU:</strong> deja pasar los positivos y anula los negativos; es la preferida en redes profundas.</li>
+</ul>
+<h3>Función de pérdida</h3>
+<p>En regresión se usa el error cuadrático medio, con <em>y<sub>i</sub></em> la respuesta esperada y <em>ŷ<sub>i</sub></em> la de la red (Borja et al., 2022):</p>
+<div class="formula">L = (1/N) Σ (y<sub>i</sub> − ŷ<sub>i</sub>)²</div>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Figuras</span>
+<h2>Funciones de activación</h2>
+<figure><img src="../assets/img/funcionactivacion.png" alt="Curvas de sigmoide, tangente hiperbólica y ReLU"><figcaption>Figura 9. Sigmoide, tangente hiperbólica y ReLU.</figcaption></figure>
+        </div>
+
+        <div class="pagina">
+<h2>Funcionamiento</h2>
+<p>Consta de dos fases que se repiten durante el entrenamiento: una pasada hacia adelante, que produce una respuesta, y una hacia atrás, que la corrige.</p>
+<h3>1. Propagación hacia adelante</h3>
+<p>Los datos entran por la capa de entrada; cada capa calcula la suma ponderada y la activación de todas sus neuronas a la vez:</p>
+<div class="formula">a<sup>(l)</sup> = φ( W<sup>(l)</sup> a<sup>(l−1)</sup> + b<sup>(l)</sup> ), &nbsp; a<sup>(0)</sup> = x</div>
+<p>La salida de la última capa es la predicción ŷ. Al inicio los pesos son aleatorios, por lo que la predicción es deficiente.</p>
+        </div>
+
+        <div class="pagina">
+<h3>2. Medición del error</h3>
+<p>Se compara la predicción con la respuesta correcta mediante la pérdida <em>L</em>. Un valor alto significa que la red se equivoca mucho; el objetivo es llevar <em>L</em> lo más cerca posible de cero.</p>
+<h3>3. Retropropagación y descenso del gradiente</h3>
+<p>Para reducir <em>L</em> hay que saber cómo cambia el error al modificar cada peso (su derivada parcial). La retropropagación calcula todas esas derivadas aplicando la regla de la cadena desde la salida hacia atrás (Borja et al., 2022). Con δ el error propagado:</p>
+<div class="formula">δ<sup>(L)</sup> = ∂L/∂a<sup>(L)</sup> ⊙ φ′(z<sup>(L)</sup>)<br>δ<sup>(l)</sup> = (W<sup>(l+1)</sup>)ᵀ δ<sup>(l+1)</sup> ⊙ φ′(z<sup>(l)</sup>)</div>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Figuras</span>
+<h2>Entrenamiento</h2>
+<figure><img src="../assets/img/entrenamiento.png" alt="Ciclo de entrenamiento: propagación, error, retropropagación y actualización de pesos"><figcaption>Figura 10. Ciclo de entrenamiento de una red neuronal.</figcaption></figure>
+        </div>
+
+        <div class="pagina">
+<p>Con el error por capa se obtiene el gradiente de cada peso, y el <strong>descenso del gradiente</strong> los mueve en dirección contraria para que el error disminuya:</p>
+<div class="formula">w ← w − η · ∂L/∂w</div>
+<p>Aquí <em>η</em> es la <strong>tasa de aprendizaje</strong>: si es muy pequeña, el aprendizaje es lento; si es muy grande, la red oscila y no converge.</p>
+<h3>4. Épocas y generalización</h3>
+<p>Recorrer una vez todos los ejemplos es una <strong>época</strong>, y se hacen muchas. El riesgo central es el <strong>sobreajuste</strong>: la red memoriza el entrenamiento y falla con datos nuevos. Se reserva una parte para validación y se usan técnicas como regularización o <em>dropout</em> (Lüthy, 2022).</p>
+        </div>
+
+        <div class="pagina">
+<h2>Algoritmo en pseudocódigo</h2>
+<p>Entrenamiento de una red multicapa con retropropagación:</p>
+<pre>inicializar W(l), b(l) con valores aleatorios pequeños
+para e = 1 hasta E_max:
+  a(0) ← X                         # 1. hacia adelante
+  para l = 1 hasta L:
+    z(l) ← W(l)·a(l-1) + b(l)
+    a(l) ← φ(z(l))
+  pérdida ← L(a(L), y)             # 2. error
+  δ(L) ← ∂L/∂a(L) ⊙ φ'(z(L))       # 3. retroprop.
+  para l = L-1 hasta 1:
+    δ(l) ← W(l+1)ᵀ·δ(l+1) ⊙ φ'(z(l))
+  para l = 1 hasta L:              # 4. gradiente
+    W(l) ← W(l) − η·δ(l)·a(l-1)ᵀ
+    b(l) ← b(l) − η·δ(l)
+devolver W, b</pre>
+<p>Si la pérdida deja de disminuir, puede detenerse antes de las épocas máximas.</p>
+        </div>
+
+        <div class="pagina">
+<h2>Tipos de redes</h2>
+<p>Se distinguen por cómo se conectan las neuronas y por el dato para el que fueron diseñadas (Abeliuk y Gutiérrez, 2021).</p>
+<p><strong>Perceptrón simple:</strong> una sola neurona que separa dos clases con una recta o hiperplano; solo resuelve problemas linealmente separables.</p>
+<p><strong>Perceptrón multicapa (MLP):</strong> añade capas ocultas, avanza siempre hacia adelante y aproxima funciones no lineales; es la arquitectura explicada aquí (Borja et al., 2022).</p>
+<p><strong>Redes convolucionales (CNN):</strong> para imágenes; aplican pequeños filtros que detectan bordes, texturas y formas, de lo simple a lo complejo.</p>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Figuras</span>
+<h2>Perceptrón multicapa y CNN</h2>
+<figure><img src="../assets/img/multicapa.png" alt="Perceptrón multicapa" style="max-height:240px;object-fit:contain"><figcaption>Figura 11. Perceptrón multicapa: la información avanza solo hacia adelante.</figcaption></figure>
+<figure><img src="../assets/img/convolucionales.png" alt="Red convolucional: filtro, mapa de características y clasificación" style="max-height:200px;object-fit:contain"><figcaption>Figura 12. Red convolucional: de la imagen a la clasificación.</figcaption></figure>
+        </div>
+
+        <div class="pagina">
+<h3>Tipos de redes (cont.)</h3>
+<p><strong>Redes recurrentes (RNN, LSTM):</strong> procesan secuencias, como texto o series de tiempo, porque en cada paso reciben una memoria del paso anterior (Lüthy, 2022).</p>
+<p><strong><em>Transformers</em>:</strong> dominan el procesamiento del lenguaje; reemplazan esa memoria por un mecanismo de atención que relaciona todos los elementos de la secuencia (Rothman y Gulli, 2021).</p>
+<p><strong>Otros:</strong> los <em>autoencoders</em> comprimen y reconstruyen datos; las redes generativas adversarias (GAN) enfrentan a dos redes para crear datos nuevos.</p>
+<p>Según cómo aprenden: <strong>supervisado</strong> (con respuestas), <strong>no supervisado</strong> (sin ellas) o <strong>por refuerzo</strong> (con recompensas).</p>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Figuras</span>
+<h2>Redes recurrentes y transformers</h2>
+<figure><img src="../assets/img/recurrentes.png" alt="Red recurrente con memoria entre pasos" style="max-height:210px;object-fit:contain"><figcaption>Figura 13. Red recurrente: cada paso recibe la memoria del anterior.</figcaption></figure>
+<figure><img src="../assets/img/transformer.png" alt="Mecanismo de atención en una oración" style="max-height:170px;object-fit:contain"><figcaption>Figura 14. Atención: «come» se relaciona más con «gato» y «pescado».</figcaption></figure>
+        </div>
+
+        <div class="pagina">
+<h2>Aplicación: el problema XOR</h2>
+<p>El mismo que el perceptrón simple no podía resolver. La salida es 1 cuando las entradas son distintas y 0 cuando son iguales: (0,0)→0, (0,1)→1, (1,0)→1, (1,1)→0. Como no se separa con una recta, hace falta una capa oculta.</p>
+<p><strong>Arquitectura:</strong> 2 neuronas de entrada, una capa oculta de 4 y una de salida, todas con sigmoide. <strong>Pérdida:</strong> error cuadrático medio. <strong>Entrenamiento:</strong> retropropagación con descenso del gradiente, η = 0.5 y 10 000 épocas.</p>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Figuras</span>
+<h2>XOR no es separable</h2>
+<figure><img src="../assets/img/aprenderXOR.png" alt="Puntos XOR que ninguna recta separa" style="max-height:400px;object-fit:contain;clip-path:inset(0 3% 0 0)"><figcaption>Figura 15. Ninguna recta separa los puntos azules (0) de los naranjas (1).</figcaption></figure>
+        </div>
+
+        <div class="pagina">
+<p><strong>Herramientas.</strong> Se resuelve con Python y NumPy para apreciar cada paso del algoritmo (Mirjalili y Raschka, 2020). En proyectos reales se usan bibliotecas que automatizan el cálculo de gradientes: <strong>TensorFlow con Keras</strong>, <strong>PyTorch</strong> y <strong>scikit-learn</strong>, que incluye un perceptrón multicapa (<code>MLPClassifier</code>) (Rothman y Gulli, 2021).</p>
+<h3>Código 2 · Red que aprende XOR (1/2)</h3>
+<pre class="codigo">import numpy as np
+
+X = np.array([[0,0],[0,1],[1,0],[1,1]], dtype=float)
+y = np.array([[0],[1],[1],[0]], dtype=float)
+
+def sigmoide(z):
+    return 1 / (1 + np.exp(-z))
+
+def derivada_sigmoide(a):   # a = sigmoide(z)
+    return a * (1 - a)
+
+np.random.seed(1)
+W1 = np.random.randn(2, 4)  # entrada -&gt; oculta
+b1 = np.zeros((1, 4))
+W2 = np.random.randn(4, 1)  # oculta -&gt; salida
+b2 = np.zeros((1, 1))
+eta = 0.5
+EPOCAS = 10000</pre>
+        </div>
+
+        <div class="pagina">
+<h3>Código 2 (2/2)</h3>
+<pre class="codigo">for epoca in range(EPOCAS):
+    # 1) Propagación hacia adelante
+    a1 = sigmoide(X @ W1 + b1)
+    a2 = sigmoide(a1 @ W2 + b2)
+
+    # 2) Error (pérdida cuadrática media)
+    perdida = np.mean((a2 - y) ** 2)
+
+    # 3) Retropropagación
+    delta2 = (a2 - y) * derivada_sigmoide(a2)
+    delta1 = (delta2 @ W2.T) * derivada_sigmoide(a1)
+
+    # 4) Descenso del gradiente
+    W2 -= eta * a1.T @ delta2
+    b2 -= eta * delta2.sum(axis=0, keepdims=True)
+    W1 -= eta * X.T @ delta1
+    b1 -= eta * delta1.sum(axis=0, keepdims=True)
+
+    if epoca % 2000 == 0:
+        print(f"Época {epoca:5d} | pérdida = {perdida:.4f}")
+
+print("Predicciones finales:")
+for entrada, salida in zip(X, a2):
+    print(entrada, "-&gt;", round(float(salida[0]), 3))</pre>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Figuras</span>
+<h2>Herramientas</h2>
+<figure><img src="../assets/img/herramientasRN.jpeg" alt="Bibliotecas para redes neuronales: TensorFlow, Keras, PyTorch, scikit-learn y otras"><figcaption>Figura 16. Bibliotecas habituales para redes neuronales.</figcaption></figure>
+        </div>
+
+        <div class="pagina">
+<h3>Resultado</h3>
+<p>Al ejecutarlo, la pérdida disminuye de 0.26 a menos de 0.001 y las predicciones finales son aproximadamente <strong>0.008, 0.986, 0.984 y 0.021</strong> para las cuatro entradas: la red aprendió la función XOR.</p>
+<p>Los valores exactos pueden variar con otra semilla, pero el comportamiento es el mismo: el error decrece época tras época a medida que los pesos se ajustan.</p>
+<figure><img src="../assets/img/figura2.png" alt="Gráfica de la pérdida por época, que baja de 0.26 a menos de 0.001"><figcaption>Figura 17. Evolución de la pérdida de la red durante el entrenamiento en XOR.</figcaption></figure>
+        </div>
+
+        <div class="pagina">
+<span class="etiqueta">Fuentes</span>
+<h2>Referencias (1/2)</h2>
+<div class="refs">
+<p>Abeliuk, A., &amp; Gutiérrez, C. (2021). Historia y evolución de la inteligencia artificial. <em>Revista Bits de Ciencia</em>, (21), 14-21.</p>
+<p>Asanza, W. R., &amp; Olivo, B. M. (2018). Redes neuronales artificiales aplicadas al reconocimiento de patrones. <em>Editorial UTMACH, 1</em>(4), 5.</p>
+<p>Borja Robalino, R., Monleón Getino, A., &amp; Rodellar, J. (2022). Matemática oculta bajo el proceso de aprendizaje en redes neuronales convolucionales. <em>Ciencia Latina Revista Científica Multidisciplinar, 6</em>(5), 1031-1063. https://doi.org/10.37811/cl_rcm.v6i5.3158</p>
+<p>Castillo, P. A., Castellano, J. G., Merelo, J. J., &amp; Prieto, A. (2001). Diseño de redes neuronales artificiales mediante algoritmos evolutivos. <em>Inteligencia Artificial. Revista Iberoamericana de IA, 5</em>(14), 2-32.</p>
+<p>Díez, R. P., Gómez, A. G., &amp; de Abajo Martínez, N. (2001). <em>Introducción a la inteligencia artificial: sistemas expertos, redes neuronales artificiales y computación evolutiva</em>. Universidad de Oviedo.</p>
+<p>Gestal, M., Rivero, D., Rabuñal, J. R., Dorado, J., &amp; Pazos, A. (2010). <em>Introducción a los algoritmos genéticos y la programación genética</em>. Universidade da Coruña.</p>
+<p>Gonzales, J. E., Ortega, Á. C., &amp; Blanco, R. R. (2022). Metaheurísticas con Python: casos prácticos. <em>Hatun Yachay Wasi, 1</em>(2), 43-57. https://doi.org/10.57107/hyw.v1i2.23</p>
+<p>Gutiérrez, D., Tapia, A., &amp; Rodríguez, A. (2020). <em>Algoritmos Genéticos con Python</em>. Marcombo.</p>
+</div>
+        </div>
+
+        <div class="pagina">
+<h2>Referencias (2/2)</h2>
+<div class="refs">
+<p>Lucia, O. G. (2023, 11 julio). <em>Estudio de heurísticas en espacios bidimensionales usando algoritmos genéticos</em>. https://hdl.handle.net/10115/22620</p>
+<p>Lüthy, I. A. (2022). Inteligencia artificial y aprendizaje de máquina en diagnóstico y tratamiento del cáncer. <em>Medicina (Buenos Aires), 82</em>(5), 798-800.</p>
+<p>Melián Batista, M. B., Moreno Pérez, J. A., &amp; Moreno Vega, J. M. (2009). Algoritmos Genéticos: una visión práctica. <em>Números: Revista de didáctica de las matemáticas, 71</em>, 29-47.</p>
+<p>Mirjalili, V., &amp; Raschka, S. (2020). <em>Python machine learning</em>. Marcombo.</p>
+<p>Piñero, P. Y., Arco, L., García, M. M., &amp; Acevedo, L. (2003). Algoritmos genéticos en la construcción de funciones de pertenencia borrosas. <em>Inteligencia Artificial. Revista Iberoamericana de IA, 7</em>(18), 25-35.</p>
+<p>Rodríguez-Sánchez, A. E. (2024). La inteligencia artificial y sus modelos de redes neuronales. <em>Ciencia Vital, 2</em>(1).</p>
+<p>Romero, D. (2019). <em>Algoritmos genéticos: Análisis y Diseño de Datos y Algoritmos</em>. Universidad de Sevilla.</p>
+<p>Rothman, D., &amp; Gulli, A. (2021). <em>Transformers for natural language processing</em>. Packt Publishing.</p>
+<p>Valencia, P. E. (1997). Optimización mediante algoritmos genéticos. <em>Anales del Instituto de Ingenieros de Chile, 109</em>(2), 83-92.</p>
+</div>
+        </div>
+
+        <!-- CONTRAPORTADA (no editar data-density) -->
+        <div class="pagina contra-revista" data-density="hard">
+          <div class="logo-mark">IA</div>
+          <h2>Fin del artículo</h2>
+          <p>Gracias por leer la Revista IA</p>
+          <a href="../index.html#articulos" class="btn btn-ghost">← Volver a la revista</a>
+        </div>
+
+      </div>
+
+      <button class="lector-flecha next" aria-label="Página siguiente">›</button>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER (igual en todas las páginas) ===== -->
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div>
+          <a href="../index.html" class="logo">
+            <span class="logo-mark">IA</span>
+            Revista<span>IA</span>
+          </a>
+          <p style="margin-top: 0.75rem;">Revista digital con artículos escritos por estudiantes sobre temas de Inteligencia Artificial.</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="anio"></span> Revista IA — Trabajo grupal</span>
+        <span>Hecho con HTML, CSS y JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/vendor/page-flip.browser.min.js"></script>
+  <script src="../js/lectura.js"></script>
+</body>
+</html>
