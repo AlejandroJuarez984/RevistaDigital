@@ -7,18 +7,23 @@ Cada artículo se lee como una **revista que se abre y cambia de página** (efec
 ## Estructura
 
 ```
-├── index.html                    # Portada: hero + tarjetas de artículos
+├── index.html                    # Portada: hero + artículos + infografías + nosotros
 ├── css/
-│   ├── styles.css                # Estilos globales (tema, navbar, footer, tarjetas)
-│   └── revista.css               # Lector: páginas, portada, controles de volteo
+│   ├── styles.css                # Estilos globales (tema, navbar, tarjetas, carrusel)
+│   ├── revista.css               # Lector: páginas, portada, controles de volteo
+│   └── photoswipe.css            # Estilos del visor de infografías
 ├── js/
 │   ├── main.js                   # Menú móvil y año dinámico
 │   ├── lectura.js                # Inicializa la revista (volteo, contador, flechas)
+│   ├── infografias.js            # Carrusel + visor con zoom (PhotoSwipe)
 │   └── vendor/
-│       └── page-flip.browser.min.js  # Librería de volteo (page-flip, MIT, incluida)
+│       ├── page-flip.browser.min.js      # Volteo de páginas (MIT, incluida)
+│       ├── photoswipe.umd.min.js         # Visor de imágenes (MIT, incluida)
+│       └── photoswipe-lightbox.umd.min.js
 ├── articulos/
 │   ├── plantilla.html            # Plantilla para crear nuevos artículos
-│   └── articulo-1..5.html        # Artículos de ejemplo
+│   └── articulo-*.html           # Artículos del equipo
+├── infografias/                  # SVG de infografías (se muestran en el carrusel)
 ├── assets/img/                   # Imágenes y logo
 ├── .nojekyll                     # Evita el procesamiento de Jekyll en GitHub Pages
 └── README.md
@@ -67,9 +72,20 @@ Cada artículo se lee como una **revista que se abre y cambia de página** (efec
 1. Coloca el archivo en `articulos/`.
 2. En `index.html`, copia una tarjeta existente dentro de `<div class="grid-articulos">` y actualiza:
    - `href` → `articulos/articulo-N.html`
-   - clase de portada (`portada-1` … `portada-5`; puedes añadir `portada-6` en `css/styles.css`)
+   - clase de portada (`portada-1` … `portada-6`; puedes añadir más en `css/styles.css`)
    - categoría, título, resumen y meta.
 3. Guarda y listo.
+
+## Cómo agregar una infografía
+
+1. Pon el archivo (`.svg` preferentemente) en la carpeta `infografias/`.
+2. En `index.html`, dentro de `<div class="carrusel-pista" id="pista-infos">`, copia un bloque `<a class="tarjeta-info">…</a>` y ajusta:
+   - `href` y `src` → ruta del archivo nuevo
+   - `data-pswp-width` / `data-pswp-height` → dimensiones reales de la imagen (las lee del SVG o de las propiedades `width`/`height`)
+   - `alt` y `.info-titulo` → título visible
+3. No hace falta tocar JS ni CSS: flechas, puntos y el visor con zoom se adaptan solos.
+
+> Consejo: los SVG grandes (>2 MB) tardan en cargar; se usan con `loading="lazy"` para no bloquear el resto de la página.
 
 ## Despliegue en GitHub Pages
 
@@ -88,7 +104,13 @@ Cada artículo se lee como una **revista que se abre y cambia de página** (efec
    - Branch: `main` / `(root)` → **Save**
 4. En unos minutos estará en: `https://TU-USUARIO.github.io/Sitio-web-revista/`
 
-> Todas las rutas son relativas, así que el sitio funciona igual en local, en GitHub Pages y en cualquier subcarpeta. La librería de volteo está incluida en el repo (sin CDN), por lo que no depende de servicios externos.
+> Todas las rutas son relativas, así que el sitio funciona igual en local, en GitHub Pages y en cualquier subcarpeta. Las librerías de volteo (page-flip) y de visor (PhotoSwipe) están incluidas en el repo (sin CDN), por lo que no depende de servicios externos.
+
+## Analítica (Google Tag Manager)
+
+- Contenedor: `GTM-5WLS67NW`.
+- El snippet va en **todas** las páginas: en el `<head>` (con el script `gtm.js`) y un `<noscript>` inmediatamente después de `<body>`.
+- Si creas una página nueva, copia ambos bloques desde `index.html` o `articulos/plantilla.html`.
 
 ## Verificar en local
 

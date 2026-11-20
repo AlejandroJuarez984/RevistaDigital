@@ -469,6 +469,149 @@ main {
   font-weight: 700;
 }
 
+/* ---------- Infografías: carrusel ---------- */
+.carrusel-controles {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.carrusel-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.carrusel-btn:hover:not(:disabled) {
+  border-color: rgba(0, 229, 255, 0.5);
+  color: var(--accent);
+}
+
+.carrusel-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.carrusel {
+  overflow: hidden;
+}
+
+.carrusel-pista {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 0.25rem 0.15rem 0.75rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carrusel-pista::-webkit-scrollbar {
+  display: none;
+}
+
+.tarjeta-info {
+  flex: 0 0 clamp(230px, 28%, 320px);
+  scroll-snap-align: start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tarjeta-info:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 229, 255, 0.45);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 24px rgba(0, 229, 255, 0.12);
+}
+
+.info-vista {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.info-vista img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.tarjeta-info:hover .info-vista img {
+  transform: scale(1.04);
+}
+
+.info-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: rgba(10, 14, 23, 0.55);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.92rem;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.tarjeta-info:hover .info-overlay,
+.tarjeta-info:focus-visible .info-overlay {
+  opacity: 1;
+}
+
+.info-titulo {
+  padding: 0.9rem 1rem 1.05rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
+.carrusel-puntos {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+.carrusel-puntos button {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  background: var(--border);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.carrusel-puntos button.activo {
+  background: var(--accent);
+  transform: scale(1.25);
+}
+
 /* ---------- Utilidades ---------- */
 .etiqueta {
   display: inline-block;
@@ -493,6 +636,14 @@ main {
   .nosotros {
     grid-template-columns: 1fr;
     padding: 1.75rem;
+  }
+
+  .carrusel-controles {
+    display: none;
+  }
+
+  .tarjeta-info {
+    flex-basis: 78%;
   }
 }
 
