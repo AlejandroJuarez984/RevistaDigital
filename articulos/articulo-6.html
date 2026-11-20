@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Minería de datos: fundamentos, metodologías, técnicas, herramientas y aplicaciones en los sistemas inteligentes - Revista IA">
+  <title>Minería de datos: fundamentos, metodologías y aplicaciones — Revista IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <!-- Estilos BASE de la revista (navbar, footer, tipografías) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <!-- Estilos del LECTOR de revista (páginas, portada, controles) -->
+  <link rel="stylesheet" href="../css/revista.css">
+
+  <!-- ============================================
+       ESTILOS EXCLUSIVOS DE ESTE ARTÍCULO
+       ============================================ -->
+  <style>
+    /* Acento rojo para este artículo */
+    body.art-6 { --accent: #ef4444; }
+
+    .art-6 .img-art { display:block; width:100%; max-height:95px; margin:0.6rem auto; font-family:var(--font-heading, sans-serif); }
+
+    .art-6 .tabla-datos {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1rem;
+      font-size: 0.9em;
+    }
+    .art-6 .tabla-datos th,
+    .art-6 .tabla-datos td {
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.6rem;
+      text-align: left;
+    }
+    .art-6 .tabla-datos th {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--accent);
+      font-family: var(--font-heading);
+    }
+  </style>
+</head>
+<body class="art-6">
+
+  <!-- ===== NAVBAR (igual en todas las páginas) ===== -->
+  <header class="navbar">
+    <div class="contenedor">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">IA</span>
+        Revista<span>IA</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== LECTOR DE REVISTA ===== -->
+  <main class="lector">
+    <div class="lector-barra">
+      <a class="lector-volver" href="../index.html#articulos">← Volver</a>
+      <span class="lector-titulo">Minería de datos</span>
+      <span class="lector-contador" id="contador">Portada</span>
+    </div>
+
+    <div class="zona-revista">
+      <button class="lector-flecha prev" aria-label="Página anterior">‹</button>
+
+      <div id="revista" class="revista">
+
+        <!-- PORTADA (no editar data-density) -->
+        <div class="pagina portada-revista" data-density="hard" style="--c1:#dc2626; --c2:#7f1d1d;">
+          <span class="portada-sello">Revista IA · Artículo</span>
+          <h1>Minería de datos: fundamentos, metodologías y aplicaciones</h1>
+          <p class="portada-autor">Por:<br>Guevara Gabriel Rodrigo<br>Ríos Avilés Dana Ixchel<br>Romero Hernández Axel Yorshua</p>
+          <span class="portada-fecha">Noviembre 2026 · FES Acatlán</span>
+          <span class="portada-hint">La revista se abrirá…</span>
+        </div>
+
+        <!-- PÁGINA 1 -->
+        <div class="pagina">
+          <span class="etiqueta">Introducción</span>
+          <h2>¿Qué es la minería de datos?</h2>
+          <p>Hoy las organizaciones generan enormes cantidades de datos, pero producir información no es lo mismo que comprenderla. La minería de datos permite identificar patrones y relaciones que no son evidentes a simple vista y convertirlos en conocimiento útil.</p>
+          <svg class="img-art" viewBox="0 0 400 70" role="img" aria-label="Los datos se convierten en patrones y luego en conocimiento"><rect x="5" y="8" width="100" height="54" rx="10" style="fill:var(--accent);fill-opacity:.15;stroke:var(--accent);stroke-width:1.5"/><text x="55.0" y="40" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">Datos</text><line x1="108" y1="35" x2="142" y2="35" style="stroke:var(--accent);stroke-width:2"/><polygon points="141,29 148,35 141,41" style="fill:var(--accent)"/><rect x="150" y="8" width="100" height="54" rx="10" style="fill:var(--accent);fill-opacity:.15;stroke:var(--accent);stroke-width:1.5"/><text x="200.0" y="40" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">Patrones</text><line x1="253" y1="35" x2="287" y2="35" style="stroke:var(--accent);stroke-width:2"/><polygon points="286,29 293,35 286,41" style="fill:var(--accent)"/><rect x="295" y="8" width="100" height="54" rx="10" style="fill:var(--accent);fill-opacity:.15;stroke:var(--accent);stroke-width:1.5"/><text x="345.0" y="40" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">Conocimiento</text></svg>
+          <div class="destacado">
+            Se relaciona con la estadística, la inteligencia artificial y el machine learning.
+          </div>
+        </div>
+
+        <!-- PÁGINA 2 -->
+        <div class="pagina">
+          <span class="etiqueta">Origen</span>
+          <h2>Origen y evolución</h2>
+          <ul>
+            <li><strong>1960–1980:</strong> muestras pequeñas y análisis estadístico manual, con límites de tiempo y riesgo de sesgos.</li>
+            <li><strong>Años 90:</strong> las bases de datos y el mayor poder de cómputo permiten automatizar el análisis.</li>
+            <li><strong>Hoy:</strong> internet, dispositivos y nube permiten analizar grandes volúmenes de forma continua.</li>
+          </ul>
+          <p>El <strong>KDD</strong> (Knowledge Discovery in Databases) es el proceso completo de seleccionar, preparar, analizar e interpretar datos. La minería de datos es su etapa de descubrimiento de patrones.</p>
+        </div>
+
+        <!-- PÁGINA 3 -->
+        <div class="pagina">
+          <span class="etiqueta">Fundamentos</span>
+          <h2>Tres disciplinas base</h2>
+          <ul>
+            <li><strong>Estadística:</strong> estudia las características, distribuciones y relaciones entre variables.</li>
+            <li><strong>Inteligencia artificial:</strong> desarrolla sistemas que razonan, aprenden o toman decisiones.</li>
+            <li><strong>Machine Learning:</strong> algoritmos que detectan patrones a partir de ejemplos y permiten predecir sin definir todas las reglas a mano.</li>
+          </ul>
+          <svg class="img-art" viewBox="0 0 400 110" role="img" aria-label="Estadística, inteligencia artificial y machine learning se combinan en la minería de datos"><circle cx="165" cy="40" r="34" style="fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:1.5"/><circle cx="235" cy="40" r="34" style="fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:1.5"/><circle cx="200" cy="72" r="34" style="fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:1.5"/><text x="125" y="38" text-anchor="end" font-size="12" font-weight="600" fill="currentColor" opacity="1">Estadística</text><text x="275" y="38" text-anchor="start" font-size="12" font-weight="600" fill="currentColor" opacity="1">Inteligencia artificial</text><text x="244" y="98" text-anchor="start" font-size="12" font-weight="600" fill="currentColor" opacity="1">Machine Learning</text><text x="200" y="56" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor" opacity="1">Minería</text><text x="200" y="67" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor" opacity="1">de datos</text></svg>
+          <div class="destacado">
+            La minería de datos no es una actividad aislada, sino parte de un proceso más amplio.
+          </div>
+        </div>
+
+        <!-- PÁGINA 4 -->
+        <div class="pagina">
+          <span class="etiqueta">Importancia</span>
+          <h2>¿Por qué es importante?</h2>
+          <ul>
+            <li>Identifica información relevante entre millones de registros.</li>
+            <li>Mejora la toma de decisiones con evidencia, no solo intuición.</li>
+            <li>Detecta tendencias, como qué productos se compran juntos.</li>
+            <li>Encuentra retrasos y costos innecesarios en procesos.</li>
+            <li>Reconoce riesgos, como transacciones fraudulentas.</li>
+          </ul>
+          <svg class="img-art" viewBox="0 0 400 110" role="img" aria-label="Más datos analizados permiten mejores decisiones"><rect x="105" y="70" width="24" height="18" rx="3" style="fill:var(--accent);fill-opacity:0.35"/><rect x="140" y="58" width="24" height="30" rx="3" style="fill:var(--accent);fill-opacity:0.48"/><rect x="175" y="46" width="24" height="42" rx="3" style="fill:var(--accent);fill-opacity:0.61"/><rect x="210" y="36" width="24" height="52" rx="3" style="fill:var(--accent);fill-opacity:0.74"/><rect x="245" y="24" width="24" height="64" rx="3" style="fill:var(--accent);fill-opacity:0.87"/><rect x="280" y="12" width="24" height="76" rx="3" style="fill:var(--accent);fill-opacity:1.00"/><polyline points="117,64 152,52 187,40 222,30 257,18 292,6" fill="none" style="stroke:var(--accent);stroke-width:2"/><line x1="95" y1="88" x2="305" y2="88" stroke="currentColor" stroke-opacity=".4"/><text x="200" y="106" text-anchor="middle" font-size="11" font-weight="500" fill="currentColor" opacity="0.8">Más datos analizados · mejores decisiones</text></svg>
+        </div>
+
+        <!-- PÁGINA 5 -->
+        <div class="pagina">
+          <span class="etiqueta">Proceso</span>
+          <h2>Etapas del proceso</h2>
+          <ul>
+            <li><strong>1. Definición del problema:</strong> qué se quiere resolver.</li>
+            <li><strong>2. Selección de datos:</strong> fuentes, calidad y permisos.</li>
+            <li><strong>3. Preparación:</strong> limpieza, integración y transformación.</li>
+            <li><strong>4. Modelado:</strong> clasificación, regresión, agrupamiento o anomalías.</li>
+            <li><strong>5. Entrenamiento y pruebas:</strong> evaluar con datos nuevos.</li>
+            <li><strong>6. Evaluación e implementación:</strong> revisar objetivos y dar seguimiento.</li>
+          </ul>
+        </div>
+
+        <!-- PÁGINA 6 -->
+        <div class="pagina">
+          <span class="etiqueta">Técnicas</span>
+          <h2>Modelos descriptivos</h2>
+          <p>Buscan comprender cómo se organiza la información, no predecir el futuro.</p>
+          <svg class="img-art" viewBox="0 0 400 110" role="img" aria-label="Puntos agrupados en tres clusters"><ellipse cx="75" cy="55" rx="52" ry="38" fill="none" stroke="currentColor" stroke-opacity=".3" stroke-dasharray="4 4"/><circle cx="110" cy="81" r="5" style="fill:var(--accent);fill-opacity:1"/><circle cx="47" cy="60" r="5" style="fill:var(--accent);fill-opacity:1"/><circle cx="70" cy="31" r="5" style="fill:var(--accent);fill-opacity:1"/><circle cx="37" cy="38" r="5" style="fill:var(--accent);fill-opacity:1"/><circle cx="112" cy="59" r="5" style="fill:var(--accent);fill-opacity:1"/><circle cx="84" cy="49" r="5" style="fill:var(--accent);fill-opacity:1"/><circle cx="39" cy="46" r="5" style="fill:var(--accent);fill-opacity:1"/><circle cx="99" cy="80" r="5" style="fill:var(--accent);fill-opacity:1"/><circle cx="62" cy="75" r="5" style="fill:var(--accent);fill-opacity:1"/><ellipse cx="200" cy="58" rx="52" ry="38" fill="none" stroke="currentColor" stroke-opacity=".3" stroke-dasharray="4 4"/><circle cx="214" cy="66" r="5" style="fill:currentColor;fill-opacity:0.65"/><circle cx="231" cy="75" r="5" style="fill:currentColor;fill-opacity:0.65"/><circle cx="174" cy="44" r="5" style="fill:currentColor;fill-opacity:0.65"/><circle cx="234" cy="67" r="5" style="fill:currentColor;fill-opacity:0.65"/><circle cx="195" cy="74" r="5" style="fill:currentColor;fill-opacity:0.65"/><circle cx="173" cy="59" r="5" style="fill:currentColor;fill-opacity:0.65"/><circle cx="204" cy="37" r="5" style="fill:currentColor;fill-opacity:0.65"/><circle cx="208" cy="83" r="5" style="fill:currentColor;fill-opacity:0.65"/><circle cx="214" cy="83" r="5" style="fill:currentColor;fill-opacity:0.65"/><ellipse cx="325" cy="50" rx="52" ry="38" fill="none" stroke="currentColor" stroke-opacity=".3" stroke-dasharray="4 4"/><circle cx="319" cy="52" r="5" style="fill:var(--accent);fill-opacity:0.45"/><circle cx="299" cy="72" r="5" style="fill:var(--accent);fill-opacity:0.45"/><circle cx="312" cy="68" r="5" style="fill:var(--accent);fill-opacity:0.45"/><circle cx="324" cy="30" r="5" style="fill:var(--accent);fill-opacity:0.45"/><circle cx="292" cy="61" r="5" style="fill:var(--accent);fill-opacity:0.45"/><circle cx="312" cy="76" r="5" style="fill:var(--accent);fill-opacity:0.45"/><circle cx="333" cy="55" r="5" style="fill:var(--accent);fill-opacity:0.45"/><circle cx="311" cy="56" r="5" style="fill:var(--accent);fill-opacity:0.45"/><circle cx="360" cy="65" r="5" style="fill:var(--accent);fill-opacity:0.45"/></svg>
+          <ul>
+            <li><strong>Clustering:</strong> agrupa datos por semejanza (ej. K-Means).</li>
+            <li><strong>Detección de anomalías:</strong> encuentra registros fuera de lo habitual.</li>
+            <li><strong>Reglas de asociación:</strong> relaciones entre elementos frecuentes, medidas con soporte y confianza.</li>
+            <li><strong>PCA:</strong> reduce variables conservando la información clave.</li>
+          </ul>
+        </div>
+
+        <!-- PÁGINA 7 -->
+        <div class="pagina">
+          <span class="etiqueta">Técnicas</span>
+          <h2>Modelos predictivos</h2>
+          <p>Estiman resultados a partir de ejemplos anteriores.</p>
+          <svg class="img-art" viewBox="0 0 400 110" role="img" aria-label="Red neuronal con capa de entrada, capa oculta y capa de salida"><line x1="70" y1="25" x2="200" y2="15" stroke="currentColor" stroke-opacity=".25"/><line x1="70" y1="25" x2="200" y2="42" stroke="currentColor" stroke-opacity=".25"/><line x1="70" y1="25" x2="200" y2="68" stroke="currentColor" stroke-opacity=".25"/><line x1="70" y1="25" x2="200" y2="95" stroke="currentColor" stroke-opacity=".25"/><line x1="70" y1="55" x2="200" y2="15" stroke="currentColor" stroke-opacity=".25"/><line x1="70" y1="55" x2="200" y2="42" stroke="currentColor" stroke-opacity=".25"/><line x1="70" y1="55" x2="200" y2="68" stroke="currentColor" stroke-opacity=".25"/><line x1="70" y1="55" x2="200" y2="95" stroke="currentColor" stroke-opacity=".25"/><line x1="70" y1="85" x2="200" y2="15" stroke="currentColor" stroke-opacity=".25"/><line x1="70" y1="85" x2="200" y2="42" stroke="currentColor" stroke-opacity=".25"/><line x1="70" y1="85" x2="200" y2="68" stroke="currentColor" stroke-opacity=".25"/><line x1="70" y1="85" x2="200" y2="95" stroke="currentColor" stroke-opacity=".25"/><line x1="200" y1="15" x2="330" y2="40" stroke="currentColor" stroke-opacity=".25"/><line x1="200" y1="15" x2="330" y2="70" stroke="currentColor" stroke-opacity=".25"/><line x1="200" y1="42" x2="330" y2="40" stroke="currentColor" stroke-opacity=".25"/><line x1="200" y1="42" x2="330" y2="70" stroke="currentColor" stroke-opacity=".25"/><line x1="200" y1="68" x2="330" y2="40" stroke="currentColor" stroke-opacity=".25"/><line x1="200" y1="68" x2="330" y2="70" stroke="currentColor" stroke-opacity=".25"/><line x1="200" y1="95" x2="330" y2="40" stroke="currentColor" stroke-opacity=".25"/><line x1="200" y1="95" x2="330" y2="70" stroke="currentColor" stroke-opacity=".25"/><circle cx="70" cy="25" r="8" style="fill:var(--accent)" /><circle cx="70" cy="55" r="8" style="fill:var(--accent)" /><circle cx="70" cy="85" r="8" style="fill:var(--accent)" /><circle cx="200" cy="15" r="8" style="fill:var(--accent)" /><circle cx="200" cy="42" r="8" style="fill:var(--accent)" /><circle cx="200" cy="68" r="8" style="fill:var(--accent)" /><circle cx="200" cy="95" r="8" style="fill:var(--accent)" /><circle cx="330" cy="40" r="8" style="fill:var(--accent)" /><circle cx="330" cy="70" r="8" style="fill:var(--accent)" /></svg>
+          <ul>
+            <li><strong>Clasificación:</strong> asigna categorías (árboles de decisión, SVM, KNN).</li>
+            <li><strong>Regresión:</strong> estima valores numéricos a partir de otras variables.</li>
+            <li><strong>Redes neuronales:</strong> capas de unidades conectadas que ajustan sus parámetros al entrenarse. Con varias capas se habla de <em>Deep Learning</em>.</li>
+          </ul>
+        </div>
+
+        <!-- PÁGINA 8 -->
+        <div class="pagina">
+          <span class="etiqueta">Técnicas</span>
+          <h2>Modelos prescriptivos</h2>
+          <p>Van un paso más allá: recomiendan acciones combinando modelos predictivos con optimización, simulación y reglas de decisión.</p>
+          <svg class="img-art" viewBox="0 0 400 70" role="img" aria-label="Descriptivo, predictivo y prescriptivo"><rect x="5" y="8" width="110" height="54" rx="10" style="fill:var(--accent);fill-opacity:.15;stroke:var(--accent);stroke-width:1.5"/><text x="60.0" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">Describe</text><text x="60.0" y="50" text-anchor="middle" font-size="11" fill="currentColor" opacity=".75">¿Qué pasó?</text><line x1="118" y1="35" x2="144" y2="35" style="stroke:var(--accent);stroke-width:2"/><polygon points="143,29 150,35 143,41" style="fill:var(--accent)"/><rect x="152" y="8" width="100" height="54" rx="10" style="fill:var(--accent);fill-opacity:.15;stroke:var(--accent);stroke-width:1.5"/><text x="202.0" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">Predice</text><text x="202.0" y="50" text-anchor="middle" font-size="11" fill="currentColor" opacity=".75">¿Qué pasará?</text><line x1="255" y1="35" x2="281" y2="35" style="stroke:var(--accent);stroke-width:2"/><polygon points="280,29 287,35 280,41" style="fill:var(--accent)"/><rect x="289" y="8" width="106" height="54" rx="10" style="fill:var(--accent);fill-opacity:.15;stroke:var(--accent);stroke-width:1.5"/><text x="342.0" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">Recomienda</text><text x="342.0" y="50" text-anchor="middle" font-size="11" fill="currentColor" opacity=".75">¿Qué hacer?</text></svg>
+          <div class="destacado">
+            Ejemplo: usar predicciones de demanda para decidir cómo distribuir productos entre sucursales.
+          </div>
+          <p>También existen la <strong>minería de texto</strong>, que analiza documentos y opiniones, y la <strong>minería de procesos</strong>, que estudia cómo se desarrollan realmente las actividades en un sistema.</p>
+        </div>
+
+        <!-- PÁGINA 9 -->
+        <div class="pagina">
+          <span class="etiqueta">Herramientas</span>
+          <h2>Herramientas y plataformas</h2>
+          <ul>
+            <li><strong>SQL:</strong> consulta y organiza bases de datos.</li>
+            <li><strong>Python:</strong> Pandas, NumPy, Scikit-learn, TensorFlow y PyTorch.</li>
+            <li><strong>R:</strong> análisis estadístico y visualización.</li>
+            <li><strong>KNIME, Weka y RapidMiner:</strong> interfaces gráficas sin programar todo.</li>
+            <li><strong>Apache Spark:</strong> procesamiento distribuido.</li>
+            <li><strong>Amazon SageMaker, SAS Viya e IBM:</strong> plataformas empresariales con MLOps.</li>
+          </ul>
+          <p>No hay una herramienta ideal para todo: depende del problema y los recursos.</p>
+        </div>
+
+        <!-- PÁGINA 10 -->
+        <div class="pagina">
+          <span class="etiqueta">Comparativa</span>
+          <h2>Minería de datos vs. machine learning</h2>
+          <p>La <strong>minería de datos</strong> es un proceso orientado a descubrir patrones y conocimiento. El <strong>aprendizaje automático</strong> reúne técnicas para construir modelos que aprenden de los datos, y puede ser parte de un proyecto de minería.</p>
+          <svg class="img-art" viewBox="0 0 400 110" role="img" aria-label="El machine learning puede ser parte de un proyecto de minería de datos"><ellipse cx="200" cy="55" rx="175" ry="48" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="2"/><text x="105" y="60" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor" opacity="1">Minería de datos</text><ellipse cx="285" cy="55" rx="70" ry="32" style="fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:1.5"/><text x="285" y="59" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="1">Machine learning</text></svg>
+          <p>El ML maneja relaciones más complejas e información como imágenes, texto o sensores, pero exige más recursos. A veces un método estadístico sencillo es mejor, sobre todo si se necesita entender cómo se obtuvo el resultado.</p>
+          <div class="destacado">
+            Son herramientas complementarias, no competidoras.
+          </div>
+        </div>
+
+        <!-- PÁGINA 11 -->
+        <div class="pagina">
+          <span class="etiqueta">Retos</span>
+          <h2>Retos técnicos</h2>
+          <ul>
+            <li><strong>Calidad de los datos:</strong> errores, valores faltantes o registros poco representativos llevan a conclusiones equivocadas.</li>
+            <li><strong>Sobreajuste (overfitting):</strong> el modelo aprende demasiado bien los datos de entrenamiento y falla con información nueva.</li>
+            <li><strong>Recursos:</strong> grandes volúmenes requieren infraestructura y costos importantes.</li>
+            <li><strong>Model drift:</strong> con el tiempo los datos cambian y la calidad de las predicciones baja.</li>
+          </ul>
+          <svg class="img-art" viewBox="0 0 400 110" role="img" aria-label="Sobreajuste: una línea que pasa por todos los puntos frente a un ajuste ideal"><line x1="30" y1="80" x2="370" y2="38" stroke="currentColor" stroke-opacity=".6" stroke-width="2" stroke-dasharray="6 4"/><polyline points="40,71 80,77 120,71 160,53 200,55 240,58 280,49 320,49 360,42" fill="none" style="stroke:var(--accent);stroke-width:2"/><circle cx="40" cy="71" r="4" fill="currentColor"/><circle cx="80" cy="77" r="4" fill="currentColor"/><circle cx="120" cy="71" r="4" fill="currentColor"/><circle cx="160" cy="53" r="4" fill="currentColor"/><circle cx="200" cy="55" r="4" fill="currentColor"/><circle cx="240" cy="58" r="4" fill="currentColor"/><circle cx="280" cy="49" r="4" fill="currentColor"/><circle cx="320" cy="49" r="4" fill="currentColor"/><circle cx="360" cy="42" r="4" fill="currentColor"/><line x1="95" y1="102" x2="115" y2="102" stroke="currentColor" stroke-opacity=".6" stroke-width="2" stroke-dasharray="6 4"/><text x="120" y="106" text-anchor="start" font-size="11" font-weight="500" fill="currentColor" opacity="1">Ajuste ideal</text><line x1="225" y1="102" x2="245" y2="102" style="stroke:var(--accent);stroke-width:2"/><text x="250" y="106" text-anchor="start" font-size="11" font-weight="500" fill="currentColor" opacity="1">Sobreajuste</text></svg>
+        </div>
+
+        <!-- PÁGINA 12 -->
+        <div class="pagina">
+          <span class="etiqueta">Metodología</span>
+          <h2>Metodología CRISP-DM</h2>
+          <p><em>Cross-Industry Standard Process for Data Mining</em>: una estructura ordenada con 6 fases.</p>
+          <ul>
+            <li><strong>Comprensión del negocio:</strong> problema y objetivos.</li>
+            <li><strong>Comprensión de los datos:</strong> explorar y detectar errores.</li>
+            <li><strong>Preparación de los datos:</strong> limpiar, integrar y transformar.</li>
+            <li><strong>Modelado:</strong> probar algoritmos y configuraciones.</li>
+            <li><strong>Evaluación:</strong> verificar si cumple el objetivo.</li>
+            <li><strong>Implementación:</strong> integrar y dar seguimiento.</li>
+          </ul>
+          <p>No es lineal: se puede volver a etapas anteriores.</p>
+        </div>
+
+        <!-- PÁGINA 13 -->
+        <div class="pagina">
+          <span class="etiqueta">Conclusión</span>
+          <h2>Conclusiones</h2>
+          <p>La minería de datos transforma grandes conjuntos de datos en conocimiento para estudiar problemas, identificar tendencias y decidir mejor. Junto con la IA y el aprendizaje automático, no solo describe lo que ocurrió, sino que ayuda a anticipar escenarios.</p>
+          <p>Su calidad depende de preparar bien los datos, elegir los algoritmos adecuados e interpretar correctamente los hallazgos, siempre con un uso ético de la información.</p>
+          <div class="destacado">
+            Su valor está en usar el conocimiento de forma responsable para responder a necesidades reales.
+          </div>
+        </div>
+
+        <!-- CONTRAPORTADA (no editar data-density) -->
+        <div class="pagina contra-revista" data-density="hard">
+          <div class="logo-mark">IA</div>
+          <h2>Fin del artículo</h2>
+          <p>Gracias por leer la Revista IA</p>
+          <a href="../index.html#articulos" class="btn btn-ghost">← Volver a la revista</a>
+        </div>
+
+      </div>
+
+      <button class="lector-flecha next" aria-label="Página siguiente">›</button>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER (igual en todas las páginas) ===== -->
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div>
+          <a href="../index.html" class="logo">
+            <span class="logo-mark">IA</span>
+            Revista<span>IA</span>
+          </a>
+          <p style="margin-top: 0.75rem;">Revista digital con artículos escritos por estudiantes sobre temas de Inteligencia Artificial.</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="anio"></span> Revista IA — Trabajo grupal</span>
+        <span>Hecho con HTML, CSS y JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/vendor/page-flip.browser.min.js"></script>
+  <script src="../js/lectura.js"></script>
+</body>
+</html>
