@@ -369,6 +369,7 @@ main {
 .portada-3 { background: linear-gradient(135deg, #06b6d4, #10b981); }
 .portada-4 { background: linear-gradient(135deg, #f59e0b, #ef4444); }
 .portada-5 { background: linear-gradient(135deg, #6366f1, #ec4899); }
+.portada-6 { background: linear-gradient(135deg, #65a30d, #0d9488); }
 
 .tarjeta-cuerpo {
   padding: 1.35rem 1.35rem 1.5rem;
