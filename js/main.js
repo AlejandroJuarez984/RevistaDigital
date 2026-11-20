@@ -5,7 +5,30 @@
 document.addEventListener("DOMContentLoaded", () => {
   initMenuMovil();
   initAnioActual();
+  pintarArticulos();
 });
+
+// Pinta las tarjetas de artículos desde js/articulos.js
+function pintarArticulos() {
+  const grid = document.getElementById("grid-articulos");
+  if (!grid || typeof ARTICULOS === "undefined") return;
+
+  grid.innerHTML = ARTICULOS.map(
+    (a) => `
+    <a class="tarjeta" href="${a.href}">
+      <div class="tarjeta-portada ${a.clasePortada}">${a.portada}</div>
+      <div class="tarjeta-cuerpo">
+        <div class="tarjeta-meta">
+          <span class="categoria">${a.categoria}</span>
+          <span>${a.fecha}</span>
+        </div>
+        <h3>${a.titulo}</h3>
+        <p>${a.resumen}</p>
+        <span class="leer">Leer artículo</span>
+      </div>
+    </a>`
+  ).join("");
+}
 
 // Menú hamburguesa móvil
 function initMenuMovil() {

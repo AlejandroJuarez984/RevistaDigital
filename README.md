@@ -13,7 +13,8 @@ Cada artículo se lee como una **revista que se abre y cambia de página** (efec
 │   ├── revista.css               # Lector: páginas, portada, controles de volteo
 │   └── photoswipe.css            # Estilos del visor de infografías
 ├── js/
-│   ├── main.js                   # Menú móvil y año dinámico
+│   ├── main.js                   # Menú móvil, año dinámico y pintado de tarjetas
+│   ├── articulos.js              # Catálogo de artículos (array que genera las cards)
 │   ├── lectura.js                # Inicializa la revista (volteo, contador, flechas)
 │   ├── infografias.js            # Carrusel + visor con zoom (PhotoSwipe)
 │   └── vendor/
@@ -67,14 +68,29 @@ Cada artículo se lee como una **revista que se abre y cambia de página** (efec
 - La revista **se abre sola** al cargar; el contador muestra la página actual.
 - Si la librería no carga, el sitio muestra las páginas en modo lista (degradación segura).
 
-## Cómo integrar un artículo nuevo (quien mantiene el sitio)
+## Cómo integrar un artículo nuevo (para el equipo)
 
-1. Coloca el archivo en `articulos/`.
-2. En `index.html`, copia una tarjeta existente dentro de `<div class="grid-articulos">` y actualiza:
-   - `href` → `articulos/articulo-N.html`
-   - clase de portada (`portada-1` … `portada-6`; puedes añadir más en `css/styles.css`)
-   - categoría, título, resumen y meta.
-3. Guarda y listo.
+Las tarjetas de la portada se generan solas desde `js/articulos.js`. **No edites el HTML de `index.html`.**
+
+1. Sube tu archivo a `articulos/` (siguiendo la plantilla).
+2. Abre `js/articulos.js` y copia una entrada al array `ARTICULOS`:
+
+   ```js
+   {
+     href: "articulos/articulo-N.html",   // ruta de tu archivo
+     portada: "TEXTO",                     // texto corto del degradado (p. ej. "IA")
+     clasePortada: "portada-7",            // clase de color en css/styles.css
+     categoria: "Categoría",               // p. ej. "Machine Learning"
+     fecha: "08 · 2026",
+     titulo: "Título del artículo",
+     resumen: "Una frase corta para la tarjeta.",
+   },
+   ```
+
+3. Si quieres un color de portada nuevo, agrega una clase `.portada-N` en `css/styles.css` (o reutiliza `portada-1` … `portada-7`).
+4. Guarda, haz push y listo: la card aparece automáticamente.
+
+> El orden del array es el orden en que se muestran las tarjetas.
 
 ## Cómo agregar una infografía
 
