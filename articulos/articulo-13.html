@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="IA Responsable, Evaluación, Observabilidad, Seguridad y Gobierno: los cinco pilares de una IA confiable - Revista IA">
+  <title>IA Responsable, Evaluación, Observabilidad, Seguridad y Gobierno — Revista IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/revista.css">
+
+  <!-- Estilos exclusivos del Artículo 6 -->
+  <style>
+    body.art-6 { --accent: #34d399; }
+
+    /* Tablas compactas */
+    .art-6 .tabla-datos {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.6rem 0 0.9rem;
+      font-size: 0.82em;
+      line-height: 1.35;
+    }
+    .art-6 .tabla-datos th,
+    .art-6 .tabla-datos td {
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.5rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .art-6 .tabla-datos th {
+      background: rgba(52, 211, 153, 0.12);
+      color: var(--accent);
+      font-family: var(--font-heading);
+    }
+    .art-6 .tabla-datos td:first-child { font-weight: 600; }
+
+    /* Los cinco pilares numerados */
+    .art-6 .pilares { list-style: none; margin: 0.5rem 0 1rem; padding: 0; counter-reset: pilar; }
+    .art-6 .pilares li {
+      counter-increment: pilar;
+      position: relative;
+      padding: 0 0 0.55rem 2rem;
+      margin: 0;
+    }
+    .art-6 .pilares li::before {
+      content: counter(pilar);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #0b1220;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.8em;
+      display: grid;
+      place-items: center;
+    }
+    .art-6 .pilares li strong { color: var(--accent); font-family: var(--font-heading); }
+
+    /* Ciclo de evaluación paso a paso */
+    .art-6 .ciclo { list-style: none; margin: 0.5rem 0 1rem; padding: 0; }
+    .art-6 .ciclo li {
+      position: relative;
+      padding: 0 0 0.8rem 1.5rem;
+      border-left: 2px solid rgba(52, 211, 153, 0.35);
+      margin: 0;
+    }
+    .art-6 .ciclo li::before {
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+    }
+    .art-6 .ciclo li:last-child { border-left-color: transparent; }
+
+    /* Funciones del NIST en cuadrícula 2x2 */
+    .art-6 .nist {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin: 0.6rem 0 0.9rem;
+    }
+    .art-6 .nist div {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.5rem 0.6rem;
+      font-size: 0.85em;
+      line-height: 1.35;
+    }
+    .art-6 .nist strong {
+      display: block;
+      color: var(--accent);
+      font-family: var(--font-heading);
+      font-size: 1.05em;
+      margin-bottom: 0.15rem;
+    }
+
+    .art-6 .referencias li { font-size: 0.9em; margin-bottom: 0.4rem; }
+
+    /* Ilustraciones */
+    .art-6 .ilustra {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 125px;
+      margin: 0.4rem auto 0.9rem;
+      filter: drop-shadow(0 6px 18px rgba(52, 211, 153, 0.18));
+    }
+    .art-6 .ilustra .pulso { animation: art6-pulso 2.2s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+    .art-6 .ilustra .giro { animation: art6-giro 18s linear infinite; transform-origin: 150px 62px; }
+    @keyframes art6-pulso { 0%,100% { opacity: .45; } 50% { opacity: 1; } }
+    @keyframes art6-giro { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .art-6 .ilustra .pulso, .art-6 .ilustra .giro { animation: none; }
+    }
+
+    /* Etiquetas de autores */
+    .art-6 .autores { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.2rem 0 0.9rem; }
+    .art-6 .autor-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-heading);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: #fff;
+      background: rgba(4, 8, 18, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      padding: 0.25rem 0.65rem 0.25rem 0.25rem;
+      border-radius: 999px;
+    }
+    .art-6 .autor-chip .ini {
+      width: 1.35rem; height: 1.35rem; border-radius: 50%;
+      display: grid; place-items: center;
+      background: #fff; color: #0f766e; font-size: 0.66rem; font-weight: 700;
+    }
+
+    /* Página de autores */
+    .art-6 .equipo { list-style: none; margin: 0.6rem 0 1rem; padding: 0; display: grid; gap: 0.55rem; }
+    .art-6 .equipo li {
+      display: flex; align-items: center; gap: 0.75rem; margin: 0;
+      background: rgba(52, 211, 153, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.55rem 0.7rem;
+    }
+    .art-6 .equipo .avatar {
+      flex: none; width: 2.3rem; height: 2.3rem; border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem;
+      color: #06101a;
+      background: linear-gradient(135deg, var(--accent), #22d3ee);
+    }
+    .art-6 .equipo strong { display: block; font-family: var(--font-heading); line-height: 1.25; }
+    .art-6 .equipo span { font-size: 0.82em; color: var(--muted); }
+  </style>
+</head>
+<body class="art-6">
+
+  <header class="navbar">
+    <div class="contenedor">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">IA</span>
+        Revista<span>IA</span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lector">
+    <div class="lector-barra">
+      <a class="lector-volver" href="../index.html#articulos">← Volver</a>
+      <span class="lector-titulo">Los cinco pilares de una IA confiable</span>
+      <span class="lector-contador" id="contador">Portada</span>
+    </div>
+
+    <div class="zona-revista">
+      <button class="lector-flecha prev" aria-label="Página anterior">‹</button>
+
+      <div id="revista" class="revista">
+
+        <!-- PORTADA -->
+        <div class="pagina portada-revista" data-density="hard" style="--c1:#10b981; --c2:#0f766e;">
+          <span class="portada-sello">Revista IA · Ética y Gobierno</span>
+          <h1>IA Responsable, Evaluación, Observabilidad, Seguridad y Gobierno</h1>
+          <p class="portada-autor">Por: Equipo M</p>
+          <div class="autores" aria-label="Autores">
+            <span class="autor-chip"><span class="ini">SC</span>Saúl Casas Lorenzo</span>
+            <span class="autor-chip"><span class="ini">DH</span>Diederik Bayani Hernández Bermeo</span>
+            <span class="autor-chip"><span class="ini">AM</span>Aaron Martínez de la Cruz</span>
+          </div>
+          <span class="portada-fecha">Noviembre 2026 · Ética y Gobierno</span>
+          <span class="portada-hint">La revista se abrirá…</span>
+        </div>
+
+        <!-- PÁGINA 1: Introducción -->
+        <div class="pagina">
+          <span class="etiqueta">Introducción</span>
+          <h2>Funcionar bien ya no es suficiente</h2>
+          <svg class="ilustra" viewBox="0 0 300 120" role="img" aria-label="Escudo con red neuronal: IA confiable">
+            <defs>
+              <linearGradient id="a6g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+            </defs>
+            <g stroke="#34d399" stroke-opacity=".35" stroke-width="1.5">
+              <line x1="30" y1="30" x2="90" y2="60"/><line x1="30" y1="90" x2="90" y2="60"/><line x1="30" y1="60" x2="90" y2="60"/>
+              <line x1="210" y1="60" x2="270" y2="30"/><line x1="210" y1="60" x2="270" y2="90"/><line x1="210" y1="60" x2="270" y2="60"/>
+            </g>
+            <g fill="#22d3ee"><circle class="pulso" cx="30" cy="30" r="5"/><circle cx="30" cy="60" r="5"/><circle class="pulso" cx="30" cy="90" r="5"/>
+              <circle cx="270" cy="30" r="5"/><circle class="pulso" cx="270" cy="60" r="5"/><circle cx="270" cy="90" r="5"/></g>
+            <path d="M150 8 L196 24 V58 C196 86 176 104 150 114 C124 104 104 86 104 58 V24 Z" fill="url(#a6g1)" fill-opacity=".15" stroke="url(#a6g1)" stroke-width="3"/>
+            <path d="M130 60 L145 75 L172 46" fill="none" stroke="#34d399" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>A medida que la inteligencia artificial pasa de ser un experimento a ejecutar procesos reales, una IA que simplemente "funciona bien" en pruebas de laboratorio ya no basta.</p>
+          <div class="destacado">
+            Un sistema puede tener alta precisión y, al mismo tiempo, discriminar a ciertos grupos, filtrar datos sensibles o ser manipulado por un usuario malicioso.
+          </div>
+          <p>También puede tomar decisiones que nadie en la organización puede explicar ni revertir a tiempo.</p>
+        </div>
+
+        <!-- PÁGINA 2: Los cinco pilares -->
+        <div class="pagina">
+          <h2>Cinco disciplinas para una IA confiable</h2>
+          <p>Para que la IA sea confiable durante todo su ciclo de vida, y no solo en su lanzamiento, han surgido estas disciplinas:</p>
+          <ol class="pilares">
+            <li><strong>IA Responsable:</strong> los principios que debe respetar.</li>
+            <li><strong>Evaluación:</strong> cómo comprobamos que los cumple.</li>
+            <li><strong>Observabilidad:</strong> cómo entendemos su comportamiento en producción.</li>
+            <li><strong>Seguridad:</strong> cómo la protegemos de ataques y abusos.</li>
+            <li><strong>Gobierno:</strong> quién decide, quién responde y bajo qué reglas.</li>
+          </ol>
+          <p>Hilo conductor: una empresa que usa IA para analizar currículums y recomendar candidatos a una vacante.</p>
+        </div>
+
+        <!-- PÁGINA 3: IA Responsable (1/2) -->
+        <div class="pagina">
+          <span class="etiqueta">1 · IA Responsable</span>
+          <h2>Principios, no un estándar único</h2>
+          <p>Es el conjunto de prácticas que buscan que un sistema produzca buenos resultados de forma ética, segura y controlable. Microsoft propone cinco principios:</p>
+          <table class="tabla-datos">
+            <thead>
+              <tr><th>Principio</th><th>En el reclutamiento</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Equidad</td><td>No favorecer ni descartar por género, edad u origen, sino por competencias.</td></tr>
+              <tr><td>Transparencia</td><td>Avisar a los candidatos que un modelo participa en la preselección.</td></tr>
+              <tr><td>Explicabilidad</td><td>Mostrar al reclutador qué factores llevaron a recomendar o descartar.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- PÁGINA 4: IA Responsable (2/2) -->
+        <div class="pagina">
+          <h2>Principios conectados</h2>
+          <table class="tabla-datos">
+            <thead>
+              <tr><th>Principio</th><th>En el reclutamiento</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Privacidad</td><td>Limitar el acceso a los CV y datos personales solo al personal autorizado.</td></tr>
+              <tr><td>Supervisión humana</td><td>Que la decisión final de contratación la tome una persona, no el modelo.</td></tr>
+            </tbody>
+          </table>
+          <div class="destacado">
+            Estos principios no son independientes: la explicabilidad permite detectar fallas de equidad, y la supervisión humana solo funciona si hay transparencia sobre cómo opera el sistema.
+          </div>
+        </div>
+
+        <!-- PÁGINA 5: Evaluación (1/3) -->
+        <div class="pagina">
+          <span class="etiqueta">2 · Evaluación</span>
+          <h2>Declarar principios no basta</h2>
+          <svg class="ilustra" viewBox="0 0 300 120" role="img" aria-label="Gráfica de barras con diferencia de aceptación entre dos grupos">
+            <line x1="20" y1="104" x2="280" y2="104" stroke="#8b97ad" stroke-width="1.5"/>
+            <g font-family="Space Grotesk, sans-serif" font-size="10" fill="#8b97ad" text-anchor="middle">
+              <text x="80" y="117">Grupo A</text><text x="170" y="117">Grupo B</text>
+            </g>
+            <rect x="55" y="22" width="50" height="82" rx="6" fill="#34d399"/>
+            <rect x="145" y="66" width="50" height="38" rx="6" fill="#f87171"/>
+            <g font-family="Space Grotesk, sans-serif" font-weight="700" font-size="13" fill="#fff" text-anchor="middle">
+              <text x="80" y="40">72%</text><text x="170" y="84">31%</text>
+            </g>
+            <line class="pulso" x1="110" y1="22" x2="140" y2="66" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4 4"/>
+            <circle cx="245" cy="48" r="20" fill="none" stroke="#fbbf24" stroke-width="4"/>
+            <line x1="259" y1="62" x2="276" y2="80" stroke="#fbbf24" stroke-width="6" stroke-linecap="round"/>
+            <text x="245" y="54" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="17" fill="#fbbf24">!</text>
+          </svg>
+          <p>Ignorar los principios tiene consecuencias concretas. El riesgo más documentado es el <strong>sesgo algorítmico</strong>: si un modelo se entrena con decisiones históricas que favorecieron a cierto perfil, aprende y reproduce ese patrón.</p>
+          <p>A esto se suman resultados difíciles de explicar y daños reputacionales o legales para la organización.</p>
+          <div class="destacado">
+            Evaluar un sistema de IA significa medir, con evidencia, si cumple los objetivos para los que fue diseñado.
+          </div>
+        </div>
+
+        <!-- PÁGINA 6: Evaluación (2/3) -->
+        <div class="pagina">
+          <h2>Tipos de prueba</h2>
+          <ul>
+            <li><strong>Calidad y error:</strong> precisión, exhaustividad (recall), falsos positivos y negativos.</li>
+            <li><strong>Sesgo:</strong> comparar resultados entre grupos (género, edad) para detectar diferencias injustificadas.</li>
+            <li><strong>Robustez:</strong> que siga funcionando con CV en otros formatos, datos incompletos o errores de OCR.</li>
+            <li><strong>Automatizada vs. humana:</strong> la automatizada analiza grandes volúmenes; la humana aporta juicio cualitativo que las métricas no capturan.</li>
+          </ul>
+        </div>
+
+        <!-- PÁGINA 7: Evaluación (3/3) -->
+        <div class="pagina">
+          <h2>Un ciclo que se repite</h2>
+          <p>La evaluación no termina en el lanzamiento: se repite cada vez que cambian el modelo, los datos o las reglas, porque un ajuste menor puede introducir nuevos sesgos.</p>
+          <ul class="ciclo">
+            <li>Probar con CV de ejemplo.</li>
+            <li>Comparar las recomendaciones contra criterios laborales relevantes.</li>
+            <li>Identificar errores o diferencias injustificadas entre candidatos equivalentes.</li>
+            <li>Corregir el sistema y volver a evaluarlo antes de confiar en él.</li>
+          </ul>
+        </div>
+
+        <!-- PÁGINA 8: Observabilidad (1/2) -->
+        <div class="pagina">
+          <span class="etiqueta">3 · Observabilidad</span>
+          <h2>Entender el sistema en producción</h2>
+          <p>Los datos reales difieren de los de prueba, el uso crece o una actualización causa efectos inesperados. La observabilidad permite entender qué ocurre <em>mientras el sistema funciona</em>.</p>
+          <ul>
+            <li><strong>Logging:</strong> qué recibió el modelo y qué respondió, con control de acceso.</li>
+            <li><strong>Métricas operativas:</strong> latencia, errores, volumen y versión del modelo.</li>
+            <li><strong>Drift:</strong> cambios graduales en los datos (data drift) o en el rendimiento (model drift).</li>
+            <li><strong>Alertas y trazabilidad:</strong> avisos y registros para reconstruir incidentes.</li>
+          </ul>
+        </div>
+
+        <!-- PÁGINA 9: Observabilidad (2/2) -->
+        <div class="pagina">
+          <h2>Detectar no es resolver</h2>
+          <svg class="ilustra" viewBox="0 0 300 120" role="img" aria-label="Panel de monitoreo con una métrica que se sale de su rango y dispara una alerta">
+            <rect x="6" y="6" width="288" height="108" rx="12" fill="#131a2a" stroke="#1e2740"/>
+            <circle cx="22" cy="20" r="4" fill="#f87171"/><circle cx="34" cy="20" r="4" fill="#fbbf24"/><circle cx="46" cy="20" r="4" fill="#34d399"/>
+            <rect x="20" y="40" width="260" height="36" fill="#34d399" fill-opacity=".08"/>
+            <line x1="20" y1="40" x2="280" y2="40" stroke="#34d399" stroke-opacity=".4" stroke-dasharray="4 4"/>
+            <line x1="20" y1="76" x2="280" y2="76" stroke="#34d399" stroke-opacity=".4" stroke-dasharray="4 4"/>
+            <polyline points="20,60 50,55 80,62 110,52 140,58 170,54 195,63 215,74 238,88 262,98" fill="none" stroke="#22d3ee" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle class="pulso" cx="262" cy="98" r="7" fill="#f87171"/>
+            <rect x="196" y="12" width="84" height="20" rx="10" fill="#f87171" fill-opacity=".18" stroke="#f87171"/>
+            <text x="238" y="26" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="10" fill="#fca5a5">ALERTA · DRIFT</text>
+          </svg>
+          <p>Si tras una actualización el sistema empieza a recomendar candidatos menos adecuados, son los registros, las métricas y las alertas los que permiten detectar el cambio e investigar su causa, no la evaluación inicial, que ya quedó atrás.</p>
+          <div class="destacado">
+            Observar un problema no lo resuelve automáticamente: la observabilidad da la información para que un equipo humano decida qué hacer.
+          </div>
+          <p>Sus prácticas provienen de MLOps y LLMOps.</p>
+        </div>
+
+        <!-- PÁGINA 10: Seguridad (1/2) -->
+        <div class="pagina">
+          <span class="etiqueta">4 · Seguridad</span>
+          <h2>Amenazas según OWASP</h2>
+          <p>Un sistema bien evaluado puede seguir siendo vulnerable a ataques deliberados. El OWASP Top 10 for LLM Applications documenta las amenazas más críticas:</p>
+          <table class="tabla-datos">
+            <thead>
+              <tr><th>Amenaza</th><th>En qué consiste</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Prompt injection</td><td>Entradas que alteran las instrucciones del sistema.</td></tr>
+              <tr><td>Salidas inseguras</td><td>Usar la respuesta del modelo sin validarla.</td></tr>
+              <tr><td>Envenenamiento de datos</td><td>Insertar datos dañinos en el entrenamiento.</td></tr>
+              <tr><td>Información sensible</td><td>El modelo revela datos confidenciales.</td></tr>
+              <tr><td>Plugins inseguros</td><td>Herramientas sin validación ni límites de permisos.</td></tr>
+              <tr><td>Exceso de autonomía</td><td>Actuar sin supervisión suficiente.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- PÁGINA 11: Seguridad (2/2) -->
+        <div class="pagina">
+          <h2>Jailbreak vs. prompt injection</h2>
+          <svg class="ilustra" viewBox="0 0 300 120" role="img" aria-label="Candado protegido por capas de seguridad que bloquean un ataque">
+            <g fill="none" stroke-width="2.5">
+              <circle cx="150" cy="62" r="54" stroke="#34d399" stroke-opacity=".25" stroke-dasharray="6 6" class="giro"/>
+              <circle cx="150" cy="62" r="42" stroke="#34d399" stroke-opacity=".5"/>
+              <circle cx="150" cy="62" r="30" stroke="#22d3ee" stroke-opacity=".7"/>
+            </g>
+            <rect x="136" y="58" width="28" height="22" rx="4" fill="#34d399"/>
+            <path d="M141 58 V50 a9 9 0 0 1 18 0 V58" fill="none" stroke="#34d399" stroke-width="4"/>
+            <circle cx="150" cy="68" r="3" fill="#06101a"/>
+            <g font-family="monospace" font-size="11" fill="#f87171">
+              <text x="12" y="40">ignore prev</text><text x="18" y="56">instructions…</text>
+            </g>
+            <path d="M88 50 L100 54" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/>
+            <path class="pulso" d="M100 46 l8 8 m0 -8 l-8 8" stroke="#f87171" stroke-width="3" stroke-linecap="round"/>
+            <g font-family="Space Grotesk, sans-serif" font-size="10" fill="#8b97ad">
+              <text x="214" y="38">guardrails</text><text x="214" y="64">validación</text><text x="214" y="90">acceso</text>
+            </g>
+          </svg>
+          <p>Suelen confundirse: el <strong>prompt injection</strong> manipula las instrucciones que recibe el sistema, mientras que el <strong>jailbreak</strong> busca sortear las barreras que el propio modelo tiene incorporadas.</p>
+          <p>En el reclutamiento, un riesgo concreto es que alguien manipule al asistente para que revele CV o datos de otros candidatos.</p>
+          <div class="destacado">
+            Ninguna medida es absoluta: se combinan control de acceso, validación de entradas y salidas, protección de datos, límites de acciones y guardrails, junto con supervisión humana.
+          </div>
+        </div>
+
+        <!-- PÁGINA 12: Gobierno (1/3) -->
+        <div class="pagina">
+          <span class="etiqueta">5 · Gobierno</span>
+          <h2>¿Quién responde por la IA?</h2>
+          <svg class="ilustra" viewBox="0 0 300 120" role="img" aria-label="Balanza con reglas de un lado y responsables del otro">
+            <line x1="150" y1="20" x2="150" y2="104" stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/>
+            <rect x="118" y="104" width="64" height="8" rx="4" fill="#a78bfa"/>
+            <circle cx="150" cy="18" r="6" fill="#a78bfa"/>
+            <line x1="70" y1="30" x2="230" y2="30" stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/>
+            <path d="M70 30 L50 70 M70 30 L90 70 M230 30 L210 70 M230 30 L250 70" stroke="#a78bfa" stroke-opacity=".6" stroke-width="1.5"/>
+            <path d="M44 70 h52 a26 12 0 0 1 -52 0 Z" fill="#a78bfa" fill-opacity=".25" stroke="#a78bfa" stroke-width="2"/>
+            <path d="M204 70 h52 a26 12 0 0 1 -52 0 Z" fill="#a78bfa" fill-opacity=".25" stroke="#a78bfa" stroke-width="2"/>
+            <rect x="56" y="44" width="26" height="24" rx="2" fill="#e6edf7"/>
+            <g stroke="#8b97ad" stroke-width="1.5"><line x1="60" y1="51" x2="78" y2="51"/><line x1="60" y1="56" x2="78" y2="56"/><line x1="60" y1="61" x2="72" y2="61"/></g>
+            <circle cx="222" cy="52" r="6" fill="#34d399"/><path d="M212 68 a10 9 0 0 1 20 0 Z" fill="#34d399"/>
+            <circle cx="240" cy="54" r="5" fill="#22d3ee"/><path d="M232 68 a8 8 0 0 1 16 0 Z" fill="#22d3ee"/>
+            <g font-family="Space Grotesk, sans-serif" font-size="10" fill="#8b97ad" text-anchor="middle">
+              <text x="70" y="97">Reglas</text><text x="230" y="97">Responsables</text>
+            </g>
+          </svg>
+          <p>Proteger técnicamente un sistema no resuelve quién es responsable ni bajo qué reglas opera. El gobierno de IA establece políticas internas, asigna roles, define usos permitidos y gestiona riesgos e incidentes.</p>
+          <p>Incluye documentación y auditoría para revisar cómo se construyó el sistema y quién autorizó cada decisión.</p>
+          <div class="destacado">
+            La seguridad protege al sistema; el gobierno establece las reglas, los controles y quién responde por él.
+          </div>
+        </div>
+
+        <!-- PÁGINA 13: Gobierno (2/3) — NIST -->
+        <div class="pagina">
+          <h2>NIST AI RMF 1.0</h2>
+          <p>Publicado en 2023 por el Instituto Nacional de Estándares y Tecnología de EE. UU., organiza la gestión de riesgos en cuatro funciones:</p>
+          <div class="nist">
+            <div><strong>Govern</strong>Políticas, procesos y responsabilidades alineados con los valores de la organización.</div>
+            <div><strong>Map</strong>Propósito, límites y riesgos del sistema en cada etapa.</div>
+            <div><strong>Measure</strong>Evaluar riesgos: equidad, robustez, seguridad y privacidad.</div>
+            <div><strong>Manage</strong>Priorizar, mitigar, monitorear y documentar tras el despliegue.</div>
+          </div>
+        </div>
+
+        <!-- PÁGINA 14: Gobierno (3/3) — EU AI Act -->
+        <div class="pagina">
+          <h2>EU AI Act</h2>
+          <p>En vigor desde agosto de 2024, clasifica los sistemas en cuatro niveles de riesgo:</p>
+          <table class="tabla-datos">
+            <thead>
+              <tr><th>Nivel</th><th>Ejemplos</th><th>Obligación</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Inaceptable</td><td>Puntuación social</td><td>Prohibido desde feb. 2025</td></tr>
+              <tr><td>Alto</td><td>Selección de personal, crédito</td><td>Gestión de riesgos y supervisión humana</td></tr>
+              <tr><td>Limitado</td><td>Chatbots, deepfakes</td><td>Informar que es IA</td></tr>
+              <tr><td>Mínimo</td><td>Filtros de spam, videojuegos</td><td>Sin obligaciones específicas</td></tr>
+            </tbody>
+          </table>
+          <p>Nuestro sistema de reclutamiento sería de <strong>alto riesgo</strong>.</p>
+        </div>
+
+        <!-- PÁGINA 15: Conclusión (1/2) -->
+        <div class="pagina">
+          <span class="etiqueta">Conclusión</span>
+          <h2>Un ciclo continuo</h2>
+          <p>Los cinco pilares no son una lista que se marca una sola vez, sino un ciclo durante toda la vida del sistema:</p>
+          <ol class="pilares">
+            <li><strong>IA Responsable</strong> define los principios.</li>
+            <li><strong>Evaluación</strong> comprueba si se cumplen, antes y después del lanzamiento.</li>
+            <li><strong>Observabilidad</strong> detecta cambios en producción.</li>
+            <li><strong>Seguridad</strong> reduce amenazas y usos indebidos.</li>
+            <li><strong>Gobierno</strong> define reglas, roles y responsables.</li>
+          </ol>
+        </div>
+
+        <!-- PÁGINA 16: Conclusión (2/2) -->
+        <div class="pagina">
+          <h2>Ningún pilar vive solo</h2>
+          <svg class="ilustra" viewBox="0 0 300 124" role="img" aria-label="Ciclo continuo de los cinco pilares">
+            <circle class="giro" cx="150" cy="62" r="46" fill="none" stroke="#34d399" stroke-opacity=".4" stroke-width="2" stroke-dasharray="3 7"/>
+            <g font-family="Space Grotesk, sans-serif" font-weight="700" font-size="9" text-anchor="middle">
+              <circle cx="150" cy="16" r="14" fill="#34d399"/><text x="150" y="19" fill="#06101a">IA-R</text>
+              <circle cx="194" cy="48" r="14" fill="#22d3ee"/><text x="194" y="51" fill="#06101a">EVAL</text>
+              <circle cx="177" cy="100" r="14" fill="#60a5fa"/><text x="177" y="103" fill="#06101a">OBS</text>
+              <circle cx="123" cy="100" r="14" fill="#f87171"/><text x="123" y="103" fill="#06101a">SEG</text>
+              <circle cx="106" cy="48" r="14" fill="#a78bfa"/><text x="106" y="51" fill="#06101a">GOB</text>
+            </g>
+            <text x="150" y="66" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="11" fill="#e6edf7">IA confiable</text>
+            <g font-family="Space Grotesk, sans-serif" font-size="9.5" fill="#8b97ad">
+              <text x="12" y="40">principios</text><text x="232" y="40">pruebas</text>
+              <text x="222" y="112">monitoreo</text><text x="20" y="112">protección</text>
+            </g>
+          </svg>
+          <p>Si la observabilidad detecta más errores, se diseñan nuevas evaluaciones. Si se encuentra una vulnerabilidad, se refuerza la seguridad. Si se identifica un riesgo importante, el gobierno define cómo actuar.</p>
+          <div class="destacado">
+            Una IA confiable no es simplemente una IA que funciona, sino una que la organización puede evaluar, comprender, proteger y gobernar de manera responsable a lo largo de todo su ciclo de vida.
+          </div>
+        </div>
+
+        <!-- PÁGINA 17: Autores -->
+        <div class="pagina">
+          <span class="etiqueta">Autores</span>
+          <h2>Equipo M</h2>
+          <ul class="equipo">
+            <li><span class="avatar">SC</span><div><strong>Saúl Casas Lorenzo</strong><span>Matemáticas Aplicadas y Computación</span></div></li>
+            <li><span class="avatar">DH</span><div><strong>Diederik Bayani Hernández Bermeo</strong><span>Matemáticas Aplicadas y Computación</span></div></li>
+            <li><span class="avatar">AM</span><div><strong>Aaron Martínez de la Cruz</strong><span>Matemáticas Aplicadas y Computación</span></div></li>
+          </ul>
+          <div class="destacado">
+            Materia: Sistemas Inteligentes · Profesor: Javier Rosas Hernández<br>FES Acatlán, UNAM
+          </div>
+        </div>
+
+        <!-- PÁGINA 18: Referencias -->
+        <div class="pagina">
+          <h2>Referencias</h2>
+          <ul class="referencias">
+            <li>NIST AI Risk Management Framework: resumen de las 4 funciones (Scrut).</li>
+            <li>NIST AI RMF: contexto y antecedentes (Morgan Lewis).</li>
+            <li>OWASP Top 10 for LLM Applications: descripción de las 10 categorías (CrowdStrike).</li>
+            <li>EU AI Act: niveles de riesgo y calendario de aplicación (Seers.ai).</li>
+            <li>EU AI Act: resumen legal y obligaciones (Travers Smith).</li>
+          </ul>
+        </div>
+
+        <!-- CONTRAPORTADA -->
+        <div class="pagina contra-revista" data-density="hard">
+          <div class="logo-mark">IA</div>
+          <h2>Fin del artículo</h2>
+          <p>Gracias por leer la Revista IA</p>
+          <a href="../index.html#articulos" class="btn btn-ghost">← Volver a la revista</a>
+        </div>
+
+      </div>
+
+      <button class="lector-flecha next" aria-label="Página siguiente">›</button>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div>
+          <a href="../index.html" class="logo">
+            <span class="logo-mark">IA</span>
+            Revista<span>IA</span>
+          </a>
+          <p style="margin-top: 0.75rem;">Revista digital con artículos escritos por estudiantes sobre temas de Inteligencia Artificial.</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="anio"></span> Revista IA — Trabajo grupal</span>
+        <span>Hecho con HTML, CSS y JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/vendor/page-flip.browser.min.js"></script>
+  <script src="../js/lectura.js"></script>
+</body>
+</html>
