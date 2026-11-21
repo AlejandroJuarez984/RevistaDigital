@@ -4,9 +4,23 @@
 // y copia una entrada aquí. No toques index.html.
 // El orden NO importa: las tarjetas se ordenan solas
 // por número de archivo (articulo-5 antes que articulo-10).
+// Campo OPCIONAL: imagen (ruta relativa a assets/img/)
+// → si existe, se usa como fondo de la tarjeta;
+//   si no, mantiene el degradado de clasePortada.
 // ============================================
 
 const ARTICULOS = [
+  {
+    href: "articulos/articulo-7.html",
+    portada: "CE",
+    clasePortada: "portada-8",
+    imagen: "assets/img/portada-ce.svg",
+    categoria: "Computación evolutiva",
+    fecha: "08 · 2026",
+    titulo: "Cómputo evolutivo: estrategias evolutivas y programación genética",
+    resumen:
+      "Origen, fundamentos y operadores de las estrategias evolutivas y la programación genética, con ejemplos prácticos y una comparación entre ambos enfoques.",
+  },
   {
     href: "articulos/articulo-5.html",
     portada: "Tema E",

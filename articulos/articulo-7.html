@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google Tag Manager -->
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-5WLS67NW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cómputo evolutivo: estrategias evolutivas y programación genética - Revista IA">
+  <title>Cómputo evolutivo — Revista IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/revista.css">
+
+  <style>
+    .art-7 { --accent: #10b981; }
+
+    /* Portada verde (refuerza --c1/--c2 inline) */
+    .art-7 .portada-revista {
+      background: linear-gradient(150deg, #059669 0%, #34d399 100%);
+    }
+
+    .art-7 .tabla-datos {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1rem;
+      font-size: 0.85em;
+    }
+    .art-7 .tabla-datos th,
+    .art-7 .tabla-datos td {
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.55rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .art-7 .tabla-datos th {
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--accent);
+      font-family: var(--font-heading);
+      font-size: 0.95em;
+    }
+    .art-7 .tabla-datos td:first-child {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .art-7 figure { margin: 0.55rem 0; }
+    .art-7 figure img {
+      max-height: 300px;
+      width: 100%;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 8px;
+      margin: 0;
+    }
+    .art-7 figcaption {
+      font-size: 0.78em;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 0.3rem;
+      line-height: 1.35;
+    }
+    .art-7 .pagina > h2 { font-size: 1.25em; margin-bottom: 0.4rem; }
+    .art-7 .pagina > p { font-size: 0.92em; line-height: 1.5; margin-bottom: 0.55rem; }
+    .art-7 .etiqueta { margin-bottom: 0.35rem; }
+    .art-7 .destacado { font-size: 0.9em; margin: 0.5rem 0; padding: 0.55rem 0.75rem; }
+    .art-7 .lista-compacta { font-size: 0.88em; margin: 0.35rem 0 0.55rem; padding-left: 1.15rem; }
+    .art-7 .lista-compacta li { margin-bottom: 0.2rem; line-height: 1.4; }
+    .art-7 .autores-portada {
+      font-size: 0.95em;
+      line-height: 1.55;
+      opacity: 0.95;
+      margin-top: 0.5rem;
+    }
+    .art-7 .portada-imgs {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.75rem;
+      margin: 0.35rem 0 1rem;
+    }
+    .art-7 .portada-imgs img {
+      height: clamp(80px, 14vw, 120px);
+      width: auto;
+      max-width: 100%;
+      margin: 0;
+      border-radius: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.55);
+      background: #042f24;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body class="art-7">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5WLS67NW"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <header class="navbar">
+    <div class="contenedor">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">IA</span>
+        Revista<span>IA</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lector">
+    <div class="lector-barra">
+      <a class="lector-volver" href="../index.html#articulos">← Volver</a>
+      <span class="lector-titulo">Cómputo evolutivo</span>
+      <span class="lector-contador" id="contador">Portada</span>
+    </div>
+
+    <div class="zona-revista">
+      <button class="lector-flecha prev" aria-label="Página anterior">‹</button>
+
+      <div id="revista" class="revista">
+
+        <!-- PORTADA -->
+        <div class="pagina portada-revista" data-density="hard" style="--c1:#059669; --c2:#34d399;">
+          <span class="portada-sello">Revista IA · Artículo</span>
+          <h1>Cómputo evolutivo</h1>
+          <div class="portada-imgs">
+            <img src="../assets/img/portada-ce.svg" alt="Portada ilustrada: hélice de ADN, árbol de expresión y vector de soluciones">
+          </div>
+          <p class="portada-autor autores-portada">
+            Sixto Rodríguez Angel Fabián<br>
+            Soto Velazquez Claudio<br>
+            López Francisco Javier
+          </p>
+          <span class="portada-fecha">Octubre 2026 · Computación evolutiva</span>
+          <span class="portada-hint">La revista se abrirá…</span>
+        </div>
+
+        <!-- P1 Introducción -->
+        <div class="pagina">
+          <span class="etiqueta">Introducción</span>
+          <h2>La evolución como algoritmo</h2>
+          <p>La inteligencia artificial ha desarrollado métodos capaces de resolver problemas complejos mediante búsqueda, aprendizaje y optimización. Dentro de ellos, la <strong>computación evolutiva</strong> se inspira en la evolución biológica: genera poblaciones de soluciones candidatas, las evalúa y las transforma generación tras generación.</p>
+          <div class="destacado">
+            A diferencia de los métodos que exigen una solución conocida, los algoritmos evolutivos exploran alternativas sin saber de antemano cuál es la mejor.
+          </div>
+          <p>Dos enfoques relevantes dentro de este campo son las <strong>estrategias evolutivas</strong>, orientadas a optimizar parámetros numéricos, y la <strong>programación genética</strong>, que evoluciona la estructura de expresiones y programas. Este artículo analiza sus fundamentos, operadores, aplicaciones y diferencias.</p>
+        </div>
+
+        <!-- P2 EE historia -->
+        <div class="pagina">
+          <span class="etiqueta">Estrategias evolutivas</span>
+          <h2>Definición y origen</h2>
+          <p>Las estrategias evolutivas (<em>Evolution Strategies</em>, ES) son métodos de optimización que mejoran un conjunto de soluciones mediante operaciones de <strong>variación y selección</strong>, guiados por una función objetivo.</p>
+          <figure>
+            <img src="../assets/img/ee-historia.png" alt="Ingo Rechenberg y Hans-Paul Schwefel, pioneros de las estrategias evolutivas en 1960">
+            <figcaption>Figura 1. Rechenberg y Schwefel impulsaron las ES en Alemania durante la década de 1960.</figcaption>
+          </figure>
+          <p>Su desarrollo comenzó en los años sesenta en la Universidad Técnica de Berlín, para optimizar diseños aerodinámicos en túneles de viento mediante modificaciones aleatorias de parámetros. No necesitan conocer la solución óptima previamente.</p>
+        </div>
+
+        <!-- P3 EE fundamentos -->
+        <div class="pagina">
+          <h2>Fundamentos: vector y función objetivo</h2>
+          <p>Cada solución se representa como un <strong>vector numérico</strong>: cada componente es una variable del problema (por ejemplo, largo, ancho y altura de una caja). La calidad se mide con una <strong>función objetivo</strong> que maximiza un resultado o minimiza un coste o error.</p>
+          <figure>
+            <img src="../assets/img/ee-ciclo.png" alt="Ciclo de las estrategias evolutivas: exploración, evaluación y selección">
+            <figcaption>Figura 2. Ciclo: explorar con mutación, evaluar y seleccionar las mejores soluciones.</figcaption>
+          </figure>
+          <p>Los tres mecanismos centrales son:</p>
+          <ul class="lista-compacta">
+            <li><strong>Mutación:</strong> perturbación aleatoria de los valores.</li>
+            <li><strong>Recombinación:</strong> combinación de información de varios progenitores.</li>
+            <li><strong>Selección:</strong> decisión de quiénes continúan en la búsqueda.</li>
+          </ul>
+        </div>
+
+        <!-- P4 EE mutación -->
+        <div class="pagina">
+          <h2>Mutación y su adaptación</h2>
+          <p>La mutación añade una perturbación ε a uno o varios componentes del vector: si x = 4, podría surgir x′ = 4.3. El candidato se evalúa para ver si mejora respecto al original.</p>
+          <figure>
+            <img src="../assets/img/ee-mutacion.png" alt="Adaptación de la mutación: cambios grandes para explorar, cambios pequeños para precisión">
+            <figcaption>Figura 3. Cambios grandes exploran; cambios pequeños afinan la búsqueda.</figcaption>
+          </figure>
+          <p>Si los pasos son demasiado pequeños, la búsqueda avanza lento; si son excesivos, se pierden mejoras cercanas. Por eso se <strong>adapta la magnitud</strong> durante la ejecución: un ejemplo clásico es la <strong>regla del éxito de 1/5</strong>, que ajusta el paso según la proporción de mutaciones exitosas.</p>
+        </div>
+
+        <!-- P5 EE selección -->
+        <div class="pagina">
+          <h2>Selección de progenitores y supervivientes</h2>
+          <p>La selección compara candidatos con la función objetivo. Existe una diferencia clave entre elegir quiénes <strong>producen descendientes</strong> y elegir quiénes <strong>sobreviven</strong> a la siguiente generación.</p>
+          <figure>
+            <img src="../assets/img/ee-seleccion.png" alt="Comparación de selección mu coma lambda y mu más lambda">
+            <figcaption>Figura 4. En (μ,λ) solo compiten los descendientes; en (μ+λ) compiten padres e hijos.</figcaption>
+          </figure>
+          <p>Este criterio define las dos variantes clásicas de supervivencia: selección <strong>con coma</strong> (,) y <strong>con signo más</strong> (+), que se detallan en la página siguiente con un ejemplo numérico.</p>
+          <div class="destacado">
+            La presión de selección equilibra aprovechar lo bueno ya encontrado y mantener diversidad para explorar.
+          </div>
+        </div>
+
+        <!-- P6 EE mu lambda -->
+        <div class="pagina">
+          <h2>Variante (μ, λ)</h2>
+          <p><strong>μ</strong> es el número de progenitores y <strong>λ</strong> el de descendientes por generación. Tras evaluar los hijos, se eligen los μ mejores <em>exclusivamente entre los λ descendientes</em>: los padres no compiten.</p>
+          <figure>
+            <img src="../assets/img/ee-mu-lambda.png" alt="Estrategia mu coma lambda: los padres no sobreviven, solo se selecciona entre descendientes">
+            <figcaption>Figura 5. (μ,λ): renovación total; los progenitores anteriores quedan descartados.</figcaption>
+          </figure>
+          <p>Ejemplo (3,10): se mantienen 3 padres y se generan 10 hijos; de esos 10 se eligen los 3 mejores. Favorece la <strong>renovación</strong> de la población, útil cuando el entorno de búsqueda cambia o se necesita diversidad.</p>
+        </div>
+
+        <!-- P7 EE mu mas lambda -->
+        <div class="pagina">
+          <h2>Variante (μ + λ) y CMA-ES</h2>
+          <p>En <strong>(μ + λ)</strong> progenitores y descendientes compiten juntos: de μ + λ candidatos se seleccionan los μ mejores. Así se conservan soluciones de alta calidad aunque los hijos no las superen aún.</p>
+          <figure>
+            <img src="../assets/img/ee-mu-mas-lambda.png" alt="Estrategia mu más lambda: padres e hijos compiten por sobrevivir">
+            <figcaption>Figura 6. (μ+λ): los padres pueden conservarse si siguen siendo los mejores.</figcaption>
+          </figure>
+          <p>Entre las variantes avanzadas destaca <strong>CMA-ES</strong>, que adapta la matriz de covarianza para orientar las mutaciones según las correlaciones entre variables—ideal cuando la función objetivo tiene geometría compleja.</p>
+        </div>
+
+        <!-- P8 EE ejemplo caja -->
+        <div class="pagina">
+          <span class="etiqueta">Ejemplo práctico · ES</span>
+          <h2>Optimizar el volumen de una caja</h2>
+          <p>Se busca maximizar el volumen de una caja sin tapa con una cantidad fija de material. Cada individuo es el vector (l, a, h); la función objetivo calcula V = l · a · h restringiendo el área disponible.</p>
+          <figure>
+            <img src="../assets/img/ee-caja-proceso.png" alt="Proceso de optimización evolutiva de cajas: población, evaluación y selección">
+            <figcaption>Figura 7. Población de cajas → mutación → evaluación del volumen → selección.</figcaption>
+          </figure>
+          <p>El algoritmo genera combinaciones de dimensiones, descarta las que violen restricciones (con penalización o reparación) y repite hasta un criterio de terminación: generaciones máximas, volumen objetivo o falta de mejoras.</p>
+        </div>
+
+        <!-- P9 EE solución caja -->
+        <div class="pagina">
+          <h2>Solución y lecciones del ejemplo</h2>
+          <p>Tras varias generaciones, la estrategia evolutiva converge hacia dimensiones que acercan el volumen al máximo teórico permitido por la superficie de material, por ejemplo un corte x ≈ 5.67 cm en la formulación del problema.</p>
+          <figure>
+            <img src="../assets/img/ee-caja-solucion.png" alt="Solución óptima de la caja con dimensiones y volumen calculado">
+            <figcaption>Figura 8. La mejor caja de la población: dimensiones válidas y volumen casi óptimo.</figcaption>
+          </figure>
+          <p>Aunque este problema admite solución analítica, ilustra los principios generales: <strong>representación numérica, mutación, evaluación y selección</strong>. Las ES son útiles cuando la evaluación es costosa (simulaciones, experimentos) y no hay derivadas disponibles.</p>
+        </div>
+
+        <!-- P10 EE ventajas -->
+        <div class="pagina">
+          <h2>Ventajas y limitaciones de las ES</h2>
+          <figure>
+            <img src="../assets/img/ee-ventajas.png" alt="Comparativa de estrategias evolutivas: pros y contras de mu coma lambda y mu más lambda">
+            <figcaption>Figura 9. Comparativa (μ,λ) frente a (μ+λ): renovación frente a conservación.</figcaption>
+          </figure>
+          <ul class="lista-compacta">
+            <li><strong>Ventajas:</strong> no requieren derivadas; manejan muchas variables; la adaptación de mutación y CMA-ES afinan la búsqueda.</li>
+            <li><strong>Limitaciones:</strong> no garantizan el óptimo global; alto coste computacional; dependen de población, operadores y terminación.</li>
+          </ul>
+          <p>Aplicaciones: ingeniería (dimensiones, geometrías), robótica, control, calibración de modelos y optimización multiobjetivo (coste <em>vs.</em> consumo energético).</p>
+        </div>
+
+        <!-- P11 PG historia -->
+        <div class="pagina">
+          <span class="etiqueta">Programación genética</span>
+          <h2>Definición y origen</h2>
+          <p>La programación genética (<em>Genetic Programming</em>, GP) genera y mejora <strong>programas, expresiones matemáticas y estructuras computacionales</strong> mediante evolución. No ajusta solo parámetros: modifica la propia estructura de la solución.</p>
+          <figure>
+            <img src="../assets/img/pg-historia.png" alt="John Koza y la programación genética, con el árbol de expresión clásico">
+            <figcaption>Figura 10. John R. Koza sistematizó la GP en su libro de 1992.</figcaption>
+          </figure>
+          <p>Su desarrollo moderno se relaciona con <strong>John R. Koza</strong> (1992). Permite no saber de antemano la forma exacta del programa que resuelve el problema: los candidatos evolucionan por sustitución, combinación y modificación de componentes.</p>
+        </div>
+
+        <!-- P12 PG árboles -->
+        <div class="pagina">
+          <h2>Representación con árboles</h2>
+          <p>La representación clásica es el <strong>árbol de expresión</strong>: los nodos internos son operaciones (+, −, ×…) y las hojas son terminales (variables como x, constantes como 3). La raíz indica la operación principal.</p>
+          <figure>
+            <img src="../assets/img/pg-arbol.png" alt="Estructura de árbol de expresión con nodo raíz, nodos internos y hojas">
+            <figcaption>Figura 11. Nodo raíz, nodos internos (funciones) y hojas (terminales).</figcaption>
+          </figure>
+          <p>El conjunto de <strong>funciones</strong> y el de <strong>terminales</strong> define el espacio de programas explorables. Deben respetarse reglas de aridad (la división necesita dos operandos) y manejar casos como división entre cero.</p>
+        </div>
+
+        <!-- P13 PG evaluación -->
+        <div class="pagina">
+          <h2>Evaluación y función de aptitud</h2>
+          <p>La <strong>función de aptitud</strong> mide qué tan bien resuelve cada programa el problema. En regresión se usa el <strong>error cuadrático medio</strong> (ECM) entre valores esperados y predicciones; a menor ECM, mejor candidato.</p>
+          <figure>
+            <img src="../assets/img/pg-fitness.png" alt="Generación de expresiones y evaluación de fitness con errores altos y bajos">
+            <figcaption>Figura 12. Cada expresión se ejecuta y se compara con los datos; el error guía la evolución.</figcaption>
+          </figure>
+          <p>La aptitud también puede penalizar complejidad, tiempo de ejecución o restricciones, para evitar programas correctos pero innecesariamente enredados o lentos. Una evaluación mal diseñada favorece soluciones frágiles.</p>
+        </div>
+
+        <!-- P14 PG cruce -->
+        <div class="pagina">
+          <span class="etiqueta">Operadores · GP</span>
+          <h2>Selección y cruce de subárboles</h2>
+          <p>La <strong>selección por torneo</strong> elige al mejor de un pequeño grupo aleatorio de programas. Demasiada presión concentra la población; demasiada poca ralentiza la búsqueda.</p>
+          <figure>
+            <img src="../assets/img/pg-cruce.png" alt="Cruce de subárboles entre dos árboles padre para generar dos descendientes">
+            <figcaption>Figura 13. El cruce intercambia subárboles completos entre dos progenitores.</figcaption>
+          </figure>
+          <p>El <strong>cruce de subárboles</strong> selecciona un subárbol de cada padre y los intercambia: no cambia números sueltos, sino <strong>estructuras enteras</strong> (operaciones con sus operandos), generando expresiones nuevas y reutilizables.</p>
+        </div>
+
+        <!-- P15 PG mutación -->
+        <div class="pagina">
+          <h2>Mutación y control del crecimiento</h2>
+          <p>La <strong>mutación</strong> modifica un solo programa: sustituye un subárbol por una estructura nueva, o cambia un operador por otro compatible (suma → multiplicación). Introduce diversidad que el cruce no alcanza.</p>
+          <figure>
+            <img src="../assets/img/pg-mutacion.png" alt="Mutación de árboles: cambio de operador, sustitución de variables y reemplazo de subárboles">
+            <figcaption>Figura 14. La mutación puede alterar operadores, variables, constantes o subárboles completos.</figcaption>
+          </figure>
+          <p>Un riesgo propio de la GP es el <strong>bloat</strong>: los árboles crecen sin mejora proporcional del desempeño. Se controla con límites de profundidad, penalización de complejidad en la aptitud o preferencia por soluciones más simples.</p>
+        </div>
+
+        <!-- P16 PG ejemplo -->
+        <div class="pagina">
+          <span class="etiqueta">Ejemplo práctico · GP</span>
+          <h2>Predigir el precio de una vivienda</h2>
+          <p>Con datos de superficie y precio, la GP debe <strong>descubrir</strong> una fórmula que los relacione. Se permiten +, −, ×, ÷, la variable x y constantes; los candidatos incluyen x+1, x² o 2x+1.</p>
+          <figure>
+            <img src="../assets/img/pg-vivienda.png" alt="Caso práctico: estimar el precio de una vivienda a partir de superficie y habitaciones">
+            <figcaption>Figura 15. Objetivo: hallar la fórmula que mejor prediga el precio a partir de la superficie.</figcaption>
+          </figure>
+          <p>Para los datos (1,3), (2,5), (3,7), (4,9), la expresión <strong>2x+1</strong> reproduce todas las salidas (ECM = 0). La GP no recibió esa fórmula: la encontró explorando estructuras. En un caso real se necesitarían más variables (ubicación, antigüedad) y validar con datos nuevos.</p>
+        </div>
+
+        <!-- P17 PG ventajas -->
+        <div class="pagina">
+          <h2>Ventajas y limitaciones de la GP</h2>
+          <figure>
+            <img src="../assets/img/pg-ventajas.png" alt="Ventajas y limitaciones de la programación genética">
+            <figcaption>Figura 16. Equilibrio necesario: evaluar caso por caso.</figcaption>
+          </figure>
+          <ul class="lista-compacta">
+            <li><strong>Ventajas:</strong> descubre estructuras sin fórmula previa; representaciones flexibles; soluciones interpretables (regresión simbólica).</li>
+            <li><strong>Limitaciones:</strong> alto coste computacional; espacio de programas enorme; riesgo de bloat y sobreajuste; programas inválidos.</li>
+          </ul>
+          <p>Aplicaciones: regresión simbólica, generación automática de código, clasificación, modelado de sistemas, planificación de tareas y evolución de reglas heurísticas.</p>
+        </div>
+
+        <!-- P18 Comparación -->
+        <div class="pagina">
+          <span class="etiqueta">Comparación y cierre</span>
+          <h2>Estrategias evolutivas vs. programación genética</h2>
+          <table class="tabla-datos">
+            <thead>
+              <tr>
+                <th>Criterio</th>
+                <th>Estrategias evolutivas</th>
+                <th>Programación genética</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Representación</td>
+                <td>Vector de números reales</td>
+                <td>Árbol / programa / expresión</td>
+              </tr>
+              <tr>
+                <td>Qué muta</td>
+                <td>Valores de los parámetros</td>
+                <td>Estructura de la solución</td>
+              </tr>
+              <tr>
+                <td>Operadores</td>
+                <td>Mutación, recombinación, selección (μ,λ / μ+λ)</td>
+                <td>Cruce de subárboles, mutación de nodos</td>
+              </tr>
+              <tr>
+                <td>Objetivo típico</td>
+                <td>Optimización numérica</td>
+                <td>Descubrir fórmulas o programas</td>
+              </tr>
+              <tr>
+                <td>Ejemplo</td>
+                <td>Maximizar volumen de una caja</td>
+                <td>Fórmula de precio de vivienda</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>Ambos comparten el ciclo <strong>población → evaluación → selección → variación</strong>. Elegir uno u otro depende del problema: ¿hay parámetros que ajustar o hay que inventar la estructura de la solución? Comprenderlos define cuándo conviene cada enfoque dentro del cómputo evolutivo.</p>
+          <div class="destacado">
+            La computación evolutiva no promete el óptimo garantizado: ofrece una búsqueda robusta cuando el problema es difícil de resolver por métodos tradicionales.
+          </div>
+        </div>
+
+        <!-- CONTRAPORTADA -->
+        <div class="pagina contra-revista" data-density="hard">
+          <div class="logo-mark">IA</div>
+          <h2>Fin del artículo</h2>
+          <p>Gracias por leer la Revista IA</p>
+          <a href="../index.html#articulos" class="btn btn-ghost">← Volver a la revista</a>
+        </div>
+
+      </div>
+
+      <button class="lector-flecha next" aria-label="Página siguiente">›</button>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div>
+          <a href="../index.html" class="logo">
+            <span class="logo-mark">IA</span>
+            Revista<span>IA</span>
+          </a>
+          <p style="margin-top: 0.75rem;">Revista digital con artículos escritos por estudiantes sobre temas de Inteligencia Artificial.</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="anio"></span> Revista IA — Trabajo grupal</span>
+        <span>Hecho con HTML, CSS y JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/vendor/page-flip.browser.min.js"></script>
+  <script src="../js/lectura.js"></script>
+</body>
+</html>

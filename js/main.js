@@ -18,10 +18,16 @@ function pintarArticulos() {
     (a, b) => extraerNumero(a.href) - extraerNumero(b.href)
   );
 
-  grid.innerHTML = ordenados.map(
-    (a) => `
+  grid.innerHTML = ordenados
+    .map((a) => {
+      // Imagen opcional de fondo (si existe a.imagen); si no, solo degradado
+      const conImagen = a.imagen ? " con-imagen" : "";
+      const estilo = a.imagen
+        ? ` style="background-image:url('${a.imagen}')"`
+        : "";
+      return `
     <a class="tarjeta" href="${a.href}">
-      <div class="tarjeta-portada ${a.clasePortada}">${a.portada}</div>
+      <div class="tarjeta-portada ${a.clasePortada}${conImagen}"${estilo}>${a.portada}</div>
       <div class="tarjeta-cuerpo">
         <div class="tarjeta-meta">
           <span class="categoria">${a.categoria}</span>
@@ -31,8 +37,9 @@ function pintarArticulos() {
         <p>${a.resumen}</p>
         <span class="leer">Leer artículo</span>
       </div>
-    </a>`
-  ).join("");
+    </a>`;
+    })
+    .join("");
 }
 
 // Extrae el número de "articulo-N.html" → N (si no hay, queda al final)

@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Portada Cómputo Evolutivo">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#042f24"/>
+      <stop offset="0.55" stop-color="#059669"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a7f3d0" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ecfdf5" stop-opacity="0.2"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.75" cy="0.25" r="0.7">
+      <stop offset="0" stop-color="#6ee7b7" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#6ee7b7" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="#ecfdf5" opacity="0.18"/>
+    </pattern>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#dots)"/>
+  <rect width="800" height="500" fill="url(#halo)"/>
+
+  <!-- Marco sutil -->
+  <rect x="18" y="18" width="764" height="464" rx="18" fill="none" stroke="#ecfdf5" stroke-opacity="0.25" stroke-width="2"/>
+
+  <!-- ===== Hélice de ADN (izquierda) ===== -->
+  <g transform="translate(110,70)" stroke-linecap="round" fill="none">
+    <!-- hebras -->
+    <path d="M0,0 C60,40 60,80 0,120 C-60,160 -60,200 0,240 C60,280 60,320 0,360" stroke="#ecfdf5" stroke-width="5" opacity="0.95"/>
+    <path d="M70,0 C10,40 10,80 70,120 C130,160 130,200 70,240 C10,280 10,320 70,360" stroke="#a7f3d0" stroke-width="5" opacity="0.9"/>
+    <!-- peldaños -->
+    <g stroke="#d1fae5" stroke-width="3.5" opacity="0.85">
+      <line x1="14" y1="22" x2="56" y2="22"/>
+      <line x1="4" y1="60" x2="66" y2="60"/>
+      <line x1="14" y1="98" x2="56" y2="98"/>
+      <line x1="14" y1="142" x2="56" y2="142"/>
+      <line x1="4" y1="180" x2="66" y2="180"/>
+      <line x1="14" y1="218" x2="56" y2="218"/>
+      <line x1="14" y1="262" x2="56" y2="262"/>
+      <line x1="4" y1="300" x2="66" y2="300"/>
+      <line x1="14" y1="338" x2="56" y2="338"/>
+    </g>
+    <!-- nodos mutación -->
+    <circle cx="4" cy="60" r="7" fill="#fbbf24" stroke="none"/>
+    <circle cx="66" cy="180" r="7" fill="#fbbf24" stroke="none"/>
+    <circle cx="4" cy="300" r="7" fill="#fbbf24" stroke="none"/>
+  </g>
+
+  <!-- ===== Árbol de expresión PG (centro-derecha) ===== -->
+  <g transform="translate(340,90)" stroke="#ecfdf5" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.95">
+    <!-- estructura -->
+    <line x1="140" y1="40" x2="70" y2="120"/>
+    <line x1="140" y1="40" x2="210" y2="120"/>
+    <line x1="70" y1="120" x2="30" y2="200"/>
+    <line x1="70" y1="120" x2="110" y2="200"/>
+    <line x1="210" y1="120" x2="170" y2="200"/>
+    <line x1="210" y1="120" x2="250" y2="200"/>
+    <!-- nodos internos -->
+    <circle cx="140" cy="40" r="22" fill="#059669" stroke="#ecfdf5"/>
+    <circle cx="70" cy="120" r="18" fill="#059669" stroke="#ecfdf5"/>
+    <circle cx="210" cy="120" r="18" fill="#059669" stroke="#ecfdf5"/>
+    <!-- hojas -->
+    <circle cx="30" cy="200" r="14" fill="#ecfdf5" stroke="none"/>
+    <circle cx="110" cy="200" r="14" fill="#ecfdf5" stroke="none"/>
+    <circle cx="170" cy="200" r="14" fill="#ecfdf5" stroke="none"/>
+    <circle cx="250" cy="200" r="14" fill="#ecfdf5" stroke="none"/>
+    <!-- símbolos -->
+    <text x="140" y="47" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#ecfdf5" stroke="none">+</text>
+    <text x="70" y="126" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#ecfdf5" stroke="none">×</text>
+    <text x="210" y="126" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#ecfdf5" stroke="none">−</text>
+    <text x="30" y="206" text-anchor="middle" font-family="Georgia, serif" font-size="15" font-weight="700" fill="#042f24">x</text>
+    <text x="110" y="206" text-anchor="middle" font-family="Georgia, serif" font-size="15" font-weight="700" fill="#042f24">3</text>
+    <text x="170" y="206" text-anchor="middle" font-family="Georgia, serif" font-size="15" font-weight="700" fill="#042f24">y</text>
+    <text x="250" y="206" text-anchor="middle" font-family="Georgia, serif" font-size="15" font-weight="700" fill="#042f24">5</text>
+  </g>
+
+  <!-- ===== Vector numérico ES (abajo centro) ===== -->
+  <g transform="translate(340,340)">
+    <rect x="0" y="0" width="280" height="72" rx="12" fill="#042f24" fill-opacity="0.45" stroke="#ecfdf5" stroke-opacity="0.35" stroke-width="2"/>
+    <text x="18" y="45" font-family="Georgia, serif" font-size="26" fill="#ecfdf5" font-style="italic">x = (l, a, h)</text>
+    <!-- puntos de población -->
+    <circle cx="190" cy="24" r="6" fill="#6ee7b7"/>
+    <circle cx="214" cy="40" r="6" fill="#a7f3d0"/>
+    <circle cx="238" cy="22" r="6" fill="#ecfdf5"/>
+    <circle cx="250" cy="48" r="6" fill="#fbbf24"/>
+    <circle cx="222" cy="56" r="5" fill="#6ee7b7" opacity="0.7"/>
+  </g>
+
+  <!-- ===== Distintivo CE ===== -->
+  <g transform="translate(640,340)">
+    <circle cx="50" cy="50" r="48" fill="#042f24" fill-opacity="0.5" stroke="#ecfdf5" stroke-opacity="0.5" stroke-width="3"/>
+    <text x="50" y="58" text-anchor="middle" font-family="Georgia, serif" font-size="36" font-weight="700" fill="#ecfdf5">CE</text>
+    <text x="50" y="84" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" letter-spacing="2" fill="#a7f3d0">1960 →</text>
+  </g>
+
+  <!-- Año origen arriba derecha -->
+  <text x="740" y="70" text-anchor="end" font-family="Arial, sans-serif" font-size="15" letter-spacing="3" fill="#ecfdf5" opacity="0.75">ES · GP</text>
+</svg>
