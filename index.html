@@ -2,12 +2,11 @@
 <html lang="es">
 <head>
   <!-- Google Tag Manager -->
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-5WLS67NW"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  </script>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5WLS67NW');</script>
   <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/photoswipe.css">
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -43,6 +43,7 @@
         <ul class="nav-links">
           <li><a href="index.html">Inicio</a></li>
           <li><a href="index.html#articulos">Artículos</a></li>
+          <li><a href="index.html#infografias">Infografías</a></li>
           <li><a href="index.html#nosotros">Nosotros</a></li>
         </ul>
       </nav>
@@ -74,36 +75,82 @@
           </div>
         </div>
 
-        <div class="grid-articulos">
-          <a class="tarjeta" href="articulos/articulo-10.html">
-            <div class="tarjeta-portada portada-6">AG+RN</div>
-            <div class="tarjeta-cuerpo">
-              <div class="tarjeta-meta">
-                <span class="categoria">Computación evolutiva</span>
-                <span>06 · 2026</span>
-              </div>
-              <h3>Algoritmos genéticos y redes neuronales</h3>
-              <p>Cómo evolucionan las soluciones y cómo aprenden las redes: definición, componentes, funcionamiento y ejemplos en Python.</p>
-              <span class="leer">Leer artículo</span>
-            </div>
-          </a>
-          <a class="tarjeta" href="articulos/articulo-6.html">
-            <div class="tarjeta-portada portada-6">MD</div>
-            <div class="tarjeta-cuerpo">
-              <div class="tarjeta-meta">
-                <span class="categoria">Minería de Datos</span>
-                <span>06 · 2026</span>
-              </div>
-              <h3>Minería de Datos</h3>
-              <p>Fundamentos, técnicas y usos de la minería de datos, y cómo aplicarla de forma responsable.</p>
-              <span class="leer">Leer artículo</span>
-            </div>
-          </a>
+        <div class="grid-articulos" id="grid-articulos">
+          <noscript>
+            <p>
+              <a href="articulos/articulo-10.html">Algoritmos genéticos y redes neuronales</a> ·
+              <a href="articulos/articulo-6.html">Minería de Datos</a> ·
+              <a href="articulos/articulo-5.html">Lógica difusa, sentido común y creatividad</a>
+            </p>
+          </noscript>
         </div>
       </div>
     </section>
-    
-          
+
+    <!-- INFOGRAFÍAS -->
+    <section class="seccion" id="infografias">
+      <div class="contenedor">
+        <div class="seccion-cabecera">
+          <div>
+            <h2>Infografías</h2>
+            <p>Resúmenes visuales de los temas de la revista. Toca una para verla en tamaño completo.</p>
+          </div>
+          <div class="carrusel-controles">
+            <button type="button" class="carrusel-btn" data-dir="-1" aria-label="Infografía anterior">‹</button>
+            <button type="button" class="carrusel-btn" data-dir="1" aria-label="Infografía siguiente">›</button>
+          </div>
+        </div>
+
+        <div class="carrusel">
+          <div class="carrusel-pista" id="pista-infos">
+            <a class="tarjeta-info" href="infografias/Infografia-AlgoritmosGeneticoRedesNeuronales.svg"
+               data-pswp-width="800" data-pswp-height="2000">
+              <span class="info-vista">
+                <img src="infografias/Infografia-AlgoritmosGeneticoRedesNeuronales.svg"
+                     alt="Infografía: algoritmos genéticos y redes neuronales"
+                     loading="lazy" width="800" height="2000">
+                <span class="info-overlay">⤢ Ver completa</span>
+              </span>
+              <span class="info-titulo">Algoritmos genéticos y redes neuronales</span>
+            </a>
+
+            <a class="tarjeta-info" href="infografias/Ciencia_de_datos.svg"
+               data-pswp-width="711" data-pswp-height="1600">
+              <span class="info-vista">
+                <img src="infografias/Ciencia_de_datos.svg"
+                     alt="Infografía: ciencia de datos"
+                     loading="lazy" width="711" height="1600">
+                <span class="info-overlay">⤢ Ver completa</span>
+              </span>
+              <span class="info-titulo">Ciencia de datos</span>
+            </a>
+
+            <a class="tarjeta-info" href="infografias/Data-Mining-Infographic.svg"
+               data-pswp-width="1080" data-pswp-height="2506">
+              <span class="info-vista">
+                <img src="infografias/Data-Mining-Infographic.svg"
+                     alt="Infografía: data mining"
+                     loading="lazy" width="1080" height="2506">
+                <span class="info-overlay">⤢ Ver completa</span>
+              </span>
+              <span class="info-titulo">Data Mining</span>
+            </a>
+
+            <a class="tarjeta-info" href="infografias/Sistemas_Inteligentes_Infografia_EquipoM.svg"
+               data-pswp-width="800" data-pswp-height="2000">
+              <span class="info-vista">
+                <img src="infografias/Sistemas_Inteligentes_Infografia_EquipoM.svg"
+                     alt="Infografía: sistemas inteligentes"
+                     loading="lazy" width="800" height="2000">
+                <span class="info-overlay">⤢ Ver completa</span>
+              </span>
+              <span class="info-titulo">Sistemas inteligentes</span>
+            </a>
+          </div>
+        </div>
+        <div class="carrusel-puntos" id="puntos-infos"></div>
+      </div>
+    </section>
 
     <!-- NOSOTROS -->
     <section class="seccion" id="nosotros">
@@ -138,6 +185,7 @@
         <ul class="footer-links">
           <li><a href="index.html">Inicio</a></li>
           <li><a href="index.html#articulos">Artículos</a></li>
+          <li><a href="index.html#infografias">Infografías</a></li>
           <li><a href="index.html#nosotros">Nosotros</a></li>
         </ul>
       </div>
@@ -148,6 +196,10 @@
     </div>
   </footer>
 
+  <script src="js/vendor/photoswipe.umd.min.js"></script>
+  <script src="js/vendor/photoswipe-lightbox.umd.min.js"></script>
+  <script src="js/articulos.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/infografias.js"></script>
 </body>
 </html>

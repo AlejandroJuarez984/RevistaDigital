@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lógica difusa, razonamiento con sentido común y creatividad — tres formas de razonar más allá del «sí o no». Revista IA, Tema e).">
+  <title>Lógica difusa, razonamiento con sentido común y creatividad — Revista IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <!-- Estilos BASE de la revista (navbar, footer, tipografías) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <!-- Estilos del LECTOR de revista (páginas, portada, controles) -->
+  <link rel="stylesheet" href="../css/revista.css">
+
+  <!-- ============================================
+       ESTILOS EXCLUSIVOS DE ESTE ARTÍCULO (.art-e)
+       Tema e): lógica difusa, sentido común y creatividad.
+       Acento por sección, igual que la exposición:
+       cian (difusa), naranja (sentido común), violeta (creatividad).
+       Figuras en ../assets/img/tema-e-*.png
+       ============================================ -->
+  <style>
+    body.art-e { --accent: #22d3ee; }
+
+    .art-e .sec-difusa      { --accent: #22d3ee; } /* cian    */
+    .art-e .sec-comun       { --accent: #fb923c; } /* naranja */
+    .art-e .sec-creatividad { --accent: #a78bfa; } /* violeta */
+    .art-e .sec-rel,
+    .art-e .sec-ia          { --accent: #38bdf8; } /* azul    */
+
+    .art-e .pagina .etiqueta {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    }
+    .art-e .pagina .destacado { background: rgba(255, 255, 255, 0.04); }
+
+    /* Imágenes de figuras (archivos en ../assets/img/) */
+    .art-e .pagina img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--border);
+    }
+    .art-e .fig { margin: 0.5rem 0 0.2rem; }
+    .art-e .fig figcaption {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      line-height: 1.5;
+    }
+    .art-e .fig figcaption b { color: var(--text); font-weight: 600; }
+
+    /* Dato / estadística resaltada */
+    .art-e .dato {
+      display: block;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--accent);
+      line-height: 1.1;
+      margin: 0.6rem 0 0.2rem;
+    }
+    .art-e .dato small {
+      display: block;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      margin-top: 0.25rem;
+    }
+
+    /* Píldoras */
+    .art-e .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.2rem 0 0.9rem; }
+    .art-e .chips span {
+      font-family: var(--font-heading); font-size: 0.74rem; font-weight: 600;
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+      padding: 0.3rem 0.6rem; border-radius: 999px;
+    }
+
+    /* Proceso creativo */
+    .art-e .proceso { font-family: var(--font-heading); font-weight: 600; font-size: 0.82rem; color: var(--text); line-height: 1.9; }
+    .art-e .proceso b { color: var(--accent); font-weight: 700; }
+
+    /* Pasos numerados */
+    .art-e .pasos { counter-reset: paso; list-style: none; margin: 0 0 0.6rem; padding: 0; }
+    .art-e .pasos li { position: relative; padding-left: 2rem; margin-bottom: 0.55rem; }
+    .art-e .pasos li::before {
+      counter-increment: paso; content: counter(paso);
+      position: absolute; left: 0; top: 0.05em;
+      width: 1.4rem; height: 1.4rem; display: grid; place-items: center;
+      font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700;
+      color: #06101a; background: var(--accent); border-radius: 50%;
+    }
+
+    /* Tarjeta de video */
+    .art-e .video-card {
+      display: block; text-decoration: none; position: relative;
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+      background: linear-gradient(160deg, #0b1120, #141c2e);
+      padding: 1.6rem 1.1rem; text-align: center; margin: 0.6rem 0 0.9rem;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .art-e .video-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .art-e .video-card .play {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--accent); display: grid; place-items: center; margin: 0 auto 0.7rem;
+      box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 40%, transparent);
+    }
+    .art-e .video-card .play svg { width: 22px; height: 22px; display: block; fill: #06101a; margin-left: 3px; border: 0; }
+    .art-e .video-card .vtitle { display: block; font-family: var(--font-heading); font-weight: 700; color: #fff; font-size: 1rem; margin-bottom: 0.3rem; }
+    .art-e .video-card .vurl {
+      display: inline-block; font-size: 0.8rem; color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+      padding: 0.28rem 0.7rem; border-radius: 999px;
+    }
+
+    /* Fuentes */
+    .art-e .fuentes { list-style: none; margin: 0; padding: 0; }
+    .art-e .fuentes li { font-size: 0.78rem; color: var(--muted); padding: 0.28rem 0; border-bottom: 1px solid var(--border); line-height: 1.45; }
+    .art-e .fuentes li:last-child { border-bottom: 0; }
+    .art-e .fuentes b { color: var(--text); font-weight: 600; }
+
+    /* Créditos */
+    .art-e .creditos { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+    .art-e .creditos b { color: var(--text); font-weight: 600; }
+  </style>
+</head>
+<body class="art-e">
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar">
+    <div class="contenedor">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">IA</span>
+        Revista<span>IA</span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== LECTOR DE REVISTA ===== -->
+  <main class="lector">
+    <div class="lector-barra">
+      <a class="lector-volver" href="../index.html#articulos">← Volver</a>
+      <span class="lector-titulo">Lógica difusa, razonamiento con sentido común y creatividad</span>
+      <span class="lector-contador" id="contador">Portada</span>
+    </div>
+
+    <div class="zona-revista">
+      <button class="lector-flecha prev" aria-label="Página anterior">‹</button>
+
+      <div id="revista" class="revista">
+
+        <!-- ===== PORTADA ===== -->
+        <div class="pagina portada-revista" data-density="hard" style="--c1:#0891b2; --c2:#7c3aed;">
+          <span class="portada-sello">Revista IA · Tema e)</span>
+          <h1>Lógica difusa, razonamiento con sentido común y creatividad</h1>
+          <p class="portada-autor">Por: Alejandro Villalobos · Ricardo Ramón Martínez · Misael Toledo</p>
+          <span class="portada-fecha">Octubre 2026 · Sistemas Inteligentes</span>
+          <span class="portada-hint">La revista se abrirá…</span>
+        </div>
+
+        <!-- 1 · INTRODUCCIÓN -->
+        <div class="pagina sec-difusa">
+          <span class="etiqueta">Introducción</span>
+          <h2>Una receta para empezar</h2>
+          <p>«Agrega <strong>una pizca</strong> de sal, cocina a <strong>fuego medio</strong> y <strong>dale tu toque</strong>». Una receta cotidiana esconde tres formas de razonar con información imperfecta:</p>
+          <div class="destacado">
+            ¿Cuánto es «una pizca»? Información imprecisa → <strong>lógica difusa</strong>.<br>
+            ¿Y si le ponemos pegamento? Lo que nadie tiene que decirnos → <strong>sentido común</strong>.<br>
+            ¿Qué es «tu toque»? Algo nuevo y valioso → <strong>creatividad</strong>.
+          </div>
+        </div>
+
+        <!-- EL HILO CONDUCTOR -->
+        <div class="pagina sec-difusa">
+          <span class="etiqueta">El hilo conductor</span>
+          <h2>Tres conceptos relacionados</h2>
+          <p>Vienen de disciplinas distintas: la lógica difusa, de las <strong>matemáticas y la ingeniería</strong>; el sentido común, de la <strong>lógica y la filosofía</strong>; la creatividad, de la <strong>psicología</strong>.</p>
+          <p>Aun así comparten un punto de partida: razonar más allá del estricto «sí o no», cuando la información es…</p>
+          <div class="chips">
+            <span>Imprecisa · difusa</span>
+            <span>Incompleta · sentido común</span>
+            <span>Nueva · creatividad</span>
+          </div>
+        </div>
+
+        <!-- 1 · LÓGICA DIFUSA — grados (FIGURA: pertenencia) -->
+        <div class="pagina sec-difusa">
+          <span class="etiqueta">1 · Lógica difusa</span>
+          <h2>Pertenecer en grados</h2>
+          <p>La lógica clásica es binaria: <strong>0 o 1</strong>. Zadeh (1965) propuso los <em>conjuntos difusos</em>: un elemento pertenece en un grado <strong>entre 0 y 1</strong>.</p>
+          <figure class="fig">
+            <img src="../assets/img/tema-e-pertenencia.png" alt="Grado de pertenencia al conjunto «alto»: lógica clásica (escalón) frente a lógica difusa (transición gradual).">
+            <figcaption>Con umbral de 1.75 m, alguien de 1.74 m sería «no alto»; con lógica difusa es alto en grado <b>0.56</b>.</figcaption>
+          </figure>
+        </div>
+
+        <!-- 1 · cómo funciona -->
+        <div class="pagina sec-difusa">
+          <span class="etiqueta">1 · Lógica difusa</span>
+          <h2>¿Cómo funciona?</h2>
+          <p>Un sistema de inferencia difusa (Mamdani y Assilian, 1975) traduce números en decisiones con reglas <strong>SI–ENTONCES</strong>, en cuatro pasos:</p>
+          <ol class="pasos">
+            <li><strong>Fuzzificación.</strong> Calcular el grado de cada entrada.</li>
+            <li><strong>Reglas SI–ENTONCES.</strong> «Si está tibia, fuego medio».</li>
+            <li><strong>Agregación.</strong> Combinar las reglas según su peso.</li>
+            <li><strong>Defuzzificación.</strong> Obtener un número concreto.</li>
+          </ol>
+        </div>
+
+        <!-- 1 · ejemplo estufa (FIGURA: estufa) -->
+        <div class="pagina sec-difusa">
+          <span class="etiqueta">1 · Lógica difusa</span>
+          <h2>Ejemplo: una estufa</h2>
+          <figure class="fig">
+            <img src="../assets/img/tema-e-estufa.png" alt="Conjuntos difusos fría, tibia y caliente para la temperatura del sartén; en 135 °C, tibia 0.75 y caliente 0.25.">
+            <figcaption>A <b>135 °C</b> el sartén es «tibio» en grado 0.75 y «caliente» en 0.25. Promedio ponderado (Sugeno) → <b>42.5 % de potencia</b>: control suave, sin brincos.</figcaption>
+          </figure>
+        </div>
+
+        <!-- 1 · difuso ≠ probable -->
+        <div class="pagina sec-difusa">
+          <span class="etiqueta">1 · Lógica difusa</span>
+          <h2>Difuso no es probable</h2>
+          <p>La <strong>probabilidad</strong> mide si algo pasará («70 % de lluvia») y desaparece cuando ya se sabe. El <strong>grado difuso</strong> mide qué tanto aplica una palabra: 1.75 m sigue siendo «alto» en grado 0.6 aunque se mida mil veces.</p>
+          <div class="destacado">
+            <strong>¿Dónde se usa?</strong> El metro de Sendai, Japón (1987), y también lavadoras, cámaras y autos.
+          </div>
+        </div>
+
+        <!-- 2 · SENTIDO COMÚN -->
+        <div class="pagina sec-comun">
+          <span class="etiqueta">2 · Sentido común</span>
+          <h2>Lo que todos saben… y nadie dice</h2>
+          <p>El sentido común es el conocimiento compartido que casi nunca decimos porque nos parece obvio: si suelto un vaso, se cae; el agua moja; en un restaurante se paga.</p>
+          <p>Razonar con él es sacar la conclusión <strong>más razonable</strong>, completar lo que nadie dijo y descartar lo absurdo. Thomas Reid (1764) ya hablaba de sus «principios».</p>
+        </div>
+
+        <!-- 2 · cómo razona -->
+        <div class="pagina sec-comun">
+          <span class="etiqueta">2 · Sentido común</span>
+          <h2>¿Cómo razona?</h2>
+          <ul>
+            <li><strong>Por defecto y revisable.</strong> «Tweety es un ave»: vuela. «Es un pingüino»: me retracto (Reiter, 1980).</li>
+            <li><strong>Depende del contexto.</strong> «El trofeo no cabe porque es demasiado <em>grande</em>»: ¿qué es grande? (Levesque et al., 2012).</li>
+            <li><strong>Es gradual.</strong> No dice «siempre» ni «nunca»: dice «normalmente». Por eso se conecta con la lógica difusa.</li>
+          </ul>
+        </div>
+
+        <!-- 3 · CREATIVIDAD -->
+        <div class="pagina sec-creatividad">
+          <span class="etiqueta">3 · Creatividad</span>
+          <h2>Nueva, sorprendente y valiosa</h2>
+          <p>Una idea creativa es <strong>nueva, sorprendente y valiosa</strong> (Boden, 2004): originalidad más utilidad (Runco y Jaeger, 2012).</p>
+          <div class="destacado">
+            ¿Pegamento en la pizza? Nuevo ✓ y sorprendente ✓, pero <strong>no valioso ✗</strong>: sin valor, lo nuevo es solo una ocurrencia.
+          </div>
+          <p>Creatividad <strong>P</strong> (nueva para mí) y <strong>H</strong> (nueva para la humanidad).</p>
+        </div>
+
+        <!-- 3 · cómo surge -->
+        <div class="pagina sec-creatividad">
+          <span class="etiqueta">3 · Creatividad</span>
+          <h2>¿Cómo surge una idea?</h2>
+          <p><strong>Tipos</strong> (Boden): mezclar lo conocido, explorar dentro de unas reglas o cambiar las reglas mismas.</p>
+          <div class="chips">
+            <span>Combinacional</span>
+            <span>Exploratoria</span>
+            <span>Transformacional</span>
+          </div>
+          <p class="proceso">
+            <b>El proceso</b> (Wallas, 1926):<br>
+            Preparación → Incubación → <b>Iluminación</b> → Verificación.
+          </p>
+          <p>Guilford: pensamiento divergente (muchas opciones) y convergente (elegir la mejor).</p>
+        </div>
+
+        <!-- 4 · CÓMO SE RELACIONAN -->
+        <div class="pagina sec-rel">
+          <span class="etiqueta">4 · ¿Cómo se relacionan?</span>
+          <h2>Tres que se necesitan</h2>
+          <ul>
+            <li>La <strong>creatividad</strong> necesita <strong>sentido común</strong> para que la idea tenga valor.</li>
+            <li>El <strong>sentido común</strong> es gradual, como la <strong>lógica difusa</strong> («normalmente»).</li>
+            <li>Las reglas <strong>difusas</strong> salen de la experiencia y del <strong>sentido común</strong> de las personas.</li>
+          </ul>
+        </div>
+
+        <!-- 4 · FIGURA: venn -->
+        <div class="pagina sec-rel">
+          <span class="etiqueta">4 · ¿Cómo se relacionan?</span>
+          <figure class="fig">
+            <img src="../assets/img/tema-e-venn.png" alt="Diagrama de Venn: lógica difusa (información imprecisa), sentido común (información incompleta) y creatividad (información nueva) se traslapan.">
+            <figcaption>Tres piezas de una misma forma de pensar: razonar más allá del «sí o no».</figcaption>
+          </figure>
+        </div>
+
+        <!-- 5 · ¿Y LA IA? difusa + sentido común (FIGURA: hellaswag) -->
+        <div class="pagina sec-ia">
+          <span class="etiqueta">5 · ¿Y la inteligencia artificial?</span>
+          <h2>Lo difuso ya está; el sentido común, pendiente</h2>
+          <p><strong>Lógica difusa:</strong> ya integrada — ANFIS (Jang, 1993), <em>soft computing</em> e IA explicable (reglas legibles).</p>
+          <figure class="fig">
+            <img src="../assets/img/tema-e-hellaswag.png" alt="Exactitud en la prueba de sentido común HellaSwag: Personas 95.6 %, GPT-4 (2023) 95.3 %, BERT-Large (2019) 47.3 %.">
+            <figcaption><strong>Sentido común:</strong> el gran pendiente. Aun con 95.3 % en HellaSwag (OpenAI, 2023), en 2024 una IA sugirió pegamento en la pizza.</figcaption>
+          </figure>
+        </div>
+
+        <!-- 5 · ¿Y la IA? creatividad -->
+        <div class="pagina sec-creatividad">
+          <span class="etiqueta">5 · ¿Y la inteligencia artificial?</span>
+          <h2>¿Y la creatividad?</h2>
+          <p>Ada Lovelace (1843): «la máquina no puede originar nada». Alan Turing (1950): «las máquinas pueden sorprendernos».</p>
+          <span class="dato">1 en 10,000
+            <small>probabilidad de la «jugada 37» de AlphaGo (2016), y fue decisiva</small>
+          </span>
+          <p>La SCJN (2025) resolvió que una obra generada de forma autónoma por IA no se registra: la autoría es de las personas.</p>
+        </div>
+
+        <!-- VIDEO -->
+        <div class="pagina sec-ia">
+          <span class="etiqueta">La exposición</span>
+          <h2>Míralo en video</h2>
+          <a class="video-card" href="https://youtu.be/qNorx7JB1A0" target="_blank" rel="noopener">
+            <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vtitle">Ver la exposición completa</span>
+            <span class="vurl">youtu.be/qNorx7JB1A0</span>
+          </a>
+          <p>Exposición del Tema e) · Sistemas Inteligentes · Grupo 1754 · FES Acatlán, UNAM.</p>
+        </div>
+
+        <!-- CONCLUSIONES -->
+        <div class="pagina sec-rel">
+          <span class="etiqueta">Conclusiones</span>
+          <h2>Tres ideas para llevarse</h2>
+          <ol class="pasos">
+            <li>Tres formas de razonar más allá del «sí o no»: con información imprecisa, incompleta o nueva.</li>
+            <li>Se necesitan entre sí: sin sentido común, la creatividad produce ocurrencias.</li>
+            <li>La IA avanza a distinto ritmo en cada una; el valor lo deciden las personas.</li>
+          </ol>
+          <div class="destacado">¿Qué nos toca a nosotros? Decidir qué vale la pena crear.</div>
+        </div>
+
+        <!-- FUENTES -->
+        <div class="pagina sec-difusa">
+          <span class="etiqueta">Fuentes principales</span>
+          <ul class="fuentes">
+            <li><b>Zadeh</b> (1965). Fuzzy sets.</li>
+            <li><b>Mamdani y Assilian</b> (1975); <b>Takagi y Sugeno</b> (1985).</li>
+            <li><b>Yasunobu y Miyamoto</b> (1985). Metro de Sendai.</li>
+            <li><b>Reiter</b> (1980); <b>Levesque et al.</b> (2012).</li>
+            <li><b>Boden</b> (2004); <b>Wallas</b> (1926); <b>Guilford</b> (1950).</li>
+            <li><b>OpenAI</b> (2023); <b>Silver et al.</b> (2016); <b>SCJN</b> (2025).</li>
+          </ul>
+          <p style="font-size:0.76rem;color:var(--muted);margin-top:0.6rem;">Lista completa en formato APA 7 en el trabajo escrito.</p>
+        </div>
+
+        <!-- ===== CONTRAPORTADA ===== -->
+        <div class="pagina contra-revista" data-density="hard">
+          <div class="logo-mark">IA</div>
+          <h2>Fin del artículo</h2>
+          <p>Lógica difusa, razonamiento con sentido común y creatividad</p>
+          <p class="creditos">
+            <b>Alejandro Villalobos González · Ricardo Ramón Martínez Hernández · Misael Toledo Hernández</b><br>
+            Sistemas Inteligentes · Grupo 1754 · Prof. Javier Rosas Hernández · FES Acatlán, UNAM
+          </p>
+          <a href="../index.html#articulos" class="btn btn-ghost">← Volver a la revista</a>
+        </div>
+
+      </div>
+
+      <button class="lector-flecha next" aria-label="Página siguiente">›</button>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div>
+          <a href="../index.html" class="logo">
+            <span class="logo-mark">IA</span>
+            Revista<span>IA</span>
+          </a>
+          <p style="margin-top: 0.75rem;">Revista digital con artículos escritos por estudiantes sobre temas de Inteligencia Artificial.</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#articulos">Artículos</a></li>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="anio"></span> Revista IA — Trabajo grupal</span>
+        <span>Hecho con HTML, CSS y JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/vendor/page-flip.browser.min.js"></script>
+  <script src="../js/lectura.js"></script>
+</body>
+</html>
