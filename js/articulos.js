@@ -41,4 +41,14 @@ const ARTICULOS = [
     resumen:
       "Cómo evolucionan las soluciones y cómo aprenden las redes: definición, componentes, funcionamiento y ejemplos en Python.",
   },
+  {
+    href: "articulos/articulo-6.html",
+    portada: "MD",
+    clasePortada: "portada-6",
+    categoria: "Minería de Datos",
+    fecha: "06 · 2026",
+    titulo: "Minería de Datos",
+    resumen:
+      "Fundamentos, técnicas y usos de la minería de datos, y cómo aplicarla de forma responsable.",
+  },
 ];
