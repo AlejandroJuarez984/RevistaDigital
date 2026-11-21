@@ -351,25 +351,29 @@
 
   .lector-barra { padding-top: 0.9rem; }
 
+  .lector-volver { font-size: 0.85rem; }
+
+  .lector-contador { font-size: 0.75rem; padding: 0.3rem 0.6rem; }
+
   .zona-revista {
     min-height: 380px;
-    padding: 1rem 0 4.25rem;
+    padding: 1rem 0 4.75rem;
   }
 
   .lector-flecha {
     top: auto;
-    bottom: 0;
+    bottom: 0.25rem;
     transform: none;
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
   }
 
   .lector-flecha:hover:not(:disabled) {
     transform: scale(1.06);
   }
 
-  .lector-flecha.prev { left: calc(50% - 56px); }
-  .lector-flecha.next { right: calc(50% - 56px); }
+  .lector-flecha.prev { left: calc(50% - 60px); }
+  .lector-flecha.next { right: calc(50% - 60px); }
 
   .pagina {
     font-size: 0.88rem;

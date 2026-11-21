@@ -324,7 +324,7 @@ main {
 /* ---------- Grid de tarjetas ---------- */
 .grid-articulos {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
   gap: 1.5rem;
 }
 
@@ -634,6 +634,14 @@ main {
     padding: 3.5rem 0 2.5rem;
   }
 
+  .hero h1 {
+    font-size: clamp(1.9rem, 7vw, 3.75rem);
+  }
+
+  .seccion {
+    padding: 2.5rem 0;
+  }
+
   .nosotros {
     grid-template-columns: 1fr;
     padding: 1.75rem;
@@ -646,12 +654,23 @@ main {
   .tarjeta-info {
     flex-basis: 78%;
   }
+
+  .footer-grid {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 /* ---------- Responsive: navbar ---------- */
 @media (max-width: 768px) {
   .nav-toggle {
     display: flex;
+    margin-right: -10px;
   }
 
   .nav-links {
@@ -666,6 +685,7 @@ main {
     border-bottom: 1px solid var(--border);
     padding: 0.5rem 0;
     display: none;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
   }
 
   .nav-links.abierto {

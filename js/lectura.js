@@ -78,10 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
     showCover: true,
     startZIndex: 0,
     mobileScrollSupport: true,
-    clickEventForward: true,
-    useMouseEvents: true,
+    clickEventForward: false,
+    useMouseEvents: false,
     swipeDistance: 30,
-    disableFlipByClick: false,
+    disableFlipByClick: true,
   });
 
   flip.loadFromHTML(paginas);
@@ -136,16 +136,5 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "ArrowRight") flip.flipNext();
   });
 
-  // --- Apertura automática de la revista ---
-  let interacto = false;
-  document.addEventListener("pointerdown", () => { interacto = true; }, { once: true });
-  document.addEventListener("keydown", () => { interacto = true; }, { once: true });
-
-  const sinAnimacion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  setTimeout(() => {
-    if (interacto || flip.getCurrentPageIndex() !== 0) return;
-    if (sinAnimacion) flip.turnToPage(1);
-    else flip.flipNext();
-  }, 750);
+  // La revista permanece en portada; solo flechas/teclado cambian de página.
 });
